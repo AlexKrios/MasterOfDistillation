@@ -1,0 +1,85 @@
+{
+	"levelExpInfo": 
+	[
+		{
+			"level": 1,
+			"max": 100
+		}
+		{
+			"level": 2,
+			"max": 200
+		}
+		{
+			"level": 3,
+			"max": 300
+		}
+		{
+			"level": 4,
+			"max": 400
+		}
+		{
+			"level": 5,
+			"max": 500
+		}
+		{
+			"level": 6,
+			"max": 600
+		}
+		{
+			"level": 7,
+			"max": 700
+		}
+		{
+			"level": 8,
+			"max": 800
+		}
+		{
+			"level": 9,
+			"max": 900
+		}
+		{
+			"level": 10,
+			"max": 1000
+		}
+		{
+			"level": 11,
+			"max": 1100
+		}
+		{
+			"level": 12,
+			"max": 1200
+		}
+		{
+			"level": 13,
+			"max": 1300
+		}
+		{
+			"level": 14,
+			"max": 1400
+		}
+		{
+			"level": 15,
+			"max": 1500
+		}
+		{
+			"level": 16,
+			"max": 1600
+		}
+		{
+			"level": 17,
+			"max": 1700
+		}
+		{
+			"level": 18,
+			"max": 1800
+		}
+		{
+			"level": 19,
+			"max": 1900
+		}
+		{
+			"level": 20,
+			"max": 2000
+		}
+	]
+}

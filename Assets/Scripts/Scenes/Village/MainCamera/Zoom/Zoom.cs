@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
 
-namespace Scripts.MainCamera
+namespace Scripts.Scenes.Village.MainCamera
 {
     public class Zoom : MonoBehaviour
     {
-        private GameManager GameManager { get => GameManager.Instance; }
-        private Camera _mainCamera { get => GameManager.mainCamera; }
-        private float _zoomSpeed { get => GameManager.zoomSpeed; }
+        private Camera _mainCamera { get => RoomManager.Instance.mainCamera; }
+        private float _zoomSpeed { get => GameManager.Instance.zoomSpeed; }
 
-        private float targetZoom;
+        private float _targetZoom;
 
         private void Start()
         {
-            targetZoom = _mainCamera.orthographicSize;
+            _targetZoom = _mainCamera.orthographicSize;
         }
 
         private void DesktopZoom()
         {
             var scrollData = Input.GetAxis("Mouse ScrollWheel");
 
-            targetZoom -= scrollData * _zoomSpeed;
-            targetZoom = Mathf.Clamp(targetZoom, 5f, 20f);
+            _targetZoom -= scrollData * 5 * _zoomSpeed;
+            _targetZoom = Mathf.Clamp(_targetZoom, 5f, 30f);
         }
 
         private void MobileZoom()
@@ -47,7 +46,7 @@ namespace Scripts.MainCamera
                     _mainCamera.orthographicSize -= zoomModifier;
                 }
 
-                targetZoom = Mathf.Clamp(_mainCamera.orthographicSize, 5f, 20f);
+                _targetZoom = Mathf.Clamp(_mainCamera.orthographicSize, 5f, 30f);
             }
         }
 
@@ -56,11 +55,7 @@ namespace Scripts.MainCamera
             DesktopZoom();
             MobileZoom();
 
-            _mainCamera.orthographicSize = Mathf.Lerp(
-                _mainCamera.orthographicSize,
-                targetZoom,
-                Time.deltaTime * 10
-            );
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, _targetZoom, Time.deltaTime * 10);
         }
     }
 }

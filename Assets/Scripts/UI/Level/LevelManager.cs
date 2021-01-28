@@ -1,103 +1,120 @@
 ﻿using Scripts.Objects;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scripts.UI.Level
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : MonoBehaviour, ILevelManager
     {
-        private List<LevelExpObject> levelExp;
-        public int level;
-        public float exp;
-        public float curExp;        
-
-        [SerializeField] private GameObject levelGameObject;
-
-        private Text levelText;
-        private Text levelPercentText;
-        private Text expText;
-        private Text curExpText;
-
-        private void Start()
+        private List<LevelExpObject> _levelsExpirience;
+        public List<LevelExpObject> LevelsExpirience
         {
-            levelText = levelGameObject.transform.Find("Icon/Count").GetComponent<Text>();
-            levelPercentText = levelGameObject.transform.Find("Percent").GetComponent<Text>();
+            get { return _levelsExpirience; }
+            set { _levelsExpirience = value; }
         }
 
-        /* List of level expirience */
-        public void SetLevelExp(List<LevelExpObject> value) => levelExp = value;
+        private int _level;
+        public int Level
+        {
+            get { return _level; }
+            set
+            {
+                _level = value;
+                SetLevelText();
+            }
+        }        
+        
+        private float _curExpirience;
+        public float CurExpirience
+        {
+            get { return _curExpirience; }
+            set
+            {
+                _curExpirience = value;
 
-        /* Level action */
-        public void SetLevel(int value)
-        {
-            level = value;
-            SetLevelText();
+                if (_curExpirience >= _LevelExpirience)
+                {
+                    SetLevelUp();
+                }
+
+                SetLevelPercent();
+            }
         }
-        private void SetOneLevel() 
+
+        private float _LevelExpirience;
+        public float LevelExpirience 
         {
-            level++;
-            SetLevelText();
+            get { return _LevelExpirience; }
+            set 
+            {
+                _LevelExpirience = value;
+            }
+        }        
+
+        private GameObject _levelGameObject;
+        private Text _levelText;
+        private Text _levelPercentText;     
+
+        private void Start() { }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishedLoading;
         }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        }
+        private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != "Village") 
+            {
+                return;
+            }
+
+            _levelGameObject = GameObject.Find("MainCanvas").transform.Find("Level").gameObject;
+        }
+
+        public void SetLevelExpirience() => LevelExpirience = _levelsExpirience[Level - 1].max;
         private void SetLevelUp()
         {
-            ResetCurExp();
-            SetOneLevel();
-            SetExp();
-        }
-        private void SetLevelText() 
-        {
-            if (levelText == null) 
-            {
-                levelGameObject.transform.Find("Icon/Count").GetComponent<Text>();                
-            }
-
-            levelText.text = level.ToString();
+            _curExpirience -= _LevelExpirience;
+            Level++;
+            SetLevelExpirience();
         }
         
-        /* Level progeress action */
+        private void SetLevelText() 
+        {
+            if (_levelText == null) 
+            {
+                _levelText = _levelGameObject.transform.Find("Icon/Count").GetComponent<Text>();                
+            }
+
+            _levelText.text = Level.ToString();
+        }
         public void SetLevelPercent()
         {
-            if (levelPercentText == null)
+            if (_levelPercentText == null)
             {
-                levelGameObject.transform.Find("Percent").GetComponent<Text>();
+                _levelPercentText = _levelGameObject.transform.Find("Percent").GetComponent<Text>();
             }
 
-            var levelPercent = curExp / (exp / 100);
-            levelPercentText.text = string.Format("{0:f0}%", levelPercent);
+            var levelPercent = _curExpirience / (_LevelExpirience / 100);
+            _levelPercentText.text = string.Format("{0:f0}%", levelPercent);
         }
-
-        /* Current level expirience action */
-        public void SetCurExp(int value, bool plus = true)
+        public void SetExpirienceText() 
         {
-            if (plus)
-            {
-                curExp += value;
-            }
-            else
-            {
-                curExp = value;
-            }            
-
-            if (curExp >= exp)
-            {
-                SetLevelUp();
-            }
-
-            SetLevelPercent();
+            var _expirienceText = _levelGameObject.transform.Find("Expirience").GetComponent<Text>();
+            _expirienceText.text = $"{_curExpirience} / {_LevelExpirience}";
         }
-        private void ResetCurExp() => curExp -= exp;
-        public void SetCurExpText() => curExpText.text = curExp.ToString();
-
-        /* Current level max expirirence action */
-        public void SetExp() => exp = levelExp[level - 1].max;
-        public void SetExpText() => expText.text = exp.ToString();                       
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                SetCurExp(20);
+                CurExpirience += 50;
+                Debug.Log($"{_curExpirience} / {_LevelExpirience}");
             }
         }
     }

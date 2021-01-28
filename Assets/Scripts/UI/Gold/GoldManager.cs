@@ -1,35 +1,53 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Scripts.UI.Gold
 {
-    public class GoldManager : MonoBehaviour, ISetGoldInfo
+    public class GoldManager : MonoBehaviour, IGoldManager
     {
-        public int gold;
-
-        [SerializeField] private GameObject goldGameObject;
-
-        private Text goldText;
-
-        private void Start() 
+        private int _gold;
+        public int Gold 
         {
-            goldText = goldGameObject.transform.Find("Count").GetComponent<Text>();
-        }
-
-        public void SetGold(int value)
-        {
-            gold = value;
-            SetGoldText();
-        }
-
-        public void SetGoldText() 
-        {
-            if (goldText == null)
+            get { return _gold; } 
+            set
             {
-                goldText = goldGameObject.transform.Find("Count").GetComponent<Text>();
+                _gold = value;
+                SetGoldText();
+            } 
+        }
+
+        private GameObject _goldGameObject;
+        private Text _goldText;
+
+        private void Start() { }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        }
+        private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != "Village")
+            {
+                return;
             }
 
-            goldText.text = gold.ToString(); 
+            _goldGameObject = GameObject.Find("MainCanvas").transform.Find("Gold").gameObject;
+        }
+
+        private void SetGoldText() 
+        {
+            if (_goldText == null)
+            {
+                _goldText = _goldGameObject.transform.Find("Count").GetComponent<Text>();
+            }
+
+            _goldText.text = _gold.ToString(); 
         }
     }
 }

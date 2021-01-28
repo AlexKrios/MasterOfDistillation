@@ -1,28 +1,24 @@
 ﻿using UnityEngine;
 
-namespace Scripts.MainCamera
+namespace Scripts.Scenes.Village.MainCamera
 {
     public class Rotate : MonoBehaviour
     {
         private GameManager GameManager { get => GameManager.Instance; }
+        private Transform _mainCamera { get => RoomManager.Instance.mainCamera.transform.parent; }
         private float _rotateSpeed { get => GameManager.rotateSpeed; }
 
-        private Transform _lookPoint;
-
-        private void Start()
-        {
-            _lookPoint = GameObject.Find("LookPoint").GetComponent<Transform>();
-        }
+        private void Start() { }
 
         private void RotateDesktop()
         {
             if (Input.GetKey(KeyCode.Q))
             {
-                transform.RotateAround(_lookPoint.position, -Vector3.up, _rotateSpeed / 2);
+                _mainCamera.transform.RotateAround(transform.position, -Vector3.up, _rotateSpeed / 2);
             }
             if (Input.GetKey(KeyCode.E))
             {
-                transform.RotateAround(_lookPoint.position, Vector3.up, _rotateSpeed / 2);
+                _mainCamera.transform.RotateAround(transform.position, Vector3.up, _rotateSpeed / 2);
             }
         }
 
@@ -32,7 +28,7 @@ namespace Scripts.MainCamera
             {
                 Touch touch = Input.GetTouch(0);
 
-                transform.Rotate(0f, touch.deltaPosition.x * _rotateSpeed * 5 * Time.deltaTime, 0f);
+                _mainCamera.transform.Rotate(0f, touch.deltaPosition.x * _rotateSpeed * 5 * Time.deltaTime, 0f);
             }
         }
 

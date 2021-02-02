@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using Scripts.Scenes.Village.Buildings.MainCamera;
+using UnityEngine;
+using Zenject;
 
 namespace Scripts.Scenes.Village.MainCamera
 {
     public class Rotate : MonoBehaviour
     {
-        private GameManager GameManager { get => GameManager.Instance; }
-        private Transform _mainCamera { get => RoomManager.Instance.mainCamera.transform.parent; }
-        private float _rotateSpeed { get => GameManager.rotateSpeed; }
+        private Transform _mainCamera;
+
+        private float _rotateSpeed;
+
+        [Inject]
+        public void Construct(GameManager gameManager, ICameraController cameraController)
+        {            
+            _mainCamera = cameraController.MainCamera.transform.parent;
+            _rotateSpeed = gameManager.rotateSpeed;
+        }
 
         private void Start() { }
 

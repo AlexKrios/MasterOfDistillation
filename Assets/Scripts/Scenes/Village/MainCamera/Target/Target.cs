@@ -1,17 +1,26 @@
-﻿using UnityEngine;
+﻿using Scripts.Scenes.Village.Buildings.MainCamera;
+using UnityEngine;
 
 namespace Scripts.Scenes.Village.MainCamera
 {
-    public class Target : MonoBehaviour, ITarget
+    public class Target : ITarget
     {
-        private IDisable Disable { get => RoomManager.Instance.disable; }
-        private Camera _mainCamera { get => RoomManager.Instance.mainCamera; }
+        private Camera _mainCamera;
+
+        private IDisable _disable;
 
         private Vector3 _position;
         public Vector3 Position 
         {
             get { return _position; }
             set { _position = value; }
+        }
+
+        public Target(ICameraController cameraController, IDisable disable)
+        {
+            _mainCamera = cameraController.MainCamera;
+
+            _disable = disable;
         }
 
         private void Start()
@@ -21,7 +30,7 @@ namespace Scripts.Scenes.Village.MainCamera
 
         public void SetTargetPos()
         {
-            if (Disable.Find("BuildSelect"))
+            if (_disable.Find("BuildingSelect"))
             {
                 return;
             }

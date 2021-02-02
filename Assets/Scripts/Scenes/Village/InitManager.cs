@@ -3,17 +3,24 @@ using Scripts.UI.Gold;
 using Scripts.UI.Level;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Scenes.Village
 {
     public class InitManager : MonoBehaviour
     {
-        private GameManager GameManager { get => GameManager.Instance; }
-        private ILevelManager LevelManager { get => GameManager.levelManager; }
-        private IGoldManager GoldManager { get => GameManager.goldManager; }
+        private IGoldController _goldController;
+        private ILevelController _levelController;
 
         public TextAsset jsonFile;
         [NonSerialized] public ResourcesObject startData;
+
+        [Inject]
+        public void Construct(IGoldController goldController, ILevelController levelController)
+        {
+            _goldController = goldController;
+            _levelController = levelController;
+        }
 
         private void Start()
         {
@@ -29,13 +36,14 @@ namespace Scripts.Scenes.Village
 
         private void SetStartData()
         {
-            LevelManager.LevelsExpirience = startData.levelExpInfo;
-            LevelManager.Level = startData.levelInfo.level;            
-            LevelManager.CurExpirience = startData.levelInfo.curExp;
-            LevelManager.SetLevelExpirience();
-            LevelManager.SetLevelPercent();
+            _levelController.LevelsExpirience = startData.levelExpInfo;
+            _levelController.Level = startData.levelInfo.level;
+            _levelController.CurExpirience = startData.levelInfo.curExp;
+            _levelController.SetLevelExpirience();
+            _levelController.SetLevelPercent();
 
-            GoldManager.Gold = startData.goldInfo.gold;
+            _goldController.Gold = startData.goldInfo.gold;
+            //_goldManager.Gold = startData.goldInfo.gold;
         }
     }
 

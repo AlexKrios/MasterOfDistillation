@@ -1,20 +1,34 @@
-﻿using UnityEngine;
+﻿using Scripts.Scenes.Village.Buildings.MainCamera;
+using UnityEngine;
+using Zenject;
 
 namespace Scripts.Scenes.Village.MainCamera
 {
     public class Move : MonoBehaviour
     {
-        private ITarget Target { get => RoomManager.Instance.target; }
-        private IDisable Disable { get => RoomManager.Instance.disable; }
-        private Transform _mainCamera { get => RoomManager.Instance.mainCamera.transform.parent; }
-        private float _moveSpeed { get => GameManager.Instance.moveSpeed; }
-        private Vector3 _targetPos { get => Target.Position; }
+        private Transform _mainCamera;
+
+        private ITarget _target;
+        private IDisable _disable;
+
+        private float _moveSpeed;
+
+        [Inject]
+        public void Construct(GameManager gameManager, ICameraController cameraController, ITarget target, IDisable disable)
+        {
+            _mainCamera = cameraController.MainCamera.transform.parent;
+
+            _target = target;
+            _disable = disable;
+
+            _moveSpeed = gameManager.moveSpeed;
+        }
 
         private void Start() { }
 
         private void DesktopMovement()
         {
-            if (!Disable.IsEmpty())
+            if (!_disable.IsEmpty())
             {
                 return;
             }
@@ -39,7 +53,7 @@ namespace Scripts.Scenes.Village.MainCamera
 
         private void MobileMovement()
         {
-            if (!Disable.IsEmpty())
+            if (!_disable.IsEmpty())
             {
                 return;
             }
@@ -47,9 +61,9 @@ namespace Scripts.Scenes.Village.MainCamera
             if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 var touch = Input.GetTouch(0);
-                var x = -touch.deltaPosition.x * 0.05f * _moveSpeed;
+                var x = -touch.deltaPosition.x * 0.02f * _moveSpeed;
                 var y = 0;
-                var z = -touch.deltaPosition.y * 0.05f * _moveSpeed;
+                var z = -touch.deltaPosition.y * 0.02f * _moveSpeed;
 
                 _mainCamera.transform.Translate(x, y, z, Space.Self);
             }
@@ -58,7 +72,7 @@ namespace Scripts.Scenes.Village.MainCamera
         private void ClampMove()
         {
             var x = Mathf.Clamp(_mainCamera.transform.position.x, -50f, 50f);
-            var y = 0;
+            var y = _mainCamera.transform.position.y;
             var z = Mathf.Clamp(_mainCamera.transform.position.z, -50f, 50f);
 
             _mainCamera.transform.position = new Vector3(x, y, z);
@@ -69,8 +83,8 @@ namespace Scripts.Scenes.Village.MainCamera
             DesktopMovement();
             MobileMovement();
 
-            Target.SetTargetPos();
-            _mainCamera.transform.position = Vector3.Lerp(_mainCamera.transform.position, _targetPos, 0.05f);
+            _target.SetTargetPos();
+            _mainCamera.transform.position = Vector3.Lerp(_mainCamera.transform.position, _target.Position, 0.05f);
 
             ClampMove();
         }

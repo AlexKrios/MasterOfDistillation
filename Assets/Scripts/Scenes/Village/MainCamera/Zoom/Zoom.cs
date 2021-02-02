@@ -1,13 +1,23 @@
-﻿using UnityEngine;
+﻿using Scripts.Scenes.Village.Buildings.MainCamera;
+using UnityEngine;
+using Zenject;
 
 namespace Scripts.Scenes.Village.MainCamera
 {
     public class Zoom : MonoBehaviour
     {
-        private Camera _mainCamera { get => RoomManager.Instance.mainCamera; }
-        private float _zoomSpeed { get => GameManager.Instance.zoomSpeed; }
+        private Camera _mainCamera;
+
+        private float _zoomSpeed;
 
         private float _targetZoom;
+
+        [Inject]
+        public void Construct(GameManager gameManager, ICameraController cameraController)
+        {
+            _mainCamera = cameraController.MainCamera;
+            _zoomSpeed = gameManager.zoomSpeed;
+        }
 
         private void Start()
         {

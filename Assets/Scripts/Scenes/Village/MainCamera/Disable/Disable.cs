@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Scripts.Scenes.Village.MainCamera
 {
-    public class Disable : MonoBehaviour, IDisable
+    public class Disable : IDisable
     {
         private List<string> _list = new List<string>();
 
-        private void Start() { }
-
+        // BuildingSelect - When click on buildings
         public void Add(string value)
         {
             _list.Add(value);

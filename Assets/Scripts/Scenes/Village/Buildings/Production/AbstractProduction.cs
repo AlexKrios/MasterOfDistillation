@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Scenes.Village.Buildings.Production
 {
-    public abstract class AbstractProduction : MonoBehaviour, IProduction
+    public abstract class AbstractProduction : MonoBehaviour
     {
-        //public void StartProduction()
-        //{
-        //    StartCoroutine(ProductionLogic());
-        //}
+        private IProductionController _productionController;
 
-        public virtual IEnumerator StartProduction()
+        [Inject]
+        public void Construct(IProductionController productionController)
+        {
+            _productionController = productionController;
+        }
+
+        public void StartProduction()
+        {
+            var coroutine = StartCoroutine(Production());
+            _productionController.Add("Test", coroutine);
+        }
+
+        public virtual IEnumerator Production()
         {
             var countdownValue = 10;
 

@@ -6,8 +6,6 @@ namespace Scripts.UI
 {
     public class UiController : IUiController
     {
-        public GameObject MainCanvas { get; }
-
         private Dictionary<string, GameObject> _uiElements = new Dictionary<string, GameObject>();
         
         private GameObject _activeBuilding;
@@ -15,11 +13,6 @@ namespace Scripts.UI
         {
             get { return _activeBuilding; }
             set { _activeBuilding = value; }
-        }
-
-        public UiController(GameObject mainCanvas)
-        {
-            MainCanvas = mainCanvas;
         }
 
         public void Add(string key, GameObject value)
@@ -39,7 +32,7 @@ namespace Scripts.UI
 
         public void Remove(GameObject gameObject)
         {
-            DestroyGameObject.Instance.Execute(gameObject);
+            GameObject.Destroy(gameObject);
             _uiElements.Remove(gameObject.name);
         }
 

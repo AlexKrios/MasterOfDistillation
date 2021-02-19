@@ -1,95 +1,113 @@
 {
-	"moneyInfo": 
+	"MoneyInfo": 
 	{
-		"money": 153
+		"Money": 153
 	},
-	"levelInfo":
+	"LevelInfo":
 	{
-		"level": 3,
-		"curExp": 10,
-		"exp": 100
+		"Level": 3,
+		"CurrentExperience": 10
 	},
-	"levelExpInfo": 
+	"RawInfo":
+	{
+		"Iron": 10
+	},
+	"RecipesInfo": 
 	[
 		{
-			"level": 1,
-			"max": 100
+			"Name": "Rifle",
+			"Slug": "rifle",
+			"Type": "Weapon",
+			"SubType": "Rifle",
+			"Quality": "Common",
+			"Raw": 
+			{
+				"Iron": 5
+			},
+			"CraftTime": 1
+		}
+	],
+	"LevelExperienceInfo": 
+	[
+		{
+			"Level": 1,
+			"Max": 100
 		},
 		{
-			"level": 2,
-			"max": 200
+			"Level": 2,
+			"Max": 200
 		},
 		{
-			"level": 3,
-			"max": 300
+			"Level": 3,
+			"Max": 300
 		},
 		{
-			"level": 4,
-			"max": 400
+			"Level": 4,
+			"Max": 400
 		},
 		{
-			"level": 5,
-			"max": 500
+			"Level": 5,
+			"Max": 500
 		},
 		{
-			"level": 6,
-			"max": 600
+			"Level": 6,
+			"Max": 600
 		},
 		{
-			"level": 7,
-			"max": 700
+			"Level": 7,
+			"Max": 700
 		},
 		{
-			"level": 8,
-			"max": 800
+			"Level": 8,
+			"Max": 800
 		},
 		{
-			"level": 9,
-			"max": 900
+			"Level": 9,
+			"Max": 900
 		},
 		{
-			"level": 10,
-			"max": 1000
+			"Level": 10,
+			"Max": 1000
 		},
 		{
-			"level": 11,
-			"max": 1100
+			"Level": 11,
+			"Max": 1100
 		},
 		{
-			"level": 12,
-			"max": 1200
+			"Level": 12,
+			"Max": 1200
 		},
 		{
-			"level": 13,
-			"max": 1300
+			"Level": 13,
+			"Max": 1300
 		},
 		{
-			"level": 14,
-			"max": 1400
+			"Level": 14,
+			"Max": 1400
 		},
 		{
-			"level": 15,
-			"max": 1500
+			"Level": 15,
+			"Max": 1500
 		},
 		{
-			"level": 16,
-			"max": 1600
+			"Level": 16,
+			"Max": 1600
 		},
 		{
-			"level": 17,
-			"max": 1700
+			"Level": 17,
+			"Max": 1700
 		},
 		{
-			"level": 18,
-			"max": 1800
+			"Level": 18,
+			"Max": 1800
 		},
 		{
-			"level": 19,
-			"max": 1900
+			"Level": 19,
+			"Max": 1900
 		},
 		{
-			"level": 20,
-			"max": 2000
+			"Level": 20,
+			"Max": 2000
 		}
 	]
 }

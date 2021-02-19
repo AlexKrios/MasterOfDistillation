@@ -5,6 +5,6 @@ namespace Scripts.Objects.Money
     [Serializable]
     public class MoneyObject
     {
-        public int money;
+        public int Money;
     }
 }

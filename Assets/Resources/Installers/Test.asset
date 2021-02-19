@@ -18,3 +18,12 @@ MonoBehaviour:
   LevelUI:
     LevelUIPrefab: {fileID: 9209229893864620261, guid: 49068a9f172410e4283921db703c7d2c,
       type: 3}
+  RawUI:
+    RawUIPrefab: {fileID: 1345606372920616409, guid: 64cdbf4a9bf31b84c835bec848e2f14a,
+      type: 3}
+  ComponentUI:
+    ComponentUIPrefab: {fileID: 3564414668192361742, guid: 284b4068209af3647a04ae60aff22cc2,
+      type: 3}
+  ProductUI:
+    ProductUIPrefab: {fileID: 921977387451305234, guid: aa66ea54915a36e499fef73735352be2,
+      type: 3}

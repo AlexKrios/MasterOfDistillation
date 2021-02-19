@@ -5,10 +5,10 @@ namespace Scripts.Objects.Product.Weapon
     [Serializable]
     public class WeaponObject
     {
-        public int id;
-        public int name;
+        public int Id;
+        public int Name;
 
-        public string type;
-        public string subType;
+        public string Type;
+        public string SubType;
     }
 }

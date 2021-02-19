@@ -1,4 +1,5 @@
 ﻿using Scripts.Stores.Money;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
@@ -11,16 +12,11 @@ namespace Scripts.UI.Money
 
         private Text _moneyText;
 
-        public void SetMoney(int value)
-        {
-            _moneyStore.Money = value;
-            SetMoneyText();
-        }
+        public UnityEvent OnSetMoneyText { get; set; } = new UnityEvent();
 
-        public void PlusMoney(int value)
+        public MoneyUIController()
         {
-            _moneyStore.Money += value;
-            SetMoneyText();
+            OnSetMoneyText.AddListener(SetMoneyText);
         }
 
         private void SetMoneyText()

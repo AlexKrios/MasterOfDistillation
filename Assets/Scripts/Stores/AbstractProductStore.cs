@@ -1,16 +1,21 @@
-﻿using Scripts.Stores.Raw;
+﻿using Scripts.UI.Product;
+using Zenject;
 
 namespace Scripts.Stores
 {
     public class AbstractProductStore : IProductStore
     {
-        protected IRawStore _rawStore;
+        [Inject] protected IProductUIController _productUIStore;
 
         protected int _componentCommon;
         public int ComponentCommon
         {
             get { return _componentCommon; }
-            set { _componentCommon = value; }
+            set 
+            { 
+                _componentCommon = value;
+                _productUIStore.OnSetComponentCommonText.Invoke();
+            }
         }
         
         protected int _componentBronze;

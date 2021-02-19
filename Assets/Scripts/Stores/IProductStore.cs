@@ -1,4 +1,6 @@
-﻿namespace Scripts.Stores
+﻿using Scripts.Stores.Raw;
+
+namespace Scripts.Stores
 {
     public interface IProductStore 
     {

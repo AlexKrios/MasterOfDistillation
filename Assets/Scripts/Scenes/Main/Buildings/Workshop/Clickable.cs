@@ -1,6 +1,6 @@
-﻿using Scripts.Scenes.Main.Buildings.Workshop.UI;
-using Scripts.Scenes.Main.MainCamera;
+﻿using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI;
+using Scripts.UI.Workshop;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -11,20 +11,16 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
     {
         private Camera _mainCamera;
 
-        private IUiController _uiController;
-        private ITarget _target;
-        private IDisable _disable;        
+        [Inject] private IUiController _uiController;
+        [Inject] private ITarget _target;
+        [Inject] private IDisable _disable;        
 
         [Inject] private WorkshopMenu.Factory _buildingMenuFactory;
 
         [Inject]
-        public void Construct([Inject(Id = "MainCamera")] Transform mainCamera, IUiController uiController, ITarget target, IDisable disable)
+        public void Construct([Inject(Id = "MainCamera")] Transform mainCamera)
         {
-            _mainCamera = mainCamera.GetComponent<Camera>();
-
-            _uiController = uiController;
-            _target = target;
-            _disable = disable;            
+            _mainCamera = mainCamera.GetComponent<Camera>();           
         }
 
         public void OnPointerClick(PointerEventData data)

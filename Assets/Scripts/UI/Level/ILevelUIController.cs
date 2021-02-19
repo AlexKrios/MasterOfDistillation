@@ -1,11 +1,11 @@
-﻿namespace Scripts.UI.Level
+﻿using UnityEngine.Events;
+
+namespace Scripts.UI.Level
 {
     public interface ILevelUIController
     {
-        void SetLevel(int value);
-        void SetCurrentExperience(int value);
-        void PlusCurrentExperience(int value);
-        void SetLevelExperience();
-        void SetLevelPercent();
+        UnityEvent OnSetLevelText { get; set; }
+        UnityEvent OnSetLevelExperience { get; set; }
+        UnityEvent OnSetLevelPercent { get; set; }
     }
 }

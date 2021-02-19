@@ -1,10 +1,16 @@
 using Scripts.Api;
-using Scripts.Scenes.Main.Craft.Weapon.Rifle;
-using Scripts.Stores;
+using Scripts.Common.Craft.Weapon.Rifle;
+using Scripts.Scenes.Main;
 using Scripts.Stores.Level;
 using Scripts.Stores.Money;
+using Scripts.Stores.Product;
 using Scripts.Stores.Product.Weapon.Rifle;
 using Scripts.Stores.Raw;
+using Scripts.UI;
+using Scripts.UI.Level;
+using Scripts.UI.Money;
+using Scripts.UI.Product;
+using Scripts.UI.Raw;
 using Zenject;
 
 namespace Scripts.DI.Game
@@ -14,8 +20,9 @@ namespace Scripts.DI.Game
         public override void InstallBindings()
         {
             Container.Bind<GameManager>().AsSingle().NonLazy();
-
+            
             InstallApi();
+            InstallUIComponents();
             InstallStores();
         }
 
@@ -24,14 +31,29 @@ namespace Scripts.DI.Game
             Container.Bind<IApiManager>().To<ApiManager>().AsSingle().NonLazy();
         }
 
+        private void InstallUIComponents()
+        {
+            Container.Bind<IUiController>().To<UiController>().AsSingle().NonLazy();
+
+            Container.Bind<IMoneyUIController>().To<MoneyUIController>().AsSingle().NonLazy();
+            Container.Bind<ILevelUIController>().To<LevelUIController>().AsSingle().NonLazy();
+            Container.Bind<IRawUIController>().To<RawUIController>().AsSingle().NonLazy();
+
+            Container.Bind<IProductUIController>().To<RifleUIController>().AsSingle().WhenInjectedInto<RifleStore>().NonLazy();
+        }
+
         private void InstallStores()
         {
-            Container.Bind<IMoneyStore>().To<MoneyStore>().AsSingle().NonLazy();
-            Container.Bind<ILevelStore>().To<LevelStore>().AsSingle().NonLazy();
+            Container.Bind<RecipesStore>().AsSingle().NonLazy();
 
+            Container.Bind<IMoneyStore>().To<MoneyStore>().AsSingle().NonLazy();
+            Container.Bind<ILevelStore>().To<LevelStore>().AsSingle().NonLazy();            
             Container.Bind<IRawStore>().To<RawStore>().AsSingle().NonLazy();
 
-            Container.Bind<IProductStore>().To<RifleStore>().AsSingle().WhenInjectedInto<RifleCraft>().NonLazy();
+            Container.BindInterfacesAndSelfTo<RifleStore>()
+                .AsSingle()
+                .WhenInjectedInto(typeof(InitManager), typeof(RifleCraft), typeof(RifleUIController))
+                .NonLazy();
         }        
     }
 }

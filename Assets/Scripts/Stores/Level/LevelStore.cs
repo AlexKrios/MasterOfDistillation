@@ -1,38 +1,58 @@
 ﻿using Scripts.Objects;
+using Scripts.UI.Level;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Scripts.Stores.Level
 {
     public class LevelStore : ILevelStore
     {
-        private List<LevelExpObject> _levelsExpirience;
-        public List<LevelExpObject> LevelsExpirience
+        [Inject] private ILevelUIController _levelUIController;
+
+        private List<LevelExperienceObject> _levelsExperience;
+        public List<LevelExperienceObject> LevelsExperience
         {
-            get { return _levelsExpirience; }
-            set { _levelsExpirience = value; }
+            get { return _levelsExperience; }
+            set { _levelsExperience = value; }
         }
 
         private int _level;
         public int Level
         {
             get { return _level; }
-            set { _level = value; }
+            set 
+            { 
+                _level = value;
+                _levelUIController.OnSetLevelText.Invoke();
+                _levelUIController.OnSetLevelExperience.Invoke();
+                _levelUIController.OnSetLevelPercent.Invoke();
+            }
         }        
         
-        private float _currentExpirience;
-        public float CurrentExpirience
+        private float _currentExperience;
+        public float CurrentExperience
         {
-            get { return _currentExpirience; }
-            set { _currentExpirience = value; }
+            get { return _currentExperience; }
+            set 
+            { 
+                _currentExperience = value;
+                _levelUIController.OnSetLevelPercent.Invoke();
+
+                if (_currentExperience < _levelExperience)
+                {
+                    return;
+                }
+
+                _currentExperience -= _levelExperience;
+                Level++;
+            }
         }
 
-        private float _levelExpirience;
-        public float LevelExpirience 
+        private float _levelExperience;
+        public float LevelExperience
         {
-            get { return _levelExpirience; }
-            set { _levelExpirience = value; }
+            get { return _levelExperience; }
+            set { _levelExperience = value; }
         }        
     }
 }

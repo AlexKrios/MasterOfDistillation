@@ -1,4 +1,5 @@
 ﻿using Scripts.Stores.Level;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
@@ -12,16 +13,15 @@ namespace Scripts.UI.Level
         private Text _levelText;
         private Text _levelPercentText;
 
-        public void SetLevel(int value)
-        {
-            _levelStore.Level = value;
-            SetLevelText();
-        }
+        public UnityEvent OnSetLevelText { get; set; } = new UnityEvent();
+        public UnityEvent OnSetLevelExperience { get; set; } = new UnityEvent();
+        public UnityEvent OnSetLevelPercent { get; set; } = new UnityEvent();
 
-        private void PlusOneLevel()
+        public LevelUIController()
         {
-            _levelStore.Level++;
-            SetLevelText();
+            OnSetLevelText.AddListener(SetLevelText);
+            OnSetLevelExperience.AddListener(SetLevelExperience);
+            OnSetLevelPercent.AddListener(SetLevelPercent);
         }
 
         private void SetLevelText()
@@ -34,45 +34,18 @@ namespace Scripts.UI.Level
             _levelText.text = _levelStore.Level.ToString();
         }
 
-        public void SetCurrentExperience(int value)
-        {
-            _levelStore.CurrentExpirience = value;
-        }
-
-        public void PlusCurrentExperience(int value)
-        {
-            _levelStore.CurrentExpirience += value;
-            CheckForNewLevel();
-            SetLevelPercent();
-        }
-
-        private void CheckForNewLevel()
-        {
-            var _currentExpirience = _levelStore.CurrentExpirience;
-            var _levelExpirience = _levelStore.LevelExpirience;
-
-            if (_currentExpirience < _levelExpirience)
-            {
-                return;
-            }
-
-            _levelStore.CurrentExpirience -= _levelExpirience;
-            PlusOneLevel();
-            SetLevelExperience();            
-        }
-
-        public void SetLevelExperience()
+        private void SetLevelExperience()
         {
             var _level = _levelStore.Level;
-            var _levelsExpirience = _levelStore.LevelsExpirience;
+            var _levelsExpirience = _levelStore.LevelsExperience;
 
-            _levelStore.LevelExpirience = _levelsExpirience[_level - 1].max;
+            _levelStore.LevelExperience = _levelsExpirience[_level - 1].Max;
         }
 
-        public void SetLevelPercent()
+        private void SetLevelPercent()
         {
-            var _curExpirience = _levelStore.CurrentExpirience;
-            var _levelExpirience = _levelStore.LevelExpirience;
+            var _curExpirience = _levelStore.CurrentExperience;
+            var _levelExpirience = _levelStore.LevelExperience;
 
             var levelPercent = _curExpirience / (_levelExpirience / 100);
 

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 53517178783214621}
   - component: {fileID: 53517178783214620}
-  - component: {fileID: 6467093449778092409}
-  - component: {fileID: 7809325794360841431}
+  - component: {fileID: 5646764249090996929}
+  - component: {fileID: 508373272506939810}
   m_Layer: 5
   m_Name: WorkshopMenu
   m_TagString: Untagged
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
---- !u!114 &6467093449778092409
+--- !u!114 &5646764249090996929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,10 +75,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 53517178783214618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89e8f432705dbb14a9ba7ffc820b753d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1358fc7d7779a484a98baea8137397d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7809325794360841431
+--- !u!114 &508373272506939810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 53517178783214618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd3339a4312aeae48aea3a1cc4346e6a, type: 3}
+  m_Script: {fileID: 11500000, guid: d6a1a5d3f789900429e0cf4721624714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 53517178783214618}
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7809325794360841431}
+      - m_Target: {fileID: 508373272506939810}
         m_MethodName: Create
         m_Mode: 3
         m_Arguments:
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7809325794360841431}
+      - m_Target: {fileID: 508373272506939810}
         m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7809325794360841431}
+      - m_Target: {fileID: 508373272506939810}
         m_MethodName: Close
         m_Mode: 1
         m_Arguments:

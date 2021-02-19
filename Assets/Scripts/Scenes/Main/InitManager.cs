@@ -2,9 +2,16 @@
 using System;
 using UnityEngine;
 using Zenject;
+using Scripts.Stores.Level;
+using Scripts.Stores.Raw;
+using Scripts.Stores.Product;
 using Scripts.UI.Money;
 using Scripts.UI.Level;
-using Scripts.Stores.Level;
+using Scripts.UI.Raw;
+using Scripts.Stores.Money;
+using Scripts.UI.Product;
+using Scripts.Stores.Product.Weapon.Rifle;
+using Scripts.Stores;
 
 namespace Scripts.Scenes.Main
 {
@@ -12,20 +19,36 @@ namespace Scripts.Scenes.Main
     {
         [Inject] private MoneyUI.Factory _moneyUI;
         [Inject] private LevelUI.Factory _levelUI;
+        [Inject] private RawUI.Factory _rawUI;
+        [Inject] private ComponentUI.Factory _componentUI;
+        [Inject] private ProductUI.Factory _productUI;
 
-        [Inject] private IMoneyUIController _moneyUIController;
+        [Inject] private RecipesStore _recipesStore;
+        [Inject] private IMoneyStore _moneyStore;
         [Inject] private ILevelStore _levelStore;
-        [Inject] private ILevelUIController _levelUIController;
+        [Inject] private IRawStore _rawStore;
+
+        [Inject] private IProductStore _rifleStore;
 
         public TextAsset jsonFile;
-        [NonSerialized] public ResourcesObject startData;
+        [NonSerialized] public ResourcesObject StartData;
+
+        private void Construct(RifleStore rifleStore)
+        {
+            _rifleStore = rifleStore;
+        }
 
         private void Start()
         {
             _moneyUI.Create();
             _levelUI.Create();
+            _rawUI.Create();
+            _componentUI.Create();
+            _productUI.Create("Rifle");
 
-            startData = InitStartData();
+            _rifleStore.ComponentCommon = 10;
+
+            StartData = InitStartData();
 
             SetStartData();            
         }
@@ -37,20 +60,24 @@ namespace Scripts.Scenes.Main
 
         private void SetStartData()
         {
-            _levelStore.LevelsExpirience = startData.levelExpInfo;
-            _levelUIController.SetLevel(startData.levelInfo.level);
-            _levelUIController.SetCurrentExperience(startData.levelInfo.curExp);
-            _levelUIController.SetLevelExperience();
-            _levelUIController.SetLevelPercent();
+            _moneyStore.Money = StartData.MoneyInfo.Money;
 
-            _moneyUIController.SetMoney(startData.moneyInfo.money);
+            _levelStore.LevelsExperience = StartData.LevelExperienceInfo;
+            _levelStore.Level = StartData.LevelInfo.Level;
+            _levelStore.CurrentExperience = StartData.LevelInfo.CurrentExperience;            
+
+            _rawStore.Iron = StartData.RawInfo.Iron;
+
+            _rifleStore.ComponentCommon = 10;
+
+            _recipesStore.Recipes = StartData.RecipesInfo;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                _levelUIController.PlusCurrentExperience(50);
+                _levelStore.CurrentExperience += 50;
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using Scripts.UI.Product;
+﻿using Scripts.Objects.Component;
+using Scripts.UI.Product;
+using System.Collections.Generic;
 using Zenject;
 
 namespace Scripts.Stores
@@ -7,36 +9,15 @@ namespace Scripts.Stores
     {
         [Inject] protected IProductUIController _productUIStore;
 
-        protected int _componentCommon;
-        public int ComponentCommon
+        protected List<ComponentObject> _components;
+        public List<ComponentObject> Components
         {
-            get { return _componentCommon; }
-            set 
-            { 
-                _componentCommon = value;
-                _productUIStore.OnSetComponentCommonText.Invoke();
+            get { return _components; }
+            set
+            {
+                _components = value;
+                _productUIStore.OnSetComponentText.Invoke();
             }
-        }
-        
-        protected int _componentBronze;
-        public int ComponentBronze
-        {
-            get { return _componentBronze; }
-            set { _componentBronze = value; }
-        }
-        
-        protected int _componentSilver;
-        public int ComponentSilver
-        {
-            get { return _componentSilver; }
-            set { _componentSilver = value; }
-        }
-        
-        protected int _componentGold;
-        public int ComponentGold
-        {
-            get { return _componentGold; }
-            set { _componentGold = value; }
         }
     }
 }

@@ -1,4 +1,5 @@
 using Scripts.Api;
+using Scripts.Common.Craft;
 using Scripts.Common.Craft.Weapon.Rifle;
 using Scripts.Scenes.Main;
 using Scripts.Stores.Level;
@@ -39,12 +40,16 @@ namespace Scripts.DI.Game
             Container.Bind<ILevelUIController>().To<LevelUIController>().AsSingle().NonLazy();
             Container.Bind<IRawUIController>().To<RawUIController>().AsSingle().NonLazy();
 
-            Container.Bind<IProductUIController>().To<RifleUIController>().AsSingle().WhenInjectedInto<RifleStore>().NonLazy();
+            Container.Bind<IProductUIController>()
+                .To<RifleUIController>()
+                .AsSingle()
+                .WhenInjectedInto(typeof(RifleStore), typeof(CraftComponent))
+                .NonLazy();
         }
 
         private void InstallStores()
         {
-            Container.Bind<RecipesStore>().AsSingle().NonLazy();
+            Container.Bind<IRecipesStore>().To<RecipesStore>().AsSingle().NonLazy();
 
             Container.Bind<IMoneyStore>().To<MoneyStore>().AsSingle().NonLazy();
             Container.Bind<ILevelStore>().To<LevelStore>().AsSingle().NonLazy();            

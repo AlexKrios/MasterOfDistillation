@@ -1,5 +1,6 @@
 ﻿using Scripts.Common.Craft;
 using Scripts.Scenes.Main.MainCamera;
+using Scripts.UI.Workshop.Craft;
 using UnityEngine;
 using Zenject;
 
@@ -7,21 +8,24 @@ namespace Scripts.UI.Workshop
 {
     public class WorkshopMenuButtons : MonoBehaviour
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private IDisable _disable;
+        [Inject] private IUiController _uiController;        
         [Inject] private ICraftController _craftController;
+        [Inject] private IDisable _disable;
+
+        [Inject] private CraftMenuUI.Factory _craftMenuUI;
 
         public GameObject menu;
 
         public void Close()
         {
             RemoveUiElement();
+            _uiController.ActiveBuilding = null;
         }
 
-        public void Create(int number)
+        public void Create()
         {
-            var craft = _uiController.ActiveBuilding.GetComponent<AbstractCraft>();
-            craft.CraftComponent();
+            var craftType = _uiController.ActiveBuilding.GetComponent<ICraft>();
+            _craftMenuUI.Create(craftType);
 
             RemoveUiElement();
         }
@@ -32,15 +36,14 @@ namespace Scripts.UI.Workshop
             StopCoroutine(coroutine);
             _craftController.Remove("Test");
 
-            RemoveUiElement();
+            RemoveUiElement();            
         }
 
         private void RemoveUiElement()
         {
-            _uiController.Remove(menu);
-            _uiController.ActiveBuilding = null;
+            _uiController.Remove(menu);            
 
-            _disable.Remove("BuildingSelect");
+            _disable.Remove("WorkshopSelect");
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Scripts.Scenes.Main.MainCamera
 
         public void SetTargetPos()
         {
-            if (_disable.Find("BuildingSelect"))
+            if (_disable.Find("WorkshopSelect"))
             {
                 return;
             }

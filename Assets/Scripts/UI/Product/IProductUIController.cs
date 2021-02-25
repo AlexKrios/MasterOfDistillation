@@ -4,9 +4,6 @@ namespace Scripts.UI.Product
 {
     public interface IProductUIController
     {
-        UnityEvent OnSetComponentCommonText { get; set; }
-        UnityEvent OnSetComponentBronzeText { get; set; }
-        UnityEvent OnSetComponentSilverText { get; set; }
-        UnityEvent OnSetComponentGoldText { get; set; }
+        UnityEvent OnSetComponentText { get; set; }
     }
 }

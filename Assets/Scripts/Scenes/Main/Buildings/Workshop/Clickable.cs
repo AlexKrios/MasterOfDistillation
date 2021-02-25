@@ -15,7 +15,7 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
         [Inject] private ITarget _target;
         [Inject] private IDisable _disable;        
 
-        [Inject] private WorkshopMenu.Factory _buildingMenuFactory;
+        [Inject] private WorkshopMenu.Factory _workshopMenuFactory;
 
         [Inject]
         public void Construct([Inject(Id = "MainCamera")] Transform mainCamera)
@@ -30,10 +30,10 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
             var targetPos = new Vector3(targetRenderer.x, _mainCamera.transform.position.y, targetRenderer.z);
 
             _target.Position = targetPos;
-            _disable.Add("BuildingSelect");
+            _disable.Add("WorkshopSelect");
 
             _uiController.ActiveBuilding = targetGO;
-            _buildingMenuFactory.Create(targetGO.name);
+            _workshopMenuFactory.Create(targetGO.name);
         }
     }
 }

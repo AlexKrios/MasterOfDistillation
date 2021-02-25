@@ -26,16 +26,16 @@ namespace Scripts.UI.Workshop
 
         public WorkshopMenu Create(string targetName)
         {
-            var name = "BuildingMenu" + targetName;
-            var uiElementSimilar = _uiController.FindByPart("BuildingMenu");
+            var name = "WorkshopMenu" + targetName;
+            var uiElementSimilar = _uiController.FindByPart("WorkshopMenu");
 
             if (uiElementSimilar != null)
             {
                 _uiController.Remove(uiElementSimilar);
-                _disable.Remove("BuildingSelect");
+                _disable.Remove("WorkshopSelect");
             }
 
-            var prefab = Resources.Load("UI/WorkshopMenu");
+            var prefab = Resources.Load("UI/Workshop/Menu");
             var horMenu = _container.InstantiatePrefabForComponent<WorkshopMenu>(prefab, _mainCanvas);
             horMenu.name = name;
 

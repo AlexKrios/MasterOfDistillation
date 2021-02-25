@@ -1,21 +1,17 @@
-﻿using Scripts.Objects.Raw;
+﻿using Scripts.Objects.Component;
+using Scripts.Objects.Raw;
 using System;
+using System.Collections.Generic;
 
 namespace Scripts.Objects.Product
 {
     [Serializable]
     public class RecipeObject
     {
-        public string Name;
-        public string Slug;
-
-        public string Type;
-        public string SubType;
-
         public string Quality;
 
         public RawObject Raw;
-        public ComponentObject Component;
+        public List<ComponentObject> Components;
 
         public int CraftTime;
     }

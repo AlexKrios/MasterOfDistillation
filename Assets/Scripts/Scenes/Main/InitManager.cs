@@ -1,4 +1,4 @@
-﻿using Scripts.Objects;
+using Scripts.Objects;
 using System;
 using UnityEngine;
 using Zenject;
@@ -21,9 +21,9 @@ namespace Scripts.Scenes.Main
         [Inject] private LevelUI.Factory _levelUI;
         [Inject] private RawUI.Factory _rawUI;
         [Inject] private ComponentUI.Factory _componentUI;
-        [Inject] private ProductUI.Factory _productUI;
+        [Inject] private ProductUI.Factory _productUI;        
 
-        [Inject] private RecipesStore _recipesStore;
+        [Inject] private IRecipesStore _recipesStore;
         [Inject] private IMoneyStore _moneyStore;
         [Inject] private ILevelStore _levelStore;
         [Inject] private IRawStore _rawStore;
@@ -46,11 +46,9 @@ namespace Scripts.Scenes.Main
             _componentUI.Create();
             _productUI.Create("Rifle");
 
-            _rifleStore.ComponentCommon = 10;
-
             StartData = InitStartData();
 
-            SetStartData();            
+            SetStartData();
         }
 
         public ResourcesObject InitStartData()
@@ -68,9 +66,9 @@ namespace Scripts.Scenes.Main
 
             _rawStore.Iron = StartData.RawInfo.Iron;
 
-            _rifleStore.ComponentCommon = 10;
+            _rifleStore.Components = StartData.RifleStoreInfo.Components;
 
-            _recipesStore.Recipes = StartData.RecipesInfo;
+            _recipesStore.Recipes = StartData.ProductsInfo;
         }
 
         private void Update()

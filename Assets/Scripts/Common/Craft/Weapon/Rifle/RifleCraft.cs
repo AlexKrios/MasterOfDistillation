@@ -6,11 +6,5 @@
         {
             ProductType = "Rifle";
         }
-
-        private void Update()
-        {
-            //Debug.Log($"Raw: {_productStore.Raw}");
-            //Debug.Log($"IngedientCommon: {_productStore.IngredientCommon}");
-        }
     }
 }

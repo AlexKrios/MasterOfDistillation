@@ -1,7 +1,7 @@
 ﻿public enum ProductQuality
 {
-    Common,
-    Bronze,
-    Silver,
-    Gold
+    Common = 0,
+    Bronze = 1,
+    Silver = 2,
+    Gold = 3
 }

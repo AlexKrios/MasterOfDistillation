@@ -1,6 +1,7 @@
 ﻿using Scripts.Objects.Money;
 using Scripts.Objects.Product;
 using Scripts.Objects.Raw;
+using Scripts.Objects.Stores;
 using System;
 using System.Collections.Generic;
 
@@ -10,9 +11,10 @@ namespace Scripts.Objects
     public class ResourcesObject
     {
         public MoneyObject MoneyInfo;
-        public LevelObject LevelInfo;        
+        public LevelObject LevelInfo;
         public RawObject RawInfo;
-        public List<RecipeObject> RecipesInfo;
+        public RifleStoreObject RifleStoreInfo;
+        public List<ProductObject> ProductsInfo;
         public List<LevelExperienceObject> LevelExperienceInfo;
     }
 }

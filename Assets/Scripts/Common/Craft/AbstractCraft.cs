@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Scripts.Common.Craft
 {
-    public abstract class AbstractCraft : MonoBehaviour
+    public abstract class AbstractCraft : MonoBehaviour, ICraft
     {
         [Inject] protected IProductStore _productStore;
         [Inject] private ICraftController _craftController;
@@ -12,22 +12,29 @@ namespace Scripts.Common.Craft
         [Inject] private CraftComponent _craftComponent;
 
         protected string _productType;
-        protected string ProductType
+        public string ProductType
         {
             get { return _productType; }
             set { _productType = value; }
         }
 
-        public void CraftComponent(ProductQuality quality = ProductQuality.Common)
+        public void CraftComponent()
         {
-            var coroutine = StartCoroutine(_craftComponent.Execute(quality, _productStore));
+            _craftController.ActiveStore = _productStore;
+
+            if (!_craftComponent.IsEnoughIngridients())
+            {
+                return;
+            }
+
+            var coroutine = StartCoroutine(_craftComponent.CraftTimer());
             _craftController.Add($"{_productType}Craft", coroutine);
         }
 
         public void CraftProduct(ProductQuality quality = ProductQuality.Common)
         {
-            var coroutine = StartCoroutine(_craftComponent.Execute(quality, _productStore));
-            _craftController.Add($"{_productType}Craft", coroutine);
+            //var coroutine = StartCoroutine(_craftComponent.Execute(product, _productStore));
+            //_craftController.Add($"{_productType}Craft", coroutine);
         }
     }
 }

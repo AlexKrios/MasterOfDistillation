@@ -7,7 +7,7 @@ namespace Scripts.Scenes.Main.MainCamera
     {
         private List<string> _list = new List<string>();
 
-        // BuildingSelect - When click on buildings
+        // WorkshopSelect - When click on workshop
         public void Add(string value)
         {
             _list.Add(value);

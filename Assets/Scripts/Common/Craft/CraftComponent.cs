@@ -1,7 +1,8 @@
 ﻿using Scripts.Objects.Product;
 using Scripts.Stores;
-using Scripts.Stores.Product;
+using Scripts.UI.Product;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -10,36 +11,42 @@ namespace Scripts.Common.Craft
     public class CraftComponent
     {
         [Inject] private ICraftController _craftController;
-        [Inject] private RecipesStore _recipesStore;
+        [Inject] protected IProductUIController _productUIStore;
 
         [Inject] private RawAction _rawAction;
         [Inject] private ComponentAction _componentAction;
 
+        private ProductObject _productObject;
+        private IProductStore _productStore;
+
+        private string _quality;
         private RecipeObject _recipe;
 
-        private ProductQuality _quality;
-        private IProductStore _store;
-
-        public IEnumerator Execute(ProductQuality quality, IProductStore store)
+        public bool IsEnoughIngridients()
         {
-            _quality = quality;
-            _store = store;
+            _productObject = _craftController.ActiveProduct;
+            _productStore = _craftController.ActiveStore;
 
-            _recipe = _recipesStore.Recipes[0];
+            _quality = _productObject.Quality;
+            _recipe = _productObject.Recipes.First(x => x.Quality == _quality);
 
-            if (!_rawAction.IsEnoughRaw() || !_componentAction.IsEnoughComponents())
+            if (!_rawAction.IsEnoughRaw(_recipe) || !_componentAction.IsEnoughComponents())
             {
                 Debug.LogWarning("Нехватает ингридиентов");
-                yield break;
+                return false;
             }
 
-            _rawAction.RemoveRaw();
+            return true;
+        }
+
+        public IEnumerator CraftTimer()
+        {
+            _rawAction.RemoveRaw(_recipe);
             //_componentAction.RemoveComponents();
 
             var countdownValue = _recipe.CraftTime;
             while (countdownValue > 0)
             {
-                //Debug.Log("Countdown: " + countdownValue);
                 yield return new WaitForSeconds(1.0f);
                 countdownValue--;
             }
@@ -49,12 +56,20 @@ namespace Scripts.Common.Craft
 
         private void CompleteCraft()
         {
-            var component = _store.GetType().GetProperty($"Component{_quality}");
-            var count = (int)component.GetValue(_store, null);
-            component.SetValue(_store, count + 1, null);
-            var newCount = (int)component.GetValue(_store, null);
+            foreach (var component in _productStore.Components)
+            {
+                if (component.Quality == _quality)
+                {
+                    component.Count++;
+                    _productUIStore.OnSetComponentText.Invoke();
 
-            Debug.Log($"Производство завершено. Component{_quality}: {newCount}");
+                    Debug.Log($"Производство завершено. Component {_quality}: {component.Count}");
+
+                    break;
+                }
+            }
+
+            _craftController.Remove($"{_productObject.SubType}Craft");
         }
     }
 }

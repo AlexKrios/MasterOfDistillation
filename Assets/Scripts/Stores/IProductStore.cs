@@ -1,12 +1,10 @@
-﻿using Scripts.Stores.Raw;
+﻿using Scripts.Objects.Component;
+using System.Collections.Generic;
 
 namespace Scripts.Stores
 {
     public interface IProductStore 
     {
-        int ComponentCommon { get; set; }
-        int ComponentBronze { get; set; }
-        int ComponentSilver { get; set; }
-        int ComponentGold { get; set; }
+        List<ComponentObject> Components { get; set; }
     }
 }

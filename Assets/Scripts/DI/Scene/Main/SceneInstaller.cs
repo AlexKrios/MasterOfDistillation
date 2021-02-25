@@ -5,6 +5,8 @@ using Scripts.UI.Money;
 using Scripts.UI.Product;
 using Scripts.UI.Raw;
 using Scripts.UI.Workshop;
+using Scripts.UI.Workshop.Craft;
+using UnityEngine;
 using Zenject;
 
 namespace Scripts.DI.Scene.Main
@@ -34,6 +36,8 @@ namespace Scripts.DI.Scene.Main
             Container.BindFactory<string, ProductUI, ProductUI.Factory>().FromFactory<ProductUIFactory>();
 
             Container.BindFactory<string, WorkshopMenu, WorkshopMenu.Factory>().FromFactory<WorkshopMenuFactory>();
+            Container.BindFactory<ICraft, CraftMenuUI, CraftMenuUI.Factory>().FromFactory<CraftMenuUIFactory>();
+            Container.BindFactory<Transform, CraftMenuCellUI, CraftMenuCellUI.Factory>().FromFactory<CraftMenuCellUIFactory>();
         }
 
         private void InstallCraftComponents()

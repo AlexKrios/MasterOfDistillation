@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Scripts.Objects.Product;
+using Scripts.Stores;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Common.Craft
@@ -6,18 +8,18 @@ namespace Scripts.Common.Craft
     public class CraftController : ICraftController
     {
         private Dictionary<string, Coroutine> _craftList = new Dictionary<string, Coroutine>();
-        private string _activeCraft;
-        public string ActiveCraft
-        {
-            get { return _activeCraft; }
-            set { _activeCraft = value; }
-        }
 
-        private string _activeQuality;
-        public string ActiveQuality
+        private ProductObject _activeProduct;
+        public ProductObject ActiveProduct
         {
-            get { return _activeQuality; }
-            set { _activeQuality = value; }
+            get { return _activeProduct; }
+            set { _activeProduct = value; }
+        }
+        private IProductStore _activeStore;
+        public IProductStore ActiveStore
+        {
+            get { return _activeStore; }
+            set { _activeStore = value; }
         }
 
         public void Add(string key, Coroutine coroutine)
@@ -33,12 +35,6 @@ namespace Scripts.Common.Craft
         public void Remove(string key)
         {
             _craftList.Remove(key);
-        }
-
-        public void ResetActive()
-        {
-            _activeCraft = null;
-            _activeQuality = null;
         }
     }
 }

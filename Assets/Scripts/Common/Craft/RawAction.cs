@@ -1,6 +1,7 @@
 ﻿using Scripts.Objects.Product;
 using Scripts.Stores.Raw;
 using System.Linq;
+using UnityEngine;
 using Zenject;
 
 namespace Scripts.Common.Craft
@@ -22,7 +23,7 @@ namespace Scripts.Common.Craft
             foreach (var field in fields)
             {
                 var storeProperty = _rawStore.GetType().GetProperty(field.Name);
-                var storeValue = (int)storeProperty.GetValue(_rawStore, null);
+                var storeValue = (int)storeProperty.GetValue(_rawStore, null); 
 
                 var objectValue = (int)field.GetValue(recipe.Raw);
 

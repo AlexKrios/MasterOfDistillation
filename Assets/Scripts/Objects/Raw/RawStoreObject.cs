@@ -3,8 +3,8 @@
 namespace Scripts.Objects.Raw
 {
     [Serializable]
-    public class RawObject
+    public class RawStoreObject
     {
-        public RawStoreObject Store;
+        public int Iron;
     }
 }

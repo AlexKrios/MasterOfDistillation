@@ -8,11 +8,11 @@ using System.Collections.Generic;
 namespace Scripts.Objects
 {
     [Serializable]
-    public class ResourcesObject
+    public class LoadObject
     {
         public MoneyObject MoneyInfo;
         public LevelObject LevelInfo;
-        public RawObject RawInfo;
+        public RawObject Raw;
         public RifleStoreObject RifleStoreInfo;
         public List<ProductObject> ProductsInfo;
         public List<LevelExperienceObject> LevelExperienceInfo;

@@ -10,7 +10,7 @@ namespace Scripts.Objects.Product
     {
         public string Quality;
 
-        public RawObject Raw;
+        public RawStoreObject Raw;
         public List<ComponentObject> Components;
 
         public int CraftTime;

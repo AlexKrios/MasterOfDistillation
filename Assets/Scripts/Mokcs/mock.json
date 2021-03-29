@@ -8,9 +8,21 @@
 		"Level": 3,
 		"CurrentExperience": 10
 	},
-	"RawInfo":
+	"Raw":
 	{
-		"Iron": 10
+		"Store":
+		{
+			"Iron": 10
+		},
+		"Settings":
+		{
+			"Iron":
+			{
+				"Level": 1,
+				"Max": 50,
+				"Cooldown": 5,
+			}
+		}
 	},
 	"RifleStoreInfo":
 	{

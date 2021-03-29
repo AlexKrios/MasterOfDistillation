@@ -31,7 +31,7 @@ namespace Scripts.Scenes.Main
         [Inject] private IProductStore _rifleStore;
 
         public TextAsset jsonFile;
-        [NonSerialized] public ResourcesObject StartData;
+        [NonSerialized] public LoadObject StartData;
 
         private void Construct(RifleStore rifleStore)
         {
@@ -51,9 +51,9 @@ namespace Scripts.Scenes.Main
             SetStartData();
         }
 
-        public ResourcesObject InitStartData()
+        public LoadObject InitStartData()
         {
-            return JsonUtility.FromJson<ResourcesObject>(jsonFile.text);
+            return JsonUtility.FromJson<LoadObject>(jsonFile.text);
         }
 
         private void SetStartData()
@@ -64,7 +64,7 @@ namespace Scripts.Scenes.Main
             _levelStore.Level = StartData.LevelInfo.Level;
             _levelStore.CurrentExperience = StartData.LevelInfo.CurrentExperience;            
 
-            _rawStore.Iron = StartData.RawInfo.Iron;
+            _rawStore.Iron = StartData.Raw.Store.Iron;
 
             _rifleStore.Components = StartData.RifleStoreInfo.Components;
 

@@ -1,13 +1,11 @@
-﻿using Scripts.Objects.Product;
-using Scripts.Stores;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts.Common.Craft
 {
     public interface ICraftController
     {
-        ProductObject ActiveProduct { get; set; }
-        IProductStore ActiveStore { get; set; }
+        ProductData ActiveProduct { get; set; }
+        ProductQuality ProductQuality { get; set; }
 
         void Add(string key, Coroutine coroutine);
         Coroutine FindByKey(string key);

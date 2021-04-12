@@ -1,0 +1,43 @@
+﻿using Scripts.Stores.Raw;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Zenject;
+
+namespace Scripts.Timer.Raw 
+{
+    public class RawTimerController : IRawTimerController
+    {
+        [Inject] private IRawStore _rawStore;
+
+        public Dictionary<string, Coroutine> RawTimers { get; set; }
+
+        public RawTimerController()
+        {
+            RawTimers = new Dictionary<string, Coroutine>();
+        }
+
+        public IEnumerator RawTimerExecute(string type) 
+        {
+            var rawObject = _rawStore.RawInfo.FirstOrDefault(x => x.Name == type);
+
+            var rawAmountCap = rawObject.Settings.AmountCap;
+            var rawCooldown = rawObject.Settings.Cooldown;
+
+            while (_rawStore.Iron < rawAmountCap)
+            {
+                var countdownValue = rawCooldown;
+                while (countdownValue > 0)
+                {
+                    yield return new WaitForSeconds(1.0f);
+                    countdownValue--;
+                }
+
+                _rawStore.Iron++;
+            }
+
+            RawTimers.Remove(type);
+        }
+    }
+}

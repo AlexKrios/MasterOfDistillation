@@ -1,54 +1,37 @@
-﻿using System;
+﻿using Scripts.Common.Craft;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Scripts.UI.Workshop.Craft
 {
     public class CraftMenuQualityUI : MonoBehaviour
     {
-        public Image icon;
+        [Inject] private ICraftController _craftController;
 
-        private CraftMenuCellUI _parentScript;
-        private ProductQuality _productQuality;
+        public Image Icon;
+        public Sprite[] QualityIcons;
 
-        private void Start()
+        private ProductQuality _activeQuality 
         {
-            _parentScript = transform.parent.GetComponent<CraftMenuCellUI>();
-            icon.color = new Color32(0, 0, 0, 0);
+            get { return _craftController.ProductQuality; }
+            set { _craftController.ProductQuality = value; }
         }
+
+        private void Start() { }
 
         public void ChangeProductQuality()
         {
-            _productQuality = (ProductQuality)Enum.Parse(typeof(ProductQuality), _parentScript.ProductObject.Quality);
-            var intQuality = (int)_productQuality;
-            _productQuality = (ProductQuality)intQuality + 1;
+            var intQuality = (int)_activeQuality + 1;            
 
-            if (!Enum.IsDefined(typeof(ProductQuality), _productQuality)) 
+            if (Enum.IsDefined(typeof(ProductQuality), intQuality))
             {
-                _productQuality = ProductQuality.Common;
+                _activeQuality = (ProductQuality)intQuality;
             }
-
-            _parentScript.ProductObject.Quality = _productQuality.ToString();
-            ChangeProductQualityIcon();            
-        }
-
-        public void ChangeProductQualityIcon()
-        {
-            if (_productQuality == ProductQuality.Common)
+            else
             {
-                icon.color = new Color32(200, 200, 200, 0);
-            }
-            if (_productQuality == ProductQuality.Bronze)
-            {
-                icon.color = new Color32(150, 150, 150, 255);
-            }
-            if (_productQuality == ProductQuality.Silver)
-            {
-                icon.color = new Color32(100, 100, 100, 255);
-            }
-            if (_productQuality == ProductQuality.Gold)
-            {
-                icon.color = new Color32(50, 50, 50, 255);
+                _activeQuality = ProductQuality.Common;
             }
         }
     }

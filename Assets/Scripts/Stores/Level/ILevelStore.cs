@@ -5,9 +5,11 @@ namespace Scripts.Stores.Level
 {
     public interface ILevelStore
     {
-        List<LevelExperienceObject> LevelsExperience { get; set; }
+        LevelObject LevelInfo { get; set; }
+
+        List<LevelExperienceObject> ExperienceMax { get; set; }
         int Level { get; set; }
-        float CurrentExperience { get; set; }
-        float LevelExperience { get; set; }
+        float Experience { get; set; }
+        float ExperienceCap { get; set; }
     }
 }

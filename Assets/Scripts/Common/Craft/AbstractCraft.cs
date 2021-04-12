@@ -1,4 +1,6 @@
-﻿using Scripts.Stores;
+﻿using Scripts.Common.Craft.Action;
+using Scripts.Stores;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -6,10 +8,14 @@ namespace Scripts.Common.Craft
 {
     public abstract class AbstractCraft : MonoBehaviour, ICraft
     {
-        [Inject] protected IProductStore _productStore;
         [Inject] private ICraftController _craftController;
+        [Inject] protected IProductStore _productStore;
+        public IProductStore ProductStore
+        {
+            get { return _productStore; }
+        }
 
-        [Inject] private CraftComponent _craftComponent;
+        [Inject] private CraftAction _craftAction;
 
         protected string _productType;
         public string ProductType
@@ -18,23 +24,21 @@ namespace Scripts.Common.Craft
             set { _productType = value; }
         }
 
-        public void CraftComponent()
+        [SerializeField] protected List<ProductData> _productList;
+        public List<ProductData> ProductList
         {
-            _craftController.ActiveStore = _productStore;
+            get { return _productList; }
+        }
 
-            if (!_craftComponent.IsEnoughIngridients())
+        public void CraftProduct()
+        {
+            if (!_craftAction.IsEnoughParts())
             {
                 return;
             }
 
-            var coroutine = StartCoroutine(_craftComponent.CraftTimer());
+            var coroutine = StartCoroutine(_craftAction.CraftTimer());
             _craftController.Add($"{_productType}Craft", coroutine);
-        }
-
-        public void CraftProduct(ProductQuality quality = ProductQuality.Common)
-        {
-            //var coroutine = StartCoroutine(_craftComponent.Execute(product, _productStore));
-            //_craftController.Add($"{_productType}Craft", coroutine);
         }
     }
 }

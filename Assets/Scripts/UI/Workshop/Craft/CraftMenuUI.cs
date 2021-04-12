@@ -1,6 +1,7 @@
 ﻿using Scripts.Common.Craft;
 using Scripts.Scenes.Main.MainCamera;
-using Scripts.Stores.Product;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,8 @@ namespace Scripts.UI.Workshop.Craft
     public class CraftMenuUI : MonoBehaviour
     {
         public GameObject Container;
+        public Dictionary<string, GameObject> CellList = new Dictionary<string, GameObject>();
+        public GameObject QualityBtn;
 
         public class Factory : PlaceholderFactory<ICraft, CraftMenuUI> { }
     }
@@ -16,9 +19,9 @@ namespace Scripts.UI.Workshop.Craft
     public class CraftMenuUIFactory : IFactory<ICraft, CraftMenuUI>
     {
         private DiContainer _container;
-        [Inject] private IUiController _uiController;        
-        [Inject] private IRecipesStore _recipesStore;
+        private IUiController _uiController;        
         [Inject] private IDisable _disable;
+        [Inject] private ICraftController _craftController;
 
         [Inject] private CraftMenuCellUI.Factory _craftMenuCellUI;
 
@@ -27,14 +30,19 @@ namespace Scripts.UI.Workshop.Craft
         private ICraft _productCraft;
         private CraftMenuUI _craftMenu;
 
-        private int _padding = 25;
-        private int _height = 125;
+        private List<ProductData> _items;
 
-        public CraftMenuUIFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        private int _rowCount = 3;
+        private int _padding = 25;
+        private int _height = 250;
+
+        public CraftMenuUIFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas, IUiController uiController)
         {
             _container = container;
+            _uiController = uiController;
 
             _mainCanvas = mainCanvas.gameObject.transform;
+            _items = _uiController.ActiveBuilding.GetComponent<ICraft>().ProductList;
         }
 
         public CraftMenuUI Create(ICraft productCraft)
@@ -64,23 +72,27 @@ namespace Scripts.UI.Workshop.Craft
         }
 
         private void SetContainerHeight() 
-        {
-            var itemLength = _recipesStore.FindBySubType(_productCraft.ProductType).Count;
-            var height = _height * itemLength + _padding * (itemLength - 1);
+        {            
+            var rowCount = (int)Math.Floor((double)_items.Count / _rowCount);
+            var height = _height * rowCount + _padding * (rowCount - 1);
 
             var containerRect = _craftMenu.GetComponent<CraftMenuUI>().Container.GetComponent<RectTransform>();
             containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, height);
         }
 
         private void CreateCraftCell()
-        {
+        {           
             var parent = _craftMenu.GetComponent<CraftMenuUI>().Container.transform;
-            var items = _recipesStore.FindBySubType(_productCraft.ProductType);
+            var _items = _uiController.ActiveBuilding.GetComponent<ICraft>().ProductList;
 
-            for (int i = 0; i < items.Count; i++)
+            _craftController.ActiveProduct = _items[0];
+
+            for (int i = 0; i < _items.Count; i++)
             {
-                var cell = _craftMenuCellUI.Create(parent.transform);                
-                cell.SetProductInfo(items[i]);
+                var cell = _craftMenuCellUI.Create(parent.transform);
+                _craftMenu.CellList.Add(_items[i].Slug, cell.gameObject);
+                cell.SetProductInfo(_items[i]);                
+                cell.name = _items[i].Slug;                
             }
         }
     }

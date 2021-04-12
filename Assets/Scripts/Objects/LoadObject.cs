@@ -12,9 +12,9 @@ namespace Scripts.Objects
     {
         public MoneyObject MoneyInfo;
         public LevelObject LevelInfo;
-        public RawObject Raw;
+        public List<RawObject> RawInfo;
         public RifleStoreObject RifleStoreInfo;
         public List<ProductObject> ProductsInfo;
-        public List<LevelExperienceObject> LevelExperienceInfo;
+        public List<LevelExperienceObject> ExperienceMaxInfo;
     }
 }

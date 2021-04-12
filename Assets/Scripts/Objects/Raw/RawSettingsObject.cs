@@ -5,8 +5,8 @@ namespace Scripts.Objects.Raw
     [Serializable]
     public class RawSettingsObject
     {
-        public int Level;
-        public int Max;
+        public int AmountCap;
+        public int LevelMax;
         public int Cooldown;
     }
 }

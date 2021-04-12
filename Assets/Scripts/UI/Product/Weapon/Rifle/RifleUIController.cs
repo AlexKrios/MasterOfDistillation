@@ -12,12 +12,12 @@ namespace Scripts.UI.Money
                 _componentText = _uiController.Find("Rifle").GetComponent<ProductUI>().ComponentText;
             }
 
-            var common = _productStore.Components.First(x => x.Quality == "Common").Count;
-            var bronze = _productStore.Components.First(x => x.Quality == "Bronze").Count;
-            var silver = _productStore.Components.First(x => x.Quality == "Silver").Count;
-            var gold = _productStore.Components.First(x => x.Quality == "Gold").Count;
+            //var common = _productStore.Components.First(x => x.Quality == "Common").Count;
+            //var bronze = _productStore.Components.First(x => x.Quality == "Bronze").Count;
+            //var silver = _productStore.Components.First(x => x.Quality == "Silver").Count;
+            //var gold = _productStore.Components.First(x => x.Quality == "Gold").Count;
 
-            _componentText.text = $"{common}/{bronze}/{silver}/{gold}";
+            //_componentText.text = $"{common}/{bronze}/{silver}/{gold}";
         }
     }
 }

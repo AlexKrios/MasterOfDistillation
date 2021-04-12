@@ -1,5 +1,5 @@
 ﻿using Scripts.Common.Craft;
-using Scripts.Objects.Product;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,40 +9,60 @@ namespace Scripts.UI.Workshop.Craft
     public class CraftMenuCellUI : MonoBehaviour
     {
         [Inject] private IUiController _uiController;
-        [Inject] private ICraftController _craftController;
+        [Inject] private ICraftController _craftController;       
 
-        public GameObject icon;
-        public GameObject product;
-        public GameObject quality;
-
-        private ProductObject _productObject;
-        public ProductObject ProductObject
+        private ProductData _productData;
+        public ProductData ProductObject
         {
-            get { return _productObject; }
-            set { _productObject = value; }
-        }
+            get { return _productData; }
+            set { _productData = value; }
+        }        
+
+        public Image Background;
+        public Image Icon;
 
         [Header("Product info")]
-        public Text productName;
-        public Text productType;
+        public Text ProductName;
 
-        public void SetProductInfo(ProductObject productObject)
+        public void SetProductInfo(ProductData productData)
         {
-            _productObject = productObject;
-            _productObject.Quality = "Common";
+            _productData = productData;
 
-            productName.text = _productObject.Name;
-            productType.text = $"{_productObject.Type}/{_productObject.SubType}";
+            ProductName.text = _productData.ProductName;
+
+            if (_productData.Slug == _craftController.ActiveProduct.Slug)
+            {
+                SetCellImage(true);
+            }
         }
 
-        public void SetProduct()
+        public void SetCellActive()
         {
-            _craftController.ActiveProduct = _productObject;
+            
+            SetCellImage(false);                                                        /* Disable past active cell */
+            
+            _craftController.ActiveProduct = _productData;                              /* Set new active cell */
+            _craftController.ProductQuality = ProductQuality.Common;                    /* Reset active product quality */
+
+            SetCellImage(true);                                                         /* Enable current active cell */
         }
 
-        public void StartProduction()
-        {
-            _uiController.ActiveBuilding.GetComponent<ICraft>().CraftComponent();
+        public void SetCellImage(bool active)
+        {            
+            if (active)
+            {
+                Background.color = new Color32(255, 155, 90, 255);
+            }
+            else 
+            {
+                var activeSlug = _craftController.ActiveProduct.Slug;
+
+                var craftMenuCellList = _uiController.FindByPart("CraftMenu").GetComponent<CraftMenuUI>().CellList;
+                var activeCellGO = craftMenuCellList.FirstOrDefault(x => x.Key == activeSlug).Value;
+                var activeCell = activeCellGO.GetComponent<CraftMenuCellUI>().Background.GetComponent<Image>();
+
+                activeCell.color = new Color32(255, 255, 255, 255);
+            }
         }
 
         public class Factory : PlaceholderFactory<Transform, CraftMenuCellUI> { }
@@ -61,7 +81,6 @@ namespace Scripts.UI.Workshop.Craft
         {
             var prefab = Resources.Load("UI/Workshop/Craft/Cell");
             var craftMenuCell = _container.InstantiatePrefabForComponent<CraftMenuCellUI>(prefab, parent);
-            craftMenuCell.name = "Cell";
 
             return craftMenuCell;
         }

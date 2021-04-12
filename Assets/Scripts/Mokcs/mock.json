@@ -1,33 +1,25 @@
 {
-	"MoneyInfo": 
-	{
+	"MoneyInfo": {
 		"Money": 153
 	},
-	"LevelInfo":
-	{
+	"LevelInfo": {
 		"Level": 3,
-		"CurrentExperience": 10
+		"Experience": 10
 	},
-	"Raw":
-	{
-		"Store":
+	"RawInfo": [
 		{
-			"Iron": 10
-		},
-		"Settings":
-		{
-			"Iron":
-			{
-				"Level": 1,
-				"Max": 50,
-				"Cooldown": 5,
+			"Name": "Iron",
+			"Count": 10,
+			"Level": 1,
+			"Settings": {
+				"AmountCap": 20,
+				"LevelMax": 10,
+				"Cooldown": 5
 			}
 		}
-	},
-	"RifleStoreInfo":
-	{
-		"Components":
-		[
+	],
+	"RifleStoreInfo": {
+		"Components": [
 			{
 				"Quality": "Common",
 				"Count": 5
@@ -46,43 +38,37 @@
 			}
 		]
 	},
-	"ProductsInfo": 
-	[
+	"ProductsInfo": [
 		{
 			"Name": "Rifle 1",
 			"Slug": "rifle 1",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -94,36 +80,31 @@
 			"Slug": "rifle 2",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -135,36 +116,31 @@
 			"Slug": "rifle 3",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -172,40 +148,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 4",
+			"Slug": "rifle 4",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -213,40 +184,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 5",
+			"Slug": "rifle 5",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -254,40 +220,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 6",
+			"Slug": "rifle 6",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -295,40 +256,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 7",
+			"Slug": "rifle 7",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -336,40 +292,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 8",
+			"Slug": "rifle 8",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -377,40 +328,35 @@
 			]
 		},
 		{
-			"Name": "Rifle 3",
-			"Slug": "rifle 3",
+			"Name": "Rifle 9",
+			"Slug": "rifle 9",
 			"Type": "Weapon",
 			"SubType": "Rifle",
-			"Recipes": 
-			[
+			"Recipes": [
 				{
 					"Quality": "Common",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 5
 					},
 					"CraftTime": 1
 				},
 				{
 					"Quality": "Bronze",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 10
 					},
 					"CraftTime": 2
 				},
 				{
 					"Quality": "Silver",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 15
 					},
 					"CraftTime": 3
 				},
 				{
 					"Quality": "Gold",
-					"Raw": 
-					{
+					"Raw": {
 						"Iron": 20
 					},
 					"CraftTime": 4
@@ -418,8 +364,7 @@
 			]
 		}
 	],
-	"LevelExperienceInfo": 
-	[
+	"ExperienceMaxInfo": [
 		{
 			"Level": 1,
 			"Max": 100

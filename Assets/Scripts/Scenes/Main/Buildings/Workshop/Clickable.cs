@@ -1,4 +1,5 @@
-﻿using Scripts.Scenes.Main.MainCamera;
+﻿using Scripts.Common.Craft;
+using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI;
 using Scripts.UI.Workshop;
 using UnityEngine;
@@ -32,7 +33,8 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
             _target.Position = targetPos;
             _disable.Add("WorkshopSelect");
 
-            _uiController.ActiveBuilding = targetGO;
+            _uiController.ActiveBuilding = targetGO;            
+
             _workshopMenuFactory.Create(targetGO.name);
         }
     }

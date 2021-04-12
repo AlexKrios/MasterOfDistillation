@@ -10,13 +10,15 @@ using Scripts.UI.Level;
 using Scripts.UI.Raw;
 using Scripts.Stores.Money;
 using Scripts.UI.Product;
-using Scripts.Stores.Product.Weapon.Rifle;
 using Scripts.Stores;
+using Scripts.Timer;
 
 namespace Scripts.Scenes.Main
 {
     public class InitManager : MonoBehaviour
     {
+        private Transform _sceneContext;
+
         [Inject] private MoneyUI.Factory _moneyUI;
         [Inject] private LevelUI.Factory _levelUI;
         [Inject] private RawUI.Factory _rawUI;
@@ -26,16 +28,18 @@ namespace Scripts.Scenes.Main
         [Inject] private IRecipesStore _recipesStore;
         [Inject] private IMoneyStore _moneyStore;
         [Inject] private ILevelStore _levelStore;
+
         [Inject] private IRawStore _rawStore;
 
-        [Inject] private IProductStore _rifleStore;
+        [Inject] private IProductStore _rifleStore;        
 
         public TextAsset jsonFile;
         [NonSerialized] public LoadObject StartData;
 
-        private void Construct(RifleStore rifleStore)
+        [Inject]
+        private void Construct([Inject(Id = "SceneContext")] Transform sceneContext)
         {
-            _rifleStore = rifleStore;
+            _sceneContext = sceneContext;
         }
 
         private void Start()
@@ -60,22 +64,21 @@ namespace Scripts.Scenes.Main
         {
             _moneyStore.Money = StartData.MoneyInfo.Money;
 
-            _levelStore.LevelsExperience = StartData.LevelExperienceInfo;
-            _levelStore.Level = StartData.LevelInfo.Level;
-            _levelStore.CurrentExperience = StartData.LevelInfo.CurrentExperience;            
+            _levelStore.ExperienceMax = StartData.ExperienceMaxInfo;
+            _levelStore.LevelInfo = StartData.LevelInfo;           
 
-            _rawStore.Iron = StartData.Raw.Store.Iron;
-
-            _rifleStore.Components = StartData.RifleStoreInfo.Components;
+            _rawStore.RawInfo = StartData.RawInfo;
 
             _recipesStore.Recipes = StartData.ProductsInfo;
+
+            _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                _levelStore.CurrentExperience += 50;
+                _levelStore.Experience += 50;
             }
         }
     }

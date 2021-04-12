@@ -5,7 +5,9 @@ namespace Scripts.Objects.Component
     [Serializable]
     public class ComponentObject
     {
-        public string Quality;
+        public string ProductName;
+        public string Type;
+        public ProductQuality Quality;
         public int Count;
     }
 }

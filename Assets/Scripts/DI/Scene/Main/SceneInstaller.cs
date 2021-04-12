@@ -1,4 +1,5 @@
 using Scripts.Common.Craft;
+using Scripts.Common.Craft.Action;
 using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI.Level;
 using Scripts.UI.Money;
@@ -43,10 +44,11 @@ namespace Scripts.DI.Scene.Main
         private void InstallCraftComponents()
         {
             Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
-            
-            Container.Bind<CraftComponent>().AsSingle().NonLazy();
+
+            Container.Bind<ICraftMenuUIController>().To<CraftMenuUIController>().AsSingle().NonLazy();
+
+            Container.Bind<CraftAction>().AsSingle().NonLazy();
             Container.Bind<RawAction>().AsSingle().NonLazy();
-            Container.Bind<ComponentAction>().AsSingle().NonLazy();
         }
     }
 }

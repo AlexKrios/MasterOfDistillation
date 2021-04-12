@@ -9,12 +9,25 @@ namespace Scripts.Stores.Level
     {
         [Inject] private ILevelUIController _levelUIController;
 
-        private List<LevelExperienceObject> _levelsExperience;
-        public List<LevelExperienceObject> LevelsExperience
+        private List<LevelExperienceObject> _experienceMax;
+        public List<LevelExperienceObject> ExperienceMax
         {
-            get { return _levelsExperience; }
-            set { _levelsExperience = value; }
+            get { return _experienceMax; }
+            set { _experienceMax = value; }
         }
+
+        private LevelObject _levelInfo;
+        public LevelObject LevelInfo 
+        {
+            get { return _levelInfo; }
+            set 
+            {
+                _levelInfo = value;
+
+                Level = _levelInfo.Level;
+                Experience = _levelInfo.Experience;
+            }
+        }        
 
         private int _level;
         public int Level
@@ -29,30 +42,30 @@ namespace Scripts.Stores.Level
             }
         }        
         
-        private float _currentExperience;
-        public float CurrentExperience
+        private float _experience;
+        public float Experience
         {
-            get { return _currentExperience; }
+            get { return _experience; }
             set 
             { 
-                _currentExperience = value;
+                _experience = value;
                 _levelUIController.OnSetLevelPercent.Invoke();
 
-                if (_currentExperience < _levelExperience)
+                if (_experience < _experienceCap)
                 {
                     return;
                 }
 
-                _currentExperience -= _levelExperience;
+                _experience -= _experienceCap;
                 Level++;
             }
         }
 
-        private float _levelExperience;
-        public float LevelExperience
+        private float _experienceCap;
+        public float ExperienceCap
         {
-            get { return _levelExperience; }
-            set { _levelExperience = value; }
+            get { return _experienceCap; }
+            set { _experienceCap = value; }
         }        
     }
 }

@@ -6,6 +6,6 @@ namespace Scripts.Objects
     public class LevelObject
     {
         public int Level;
-        public int CurrentExperience;
+        public int Experience;
     }
 }

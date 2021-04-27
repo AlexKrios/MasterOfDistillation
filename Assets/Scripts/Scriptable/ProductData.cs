@@ -5,29 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New ProductData", menuName = "Product Data", order = 51)]
 public class ProductData : ScriptableObject
 {
-    [SerializeField] private string _productName;
-    public string ProductName 
+    private GameObject _gameObject;
+    public GameObject GameObject
     {
-        get { return _productName; }
+        get { return _gameObject; }
+        set { _gameObject = value; }
     }
 
-    [SerializeField] private string _slug;
-    public string Slug
+    private List<int> _count;
+    public List<int> Count
     {
-        get { return _slug; }
+        get { return _count; }
+        set { _count = value; }
     }
 
-    [SerializeField] private string _type;
-    public string Type
+    [SerializeField] private ObjectData _data;
+    public ObjectData Data 
     {
-        get { return _type; }
-    }
-
-    [SerializeField] private string _subType;
-    public string SubType
-    {
-        get { return _subType; }
-    }
+        get { return _data; }
+    }    
 
     [SerializeField] private List<RecipeObject> _recipes;
     public List<RecipeObject> Recipes

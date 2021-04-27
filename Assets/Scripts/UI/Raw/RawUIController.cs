@@ -1,22 +1,41 @@
 ﻿using Scripts.Stores.Raw;
+using System;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Scripts.UI.Raw
 {
+    [Serializable]
+    public class RawTextEvent : UnityEvent<string> { }
+
     public class RawUIController : IRawUIController
     {
         [Inject] private IUiController _uiController;
         [Inject] private IRawStore _rawStore;
 
-        private Text _ironText;
+        public RawTextEvent RawTextEvent { get; set; }
 
-        public UnityEvent OnSetIronText { get; set; } = new UnityEvent();
+        private Text _ironText;
 
         public RawUIController()
         {
-            OnSetIronText.AddListener(SetIronText);
+            if (RawTextEvent == null)
+            {
+                RawTextEvent = new RawTextEvent();
+            }
+
+            RawTextEvent.AddListener(SetRawText);
+        }
+
+        private void SetRawText(string raw)
+        {
+            switch (raw)
+            {
+                case "Iron":
+                    SetIronText();
+                    break;
+            }
         }
 
         #region Iron
@@ -27,7 +46,7 @@ namespace Scripts.UI.Raw
                 _ironText = _uiController.Find("Raw").GetComponent<RawUI>().IronText;
             }
 
-            _ironText.text = _rawStore.Iron.ToString();
+            _ironText.text = _rawStore.RawData["Iron"].Count.ToString();
         }
         #endregion
     }

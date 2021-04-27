@@ -16,8 +16,6 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
         [Inject] private ITarget _target;
         [Inject] private IDisable _disable;        
 
-        [Inject] private WorkshopMenu.Factory _workshopMenuFactory;
-
         [Inject]
         public void Construct([Inject(Id = "MainCamera")] Transform mainCamera)
         {
@@ -26,16 +24,16 @@ namespace Scripts.Scenes.Main.Buildings.Workshop
 
         public void OnPointerClick(PointerEventData data)
         {
-            var targetGO = data.pointerCurrentRaycast.gameObject;
-            var targetRenderer = targetGO.GetComponent<Renderer>().bounds.center;
-            var targetPos = new Vector3(targetRenderer.x, _mainCamera.transform.position.y, targetRenderer.z);
+            //var targetGO = data.pointerCurrentRaycast.gameObject;
+            //var targetRenderer = targetGO.GetComponent<Renderer>().bounds.center;
+            //var targetPos = new Vector3(targetRenderer.x, _mainCamera.transform.position.y, targetRenderer.z);
 
-            _target.Position = targetPos;
-            _disable.Add("WorkshopSelect");
+            //_target.Position = targetPos;
+            //_disable.Add("WorkshopSelect");
 
-            _uiController.ActiveBuilding = targetGO;            
+            //_uiController.ActiveBuilding = targetGO;            
 
-            _workshopMenuFactory.Create(targetGO.name);
+            //_workshopMenuFactory.Create(targetGO.name);
         }
     }
 }

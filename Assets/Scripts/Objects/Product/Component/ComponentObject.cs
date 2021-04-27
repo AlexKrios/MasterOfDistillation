@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Scripts.Objects.Component
 {
@@ -9,5 +10,7 @@ namespace Scripts.Objects.Component
         public string Type;
         public ProductQuality Quality;
         public int Count;
+
+        public Sprite icon;
     }
 }

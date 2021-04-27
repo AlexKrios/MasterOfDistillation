@@ -14,16 +14,16 @@ namespace Scripts.Timer
 
         public void SetRawTimers()
         {
-            foreach (var raw in _rawStore.RawInfo)
+            foreach (var raw in _rawStore.RawData)
             {                
-                if (_rawTimerController.RawTimers.ContainsKey(raw.Name))
+                if (_rawTimerController.RawTimers.ContainsKey(raw.Value.Data.Name))
                 {
                     return;
                 }
 
                 _rawTimerController.RawTimers.Add(
-                    raw.Name, 
-                    StartCoroutine(_rawTimerController.RawTimerExecute(raw.Name))
+                    raw.Value.Data.Name, 
+                    StartCoroutine(_rawTimerController.RawTimerExecute(raw.Value.Data.Name))
                 );
             }
         }

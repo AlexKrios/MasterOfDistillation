@@ -1,4 +1,4 @@
-﻿using Scripts.Objects.Component;
+﻿using Scripts.Objects.Part;
 using System;
 using System.Collections.Generic;
 
@@ -7,10 +7,10 @@ namespace Scripts.Objects.Product
     [Serializable]
     public class RecipeObject
     {
-        public string RecipeName;
+        public string Name;
 
         public ProductQuality Quality;
-        public List<ComponentObject> Components;
+        public List<PartObject> Parts;
 
         public int CraftTime;
     }

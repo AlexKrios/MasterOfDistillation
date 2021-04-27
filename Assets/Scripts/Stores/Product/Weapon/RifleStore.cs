@@ -1,12 +1,13 @@
-﻿namespace Scripts.Stores.Product.Weapon.Rifle
+﻿namespace Scripts.Stores.Product.Weapon
 {
-    public class RifleStore : AbstractProductStore 
+    public class RifleStore : AbstractStore 
     {
         public RifleStore()
         {
-            productFilesPath = "Products/Weapon/Rifle/Scriptable";
+            itemSubType = "Rifle";
+            itemFilesPath = "Data/Products/Weapon/Rifle";
 
-            SetProductToStoreList(RifleStoreList);
+            SetProductToStoreDictionary(_data);
         }
     }
 }

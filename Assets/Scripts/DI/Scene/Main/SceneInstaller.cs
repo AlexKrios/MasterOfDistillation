@@ -1,13 +1,10 @@
-using Scripts.Common.Craft;
-using Scripts.Common.Craft.Action;
 using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI.Level;
 using Scripts.UI.Money;
-using Scripts.UI.Product;
 using Scripts.UI.Raw;
-using Scripts.UI.Workshop;
 using Scripts.UI.Workshop.Craft;
-using UnityEngine;
+using Scripts.UI.Workshop.Craft.Item;
+using Scripts.UI.Workshop.Craft.TypeTab;
 using Zenject;
 
 namespace Scripts.DI.Scene.Main
@@ -17,9 +14,7 @@ namespace Scripts.DI.Scene.Main
         public override void InstallBindings()
         {
             InstallCameraComponents();
-            InstallUIFactory();
-
-            InstallCraftComponents();
+            InstallUIFactory();            
         }
 
         private void InstallCameraComponents()
@@ -33,22 +28,11 @@ namespace Scripts.DI.Scene.Main
             Container.BindFactory<MoneyUI, MoneyUI.Factory>().FromFactory<MoneyUIFactory>();
             Container.BindFactory<LevelUI, LevelUI.Factory>().FromFactory<LevelUIFactory>();
             Container.BindFactory<RawUI, RawUI.Factory>().FromFactory<RawUIFactory>();
-            Container.BindFactory<ComponentUI, ComponentUI.Factory>().FromFactory<ComponentUIFactory>();
-            Container.BindFactory<string, ProductUI, ProductUI.Factory>().FromFactory<ProductUIFactory>();
 
-            Container.BindFactory<string, WorkshopMenu, WorkshopMenu.Factory>().FromFactory<WorkshopMenuFactory>();
-            Container.BindFactory<ICraft, CraftMenuUI, CraftMenuUI.Factory>().FromFactory<CraftMenuUIFactory>();
-            Container.BindFactory<Transform, CraftMenuCellUI, CraftMenuCellUI.Factory>().FromFactory<CraftMenuCellUIFactory>();
-        }
-
-        private void InstallCraftComponents()
-        {
-            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
-
-            Container.Bind<ICraftMenuUIController>().To<CraftMenuUIController>().AsSingle().NonLazy();
-
-            Container.Bind<CraftAction>().AsSingle().NonLazy();
-            Container.Bind<RawAction>().AsSingle().NonLazy();
-        }
+            Container.BindFactory<CraftMenuUI, CraftMenuUI.Factory>().FromFactory<CraftMenuUIFactory>();
+            Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
+            Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
+            Container.BindFactory<ProductData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
+        }        
     }
 }

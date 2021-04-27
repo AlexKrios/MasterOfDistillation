@@ -1,9 +1,7 @@
-﻿using UnityEngine.Events;
-
-namespace Scripts.UI.Raw
+﻿namespace Scripts.UI.Raw
 {
     public interface IRawUIController
     {
-        UnityEvent OnSetIronText { get; set; }
+        RawTextEvent RawTextEvent { get; set; }
     }
 }

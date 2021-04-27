@@ -1,4 +1,4 @@
-﻿using Scripts.Objects.Component;
+﻿using Scripts.Objects.Part;
 using Scripts.Stores.Raw;
 using Zenject;
 
@@ -8,14 +8,12 @@ namespace Scripts.Common.Craft.Action
     {
         [Inject] private IRawStore _rawStore;
 
-        public bool IsEnoughRaw(ComponentObject component)
+        public bool IsEnoughRaw(PartObject part)
         {
-            var componentValue = component.Count;
+            var partCount = part.Count;
+            var storeValue = _rawStore.RawData[part.Data.Name].Count;
 
-            var storeProperty = _rawStore.GetType().GetProperty(component.ProductName);
-            var storeValue = (int)storeProperty.GetValue(_rawStore, null);
-
-            if (storeValue - componentValue < 0)
+            if (storeValue - partCount < 0)
             {
                 return false;
             }
@@ -23,14 +21,12 @@ namespace Scripts.Common.Craft.Action
             return true;
         }
 
-        public void RemoveRaw(ComponentObject component)
+        public void RemoveRaw(PartObject part)
         {
-            var componentValue = component.Count;
+            var partName = part.Data.Name;
+            var partCount = part.Count;
 
-            var storeProperty = _rawStore.GetType().GetProperty(component.ProductName);
-            var storeValue = (int)storeProperty.GetValue(_rawStore, null);
-
-            storeProperty.SetValue(_rawStore, storeValue - componentValue, null);
+            _rawStore.SetRawListData(partName, -partCount);
         }
     }    
 }

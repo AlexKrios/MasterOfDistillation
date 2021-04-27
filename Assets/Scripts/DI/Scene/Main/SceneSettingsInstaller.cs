@@ -1,7 +1,9 @@
 using Scripts.UI.Level;
 using Scripts.UI.Money;
-using Scripts.UI.Product;
 using Scripts.UI.Raw;
+using Scripts.UI.Workshop.Craft;
+using Scripts.UI.Workshop.Craft.Item;
+using Scripts.UI.Workshop.Craft.TypeTab;
 using UnityEngine;
 using Zenject;
 
@@ -13,16 +15,22 @@ namespace Scripts.DI.Scene.Main
         public MoneyUIFactory.Settings MoneyUI;
         public LevelUIFactory.Settings LevelUI;
         public RawUIFactory.Settings RawUI;
-        public ComponentUIFactory.Settings ComponentUI;
-        public ProductUIFactory.Settings ProductUI;
+
+        public CraftMenuUIFactory.Settings CraftMenuUI;
+        public TypeTabFactory.Settings TypeTabs;
+        public ItemsGroupFactory.Settings ItemsGroup;
+        public ItemButtonFactory.Settings ItemButton;
 
         public override void InstallBindings()
         {
             Container.BindInstance(MoneyUI);
             Container.BindInstance(LevelUI);
             Container.BindInstance(RawUI);
-            Container.BindInstance(ComponentUI);
-            Container.BindInstance(ProductUI);
+
+            Container.BindInstance(CraftMenuUI);
+            Container.BindInstance(TypeTabs);
+            Container.BindInstance(ItemsGroup);
+            Container.BindInstance(ItemButton);
         }
     }
 }

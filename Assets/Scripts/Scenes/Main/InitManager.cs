@@ -4,14 +4,13 @@ using UnityEngine;
 using Zenject;
 using Scripts.Stores.Level;
 using Scripts.Stores.Raw;
-using Scripts.Stores.Product;
 using Scripts.UI.Money;
 using Scripts.UI.Level;
 using Scripts.UI.Raw;
 using Scripts.Stores.Money;
-using Scripts.UI.Product;
-using Scripts.Stores;
 using Scripts.Timer;
+using System.Collections.Generic;
+using Scripts.Stores;
 
 namespace Scripts.Scenes.Main
 {
@@ -21,17 +20,13 @@ namespace Scripts.Scenes.Main
 
         [Inject] private MoneyUI.Factory _moneyUI;
         [Inject] private LevelUI.Factory _levelUI;
-        [Inject] private RawUI.Factory _rawUI;
-        [Inject] private ComponentUI.Factory _componentUI;
-        [Inject] private ProductUI.Factory _productUI;        
+        [Inject] private RawUI.Factory _rawUI;      
 
-        [Inject] private IRecipesStore _recipesStore;
         [Inject] private IMoneyStore _moneyStore;
         [Inject] private ILevelStore _levelStore;
 
         [Inject] private IRawStore _rawStore;
-
-        [Inject] private IProductStore _rifleStore;        
+        [Inject] private List<IStore> _storeList;
 
         public TextAsset jsonFile;
         [NonSerialized] public LoadObject StartData;
@@ -47,8 +42,6 @@ namespace Scripts.Scenes.Main
             _moneyUI.Create();
             _levelUI.Create();
             _rawUI.Create();
-            _componentUI.Create();
-            _productUI.Create("Rifle");
 
             StartData = InitStartData();
 
@@ -67,19 +60,11 @@ namespace Scripts.Scenes.Main
             _levelStore.ExperienceMax = StartData.ExperienceMaxInfo;
             _levelStore.LevelInfo = StartData.LevelInfo;           
 
-            _rawStore.RawInfo = StartData.RawInfo;
+            _rawStore.InitRawListData(StartData.RawInfo);
 
-            _recipesStore.Recipes = StartData.ProductsInfo;
+            _storeList[0].LoadItemsCount(StartData.StoresInfo);
 
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _levelStore.Experience += 50;
-            }
         }
     }
 

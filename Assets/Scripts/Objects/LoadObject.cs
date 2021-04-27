@@ -1,7 +1,6 @@
 ﻿using Scripts.Objects.Money;
-using Scripts.Objects.Product;
-using Scripts.Objects.Raw;
-using Scripts.Objects.Stores;
+using Scripts.Objects.Product.Load;
+using Scripts.Objects.Raw.Load;
 using System;
 using System.Collections.Generic;
 
@@ -12,9 +11,8 @@ namespace Scripts.Objects
     {
         public MoneyObject MoneyInfo;
         public LevelObject LevelInfo;
-        public List<RawObject> RawInfo;
-        public RifleStoreObject RifleStoreInfo;
-        public List<ProductObject> ProductsInfo;
+        public List<RawLoadObject> RawInfo;
+        public List<ProductLoadObject> StoresInfo;
         public List<LevelExperienceObject> ExperienceMaxInfo;
     }
 }

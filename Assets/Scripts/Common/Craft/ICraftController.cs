@@ -1,14 +1,12 @@
-﻿using UnityEngine;
+﻿using Scripts.Objects.Craft;
+using System.Collections.Generic;
 
 namespace Scripts.Common.Craft
 {
     public interface ICraftController
     {
-        ProductData ActiveProduct { get; set; }
-        ProductQuality ProductQuality { get; set; }
+        Dictionary<int, CraftObject> CraftList { get; }
 
-        void Add(string key, Coroutine coroutine);
-        Coroutine FindByKey(string key);
-        void Remove(string key);
+        int? CheckFreeIndex();
     }
 }

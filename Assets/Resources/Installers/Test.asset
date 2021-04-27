@@ -21,9 +21,20 @@ MonoBehaviour:
   RawUI:
     RawUIPrefab: {fileID: 1345606372920616409, guid: 64cdbf4a9bf31b84c835bec848e2f14a,
       type: 3}
-  ComponentUI:
-    ComponentUIPrefab: {fileID: 3564414668192361742, guid: 284b4068209af3647a04ae60aff22cc2,
+  CraftMenuUI:
+    Name: CraftMenu
+    Prefab: {fileID: 7196737555349474873, guid: 9754840056129854cbc5a592d2bc5d89,
       type: 3}
-  ProductUI:
-    ProductUIPrefab: {fileID: 921977387451305234, guid: aa66ea54915a36e499fef73735352be2,
+    RowCount: 4
+    Padding: 25
+    Height: 250
+  TypeTabs:
+    Name: TypeTabs
+    Prefab: {fileID: 2881336544839766366, guid: 3c4e2b3d219ce444d886f6be7ddc6830,
       type: 3}
+  ItemsGroup:
+    Name: Items
+    Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
+      type: 3}
+  ItemButton:
+    Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc, type: 3}

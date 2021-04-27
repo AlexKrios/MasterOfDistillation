@@ -20,12 +20,12 @@ namespace Scripts.Timer.Raw
 
         public IEnumerator RawTimerExecute(string type) 
         {
-            var rawObject = _rawStore.RawInfo.FirstOrDefault(x => x.Name == type);
+            var rawObject = _rawStore.RawData[type];
 
             var rawAmountCap = rawObject.Settings.AmountCap;
             var rawCooldown = rawObject.Settings.Cooldown;
 
-            while (_rawStore.Iron < rawAmountCap)
+            while (_rawStore.RawData[type].Count < rawAmountCap)
             {
                 var countdownValue = rawCooldown;
                 while (countdownValue > 0)
@@ -34,7 +34,7 @@ namespace Scripts.Timer.Raw
                     countdownValue--;
                 }
 
-                _rawStore.Iron++;
+                _rawStore.SetRawListData(type, 1);
             }
 
             RawTimers.Remove(type);

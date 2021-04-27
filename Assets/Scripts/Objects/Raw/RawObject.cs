@@ -5,7 +5,7 @@ namespace Scripts.Objects.Raw
     [Serializable]
     public class RawObject
     {
-        public string Name;
+        public ObjectData Data;
 
         public int Count;
         public int Level;

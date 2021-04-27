@@ -1,7 +1,10 @@
 ﻿using Scripts.Objects.Product;
 using Scripts.Stores;
 using Scripts.UI;
+using Scripts.UI.Workshop.Craft;
+using Scripts.UI.Workshop.Craft.Item;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -12,29 +15,30 @@ namespace Scripts.Common.Craft.Action
     {
         [Inject] private IUiController _uiController;
         [Inject] private ICraftController _craftController;
+        [Inject] private List<IStore> _storeList;
 
         [Inject] private RawAction _rawAction;
 
-        private IProductStore _productStore 
-        {
-           get { return _uiController.ActiveBuilding.GetComponent<ICraft>().ProductStore; }
-        }
-        private ProductData _productData { get => _craftController.ActiveProduct; }
-        private ProductQuality _productQuality { get => _craftController.ProductQuality; }
+        private CraftMenuUI _menu;
+
+        private ItemButton _activeItem { get => _menu.ItemsGroup.ActiveItem; }
+        private ProductQuality _activeQuality { get => _menu.QualityBtn.ActiveQuality; }
+
         private RecipeObject _recipe;
 
         public bool IsEnoughParts()
-        {        
-            _recipe = _productData.Recipes.First(x => x.Quality == _productQuality);
+        {
+            _menu = _uiController.FindByPart("CraftMenu").GetComponent<CraftMenuUI>();
+            _recipe = _activeItem.Product.Recipes.First(x => x.Quality == _activeQuality);
 
             bool isEnough = true;
 
-            foreach (var component in _recipe.Components) 
+            foreach (var partObj in _recipe.Parts) 
             {                
-                switch (component.Type)
+                switch (partObj.Data.Type)
                 {
                     case "Raw":
-                        isEnough = _rawAction.IsEnoughRaw(component);
+                        isEnough = _rawAction.IsEnoughRaw(partObj);
                         break;
 
                     default:
@@ -42,8 +46,7 @@ namespace Scripts.Common.Craft.Action
                 }
 
                 if (!isEnough)
-                {
-                    Debug.LogWarning("Нехватает ингридиентов");
+                {                    
                     return false;
                 }
             }
@@ -51,7 +54,7 @@ namespace Scripts.Common.Craft.Action
             return isEnough;
         }
 
-        public IEnumerator CraftTimer()
+        public IEnumerator StartCraft(int number)
         {
             RemoveParts();
 
@@ -62,17 +65,17 @@ namespace Scripts.Common.Craft.Action
                 countdownValue--;
             }
 
-            CompleteCraft();
+            CompleteCraft(number);
         }
 
         public void RemoveParts()
         {
-            foreach (var component in _recipe.Components)
+            foreach (var partObj in _recipe.Parts)
             {
-                switch (component.Type)
+                switch (partObj.Data.Type)
                 {
                     case "Raw":
-                        _rawAction.RemoveRaw(component);
+                        _rawAction.RemoveRaw(partObj);
                         break;
 
                     default:
@@ -81,15 +84,18 @@ namespace Scripts.Common.Craft.Action
             }
         }
 
-        private void CompleteCraft()
+        private void CompleteCraft(int number)
         {
-            Debug.Log($"Craft {_productData.ProductName} complete");
+            var itemCraft = _craftController.CraftList[number].Item;
+            var itemQuality = _craftController.CraftList[number].Quality;
+            var store = _storeList[0].AllStore[itemCraft.Data.Type];
+            var itemStore = store[itemCraft.Data.Name];
+            
+            itemStore.Count[(int)itemQuality]++;
 
-            var product = _productStore.RifleStoreList.First(x => 
-                x.Slug == _productData.Slug && x.Quality == _productQuality
-            );
+            Debug.Log($"Craft {itemCraft.Data.Name} complete");            
 
-            product.Count++;
+            _craftController.CraftList.Remove(number);
         }
     }    
 }

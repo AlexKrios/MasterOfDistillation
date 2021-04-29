@@ -1,10 +1,7 @@
 ﻿using Scripts.Stores;
-using Scripts.UI.Workshop.Craft.Create;
-using Scripts.UI.Workshop.Craft.Item;
-using Scripts.UI.Workshop.Craft.Part;
+using Scripts.UI.Workshop.Storage.Item;
 using Scripts.UI.Workshop.Craft.Product;
-using Scripts.UI.Workshop.Craft.Quality;
-using Scripts.UI.Workshop.Craft.TypeTab;
+using Scripts.UI.Workshop.Storage.TypeTab;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,26 +23,13 @@ namespace Scripts.UI.Workshop.Storage
         public Text Title { get => _title; }
 
         private TypeTabsGroup _typeTabs;
-        public TypeTabsGroup TypeTabs 
-        {
-            get { return _typeTabs; }
-            set { _typeTabs = value; }
-        }
+        public TypeTabsGroup TypeTabs { get => _typeTabs; }
 
         private ItemsGroup _itemsGroup;
         public ItemsGroup ItemsGroup { get => _itemsGroup; }
 
         [SerializeField] private ProductCell _productCell;
         public ProductCell ProductCell { get => _productCell; }
-
-        [SerializeField] private PartGroup _partGroup;
-        public PartGroup PartGroup { get => _partGroup; }
-
-        [SerializeField] private CreateButton _createBtn;
-        public CreateButton CreateBtn { get => _createBtn; }
-
-        [SerializeField] private QualityButton _qualityBtn;
-        public QualityButton QualityBtn { get => _qualityBtn; }
 
         private void Start()
         {

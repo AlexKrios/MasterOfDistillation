@@ -26,7 +26,7 @@ namespace Scripts.UI.Workshop.Storage.TypeTab
         {
             _position = GetComponent<RectTransform>();
             _canvas = GetComponent<Canvas>();
-            _background = GetComponent<Image>();            
+            _background = GetComponent<Image>();
             _tabGroup.SubscribeTabToList(this);
         }
 

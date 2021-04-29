@@ -11808,7 +11808,7 @@ GameObject:
   - component: {fileID: 764828149}
   - component: {fileID: 764828148}
   m_Layer: 5
-  m_Name: Store
+  m_Name: Storage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11843,7 +11843,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 764828146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a73d494cb7de741b7cbf15fbe0f4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 988bea8d25734e94b9cf4e42d626eebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &764828149
@@ -27338,6 +27338,7 @@ GameObject:
   - component: {fileID: 1763668205}
   - component: {fileID: 1763668208}
   - component: {fileID: 1763668207}
+  - component: {fileID: 1763668210}
   - component: {fileID: 1763668209}
   - component: {fileID: 1763668212}
   m_Layer: 0
@@ -27363,6 +27364,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c570e1438c101646be4887ccb48d9a6, type: 2}
   _monoInstallers:
   - {fileID: 1763668207}
+  - {fileID: 1763668210}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -27434,6 +27436,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 275da1def2b098741bfde8ba03620e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1763668210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763668204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98ad1fd0216c25498def16dfd02e005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1763668212

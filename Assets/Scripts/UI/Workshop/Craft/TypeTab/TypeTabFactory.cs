@@ -7,7 +7,7 @@ namespace Scripts.UI.Workshop.Craft.TypeTab
     public class TypeTabFactory : IFactory<TypeTabsGroup>
     {
         [Inject] private IUiController _uiController;
-        [Inject] private Settings _settings;
+        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
 
         private DiContainer _container;
         private TypeTabsGroup _typeTab;
@@ -19,10 +19,11 @@ namespace Scripts.UI.Workshop.Craft.TypeTab
 
         public TypeTabsGroup Create()
         {
-            var parent = _uiController.FindByPart("Menu").transform;
+            var tabsSettings = _menuSettings.TabsSettings;
+            var parent = _uiController.FindByPart(_menuSettings.Name).transform;
 
-            _typeTab = _container.InstantiatePrefabForComponent<TypeTabsGroup>(_settings.Prefab, parent);
-            _typeTab.name = _settings.Name;
+            _typeTab = _container.InstantiatePrefabForComponent<TypeTabsGroup>(tabsSettings.Prefab, parent);
+            _typeTab.name = tabsSettings.Name;
 
             _typeTab.transform.SetSiblingIndex(1);
 

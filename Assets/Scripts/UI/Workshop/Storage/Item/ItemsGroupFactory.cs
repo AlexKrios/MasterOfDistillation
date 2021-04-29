@@ -2,12 +2,12 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Craft.Item
+namespace Scripts.UI.Workshop.Storage.Item
 {
     public class ItemsGroupFactory : IFactory<ItemsGroup>
     {
         [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
 
         private DiContainer _container;
 

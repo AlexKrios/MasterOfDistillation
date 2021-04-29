@@ -2,12 +2,12 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Craft.Item
+namespace Scripts.UI.Workshop.Storage.Item
 {
     public class ItemButtonFactory : IFactory<ProductData, ItemButton> 
     {
         [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
 
         private DiContainer _container;
 
@@ -20,7 +20,7 @@ namespace Scripts.UI.Workshop.Craft.Item
         {
             var itemSettings = _menuSettings.ItemButtonSettings;
 
-            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenuUI>().ItemsGroup.Container;
+            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUI>().ItemsGroup.Container;
             var item = _container.InstantiatePrefabForComponent<ItemButton>(itemSettings.Prefab, parent);
 
             item.SetCellInfo(product);

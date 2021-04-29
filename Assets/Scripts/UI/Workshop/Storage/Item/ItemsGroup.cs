@@ -4,15 +4,15 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Craft.Item
+namespace Scripts.UI.Workshop.Storage.Item
 {
     public class ItemsGroup : MonoBehaviour
     {
         [Inject] private IUiController _uiController;
         [Inject] private ItemButton.Factory _itemFactory;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
 
-        private CraftMenuUI _menu;
+        private StorageMenuUI _menu;
 
         [Header("Links")]
         [SerializeField] private RectTransform _container;
@@ -36,15 +36,13 @@ namespace Scripts.UI.Workshop.Craft.Item
                     _activeItem = value;
                     _activeItem.SetItemActive();
                     _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
-                    _menu.QualityBtn.ResetQuality();
-                    _menu.PartGroup.SetPartsInfo();
                 }
             }
         }
 
         private void Start()
         {
-            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenuUI>();
+            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUI>();
 
             CreateMenuItems();
         }
@@ -67,14 +65,33 @@ namespace Scripts.UI.Workshop.Craft.Item
                 var items = _menu.Stores[key.ToString()].Data;
                 foreach (var item in items)
                 {
-                    var newItem = _itemFactory.Create(item.Value);
-                    SubscribeItemToList(newItem);
+                    if (CheckIfHaveCount(item.Value))
+                    {
+                        var newItem = _itemFactory.Create(item.Value);
+                        SubscribeItemToList(newItem);
+                    }                    
                 }
             }
 
-            ActiveItem = _items.First().Value;
+            if (_items.Count != 0)
+            {
+                ActiveItem = _items.First().Value;
+            }            
 
             SetContainerHeight();
+        }
+
+        private bool CheckIfHaveCount(ProductData item)
+        {
+            foreach (var count in item.Count)
+            {
+                if (count != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void SetContainerHeight()

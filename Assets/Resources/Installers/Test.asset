@@ -25,16 +25,35 @@ MonoBehaviour:
     Name: CraftMenu
     Prefab: {fileID: 7196737555349474873, guid: 9754840056129854cbc5a592d2bc5d89,
       type: 3}
-    RowCount: 4
-    Padding: 25
-    Height: 250
-  TypeTabs:
-    Name: TypeTabs
-    Prefab: {fileID: 2881336544839766366, guid: 3c4e2b3d219ce444d886f6be7ddc6830,
+    TabsSettings:
+      Name: TypeTabs
+      Prefab: {fileID: 2881336544839766366, guid: 3c4e2b3d219ce444d886f6be7ddc6830,
+        type: 3}
+    ItemsGroupSettings:
+      Name: Items
+      Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
+        type: 3}
+      RowCount: 4
+      Padding: 25
+      Height: 250
+    ItemButtonSettings:
+      Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,
+        type: 3}
+  StorageMenuUI:
+    Name: StorageMenu
+    Prefab: {fileID: 7196737555349474873, guid: abb901f12c5d2634a9e3f013c693b766,
       type: 3}
-  ItemsGroup:
-    Name: Items
-    Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
-      type: 3}
-  ItemButton:
-    Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc, type: 3}
+    TabsSettings:
+      Name: TypeTabs
+      Prefab: {fileID: 2881336544839766366, guid: 7c8a783c2026fd046a72d3cf628a2397,
+        type: 3}
+    ItemsGroupSettings:
+      Name: Items
+      Prefab: {fileID: 4785780335862507188, guid: ab4e02e0469015349bfc85a870177de4,
+        type: 3}
+      RowCount: 4
+      Padding: 25
+      Height: 250
+    ItemButtonSettings:
+      Prefab: {fileID: 500747981298187993, guid: de36a7b6eef725e47b19654311fd5b71,
+        type: 3}

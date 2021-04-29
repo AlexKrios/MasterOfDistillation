@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.Objects.Product;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Object Data", menuName = "Object Data", order = 51)]
 public class ObjectData : ScriptableObject
@@ -10,15 +11,15 @@ public class ObjectData : ScriptableObject
         set { _name = value; }
     }
 
-    [SerializeField] private string _type;
-    public string Type
+    [SerializeField] private ProductType _type;
+    public ProductType Type
     {
         get { return _type; }
         set { _type = value; }
     }
 
-    [SerializeField] private string _subType;
-    public string SubType
+    [SerializeField] private ProductSubType _subType;
+    public ProductSubType SubType
     {
         get { return _subType; }
         set { _subType = value; }

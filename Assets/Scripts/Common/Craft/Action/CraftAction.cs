@@ -34,10 +34,10 @@ namespace Scripts.Common.Craft.Action
             bool isEnough = true;
 
             foreach (var partObj in _recipe.Parts) 
-            {                
+            {        
                 switch (partObj.Data.Type)
                 {
-                    case "Raw":
+                    case ProductType.Raw:
                         isEnough = _rawAction.IsEnoughRaw(partObj);
                         break;
 
@@ -74,7 +74,7 @@ namespace Scripts.Common.Craft.Action
             {
                 switch (partObj.Data.Type)
                 {
-                    case "Raw":
+                    case ProductType.Raw:
                         _rawAction.RemoveRaw(partObj);
                         break;
 
@@ -88,7 +88,7 @@ namespace Scripts.Common.Craft.Action
         {
             var itemCraft = _craftController.CraftList[number].Item;
             var itemQuality = _craftController.CraftList[number].Quality;
-            var store = _storeList[0].AllStore[itemCraft.Data.Type];
+            var store = _storeList[0].AllStore[itemCraft.Data.SubType.ToString()];
             var itemStore = store[itemCraft.Data.Name];
             
             itemStore.Count[(int)itemQuality]++;

@@ -13,6 +13,5 @@ namespace Scripts.Objects
         public LevelObject LevelInfo;
         public List<RawLoadObject> RawInfo;
         public List<ProductLoadObject> StoresInfo;
-        public List<LevelExperienceObject> ExperienceMaxInfo;
     }
 }

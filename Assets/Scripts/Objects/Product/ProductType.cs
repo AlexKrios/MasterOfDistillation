@@ -2,8 +2,10 @@
 {
     public enum ProductType
     {
-        Weapon = 0,
-        Equipment = 1,
-        Medicine = 2
+        Raw,
+        Component,
+        Weapon,
+        Equipment,
+        Medicine
     }
 }

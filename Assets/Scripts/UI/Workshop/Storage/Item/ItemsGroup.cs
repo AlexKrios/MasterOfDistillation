@@ -55,7 +55,7 @@ namespace Scripts.UI.Workshop.Storage.Item
             }
 
             _items.Add(item.Product.Data.Name, item);
-        }        
+        }
 
         public void CreateMenuItems()
         {
@@ -63,20 +63,22 @@ namespace Scripts.UI.Workshop.Storage.Item
             foreach (var key in keys)
             {
                 var items = _menu.Stores[key.ToString()].Data;
+                if (items == null) { return; }
+
                 foreach (var item in items)
                 {
                     if (CheckIfHaveCount(item.Value))
                     {
                         var newItem = _itemFactory.Create(item.Value);
                         SubscribeItemToList(newItem);
-                    }                    
+                    }
                 }
             }
 
             if (_items.Count != 0)
             {
                 ActiveItem = _items.First().Value;
-            }            
+            }
 
             SetContainerHeight();
         }

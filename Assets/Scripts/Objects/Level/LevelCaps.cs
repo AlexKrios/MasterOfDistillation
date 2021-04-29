@@ -3,7 +3,7 @@
 namespace Scripts.Objects
 {
     [Serializable]
-    public class LevelExperienceObject
+    public class LevelCaps
     {
         public int Level;
         public int Max;

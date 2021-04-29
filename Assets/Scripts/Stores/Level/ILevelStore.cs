@@ -7,9 +7,9 @@ namespace Scripts.Stores.Level
     {
         LevelObject LevelInfo { get; set; }
 
-        List<LevelExperienceObject> ExperienceMax { get; set; }
+        List<LevelCaps> LevelCaps { get; set; }
         int Level { get; set; }
         float Experience { get; set; }
-        float ExperienceCap { get; set; }
+        float LevelCap { get; set; }
     }
 }

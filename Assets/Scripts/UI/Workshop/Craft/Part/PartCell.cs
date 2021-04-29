@@ -43,11 +43,11 @@ namespace Scripts.UI.Workshop.Craft.Part
 
             switch (type)
             {
-                case "Raw":
+                case ProductType.Raw:
                     return _rawStore.RawData[name].Count;
 
                 default:
-                    var store = _storeList[0].AllStore[type];
+                    var store = _storeList[0].AllStore[type.ToString()];
                     return store[name].Count[(int)recipe.Quality];
             }
         }

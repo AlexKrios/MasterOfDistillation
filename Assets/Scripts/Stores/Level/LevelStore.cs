@@ -1,6 +1,7 @@
 ﻿using Scripts.Objects;
 using Scripts.UI.Level;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace Scripts.Stores.Level
@@ -9,11 +10,11 @@ namespace Scripts.Stores.Level
     {
         [Inject] private ILevelUIController _levelUIController;
 
-        private List<LevelExperienceObject> _experienceMax;
-        public List<LevelExperienceObject> ExperienceMax
+        private List<LevelCaps> _levelCaps;
+        public List<LevelCaps> LevelCaps
         {
-            get { return _experienceMax; }
-            set { _experienceMax = value; }
+            get { return _levelCaps; }
+            set { _levelCaps = value; }
         }
 
         private LevelObject _levelInfo;
@@ -51,21 +52,28 @@ namespace Scripts.Stores.Level
                 _experience = value;
                 _levelUIController.OnSetLevelPercent.Invoke();
 
-                if (_experience < _experienceCap)
+                if (_experience < _levelCap)
                 {
                     return;
                 }
 
-                _experience -= _experienceCap;
+                _experience -= _levelCap;
                 Level++;
             }
         }
 
-        private float _experienceCap;
-        public float ExperienceCap
+        private float _levelCap;
+        public float LevelCap
         {
-            get { return _experienceCap; }
-            set { _experienceCap = value; }
-        }        
+            get { return _levelCap; }
+            set { _levelCap = value; }
+        }
+
+        public LevelStore()
+        {
+            var levelSettings = Resources.Load("Data/Level/Settings") as LevelSettings;
+
+            _levelCaps = levelSettings.Caps;
+        }
     }
 }

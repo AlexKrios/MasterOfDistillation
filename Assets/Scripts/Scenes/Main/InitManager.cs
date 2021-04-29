@@ -18,15 +18,15 @@ namespace Scripts.Scenes.Main
     {
         private Transform _sceneContext;
 
-        [Inject] private MoneyUI.Factory _moneyUI;
-        [Inject] private LevelUI.Factory _levelUI;
-        [Inject] private RawUI.Factory _rawUI;      
+        [Inject] private readonly MoneyUI.Factory _moneyUI;
+        [Inject] private readonly LevelUI.Factory _levelUI;
+        [Inject] private readonly RawUI.Factory _rawUI;      
 
-        [Inject] private IMoneyStore _moneyStore;
-        [Inject] private ILevelStore _levelStore;
+        [Inject] private readonly IMoneyStore _moneyStore;
+        [Inject] private readonly ILevelStore _levelStore;
 
-        [Inject] private IRawStore _rawStore;
-        [Inject] private List<IStore> _storeList;
+        [Inject] private readonly IRawStore _rawStore;
+        [Inject] private readonly List<IStore> _storeList;
 
         public TextAsset jsonFile;
         [NonSerialized] public LoadObject StartData;
@@ -56,9 +56,7 @@ namespace Scripts.Scenes.Main
         private void SetStartData()
         {
             _moneyStore.Money = StartData.MoneyInfo.Money;
-
-            _levelStore.ExperienceMax = StartData.ExperienceMaxInfo;
-            _levelStore.LevelInfo = StartData.LevelInfo;           
+            _levelStore.LevelInfo = StartData.LevelInfo;
 
             _rawStore.InitRawListData(StartData.RawInfo);
 
@@ -66,6 +64,13 @@ namespace Scripts.Scenes.Main
 
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }
-    }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                _levelStore.Experience += 50;
+            }
+        }
+    }
 }

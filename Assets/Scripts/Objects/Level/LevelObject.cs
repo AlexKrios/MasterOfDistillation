@@ -7,5 +7,7 @@ namespace Scripts.Objects
     {
         public int Level;
         public int Experience;
+
+        public LevelSettings Settings;
     }
 }

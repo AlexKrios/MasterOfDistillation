@@ -62,7 +62,7 @@ namespace Scripts.UI.Workshop.Storage.Item
             var keys = _menu.TypeTabs.ActiveTab.Keys;
             foreach (var key in keys)
             {
-                var items = _menu.Stores[key.ToString()].Data;
+                var items = _menu.ProductStore.AllStore[key.ToString()];
                 if (items == null) { return; }
 
                 foreach (var item in items)
@@ -87,6 +87,7 @@ namespace Scripts.UI.Workshop.Storage.Item
         {
             foreach (var count in item.Count)
             {
+                //Debug.Log($"{item.Data.Name}: {count}");
                 if (count != 0)
                 {
                     return true;

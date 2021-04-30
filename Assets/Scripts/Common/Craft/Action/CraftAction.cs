@@ -4,7 +4,6 @@ using Scripts.UI;
 using Scripts.UI.Workshop.Craft;
 using Scripts.UI.Workshop.Craft.Item;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -15,7 +14,7 @@ namespace Scripts.Common.Craft.Action
     {
         [Inject] private IUiController _uiController;
         [Inject] private ICraftController _craftController;
-        [Inject] private List<IStore> _storeList;
+        [Inject] private IStore _productStore;
 
         [Inject] private RawAction _rawAction;
 
@@ -88,14 +87,14 @@ namespace Scripts.Common.Craft.Action
         {
             var itemCraft = _craftController.CraftList[number].Item;
             var itemQuality = _craftController.CraftList[number].Quality;
-            var store = _storeList[0].AllStore[itemCraft.Data.SubType.ToString()];
+            var store = _productStore.AllStore[itemCraft.Data.SubType.ToString()];
             var itemStore = store[itemCraft.Data.Name];
-            
+
             itemStore.Count[(int)itemQuality]++;
 
             Debug.Log($"Craft {itemCraft.Data.Name} complete");            
 
-            _craftController.CraftList.Remove(number);
+            _craftController.CraftList.Remove(number); 
         }
     }    
 }

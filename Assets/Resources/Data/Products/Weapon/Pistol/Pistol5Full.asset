@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 6c9e23bcbf445764db48251fe7ab6226, type: 2}
   _recipes:
-  - Name: 
+  - Name: Common
     Quality: 0
-    Parts: []
-    CraftTime: 3
+    Parts:
+    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
+      Count: 1
+    CraftTime: 1
   - Name: 
     Quality: 1
     Parts: []

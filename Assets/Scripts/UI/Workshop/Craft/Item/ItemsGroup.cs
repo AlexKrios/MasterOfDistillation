@@ -64,7 +64,7 @@ namespace Scripts.UI.Workshop.Craft.Item
             var keys = _menu.TypeTabs.ActiveTab.Keys;
             foreach (var key in keys)
             {
-                var items = _menu.Stores[key.ToString()].Data;
+                var items = _menu.ProductStore.AllStore[key.ToString()];
                 foreach (var item in items)
                 {
                     var newItem = _itemFactory.Create(item.Value);

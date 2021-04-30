@@ -12,7 +12,7 @@ public class ProductData : ScriptableObject
         set { _gameObject = value; }
     }
 
-    private List<int> _count;
+    private List<int> _count = new List<int>() { 0, 0, 0, 0 };
     public List<int> Count
     {
         get { return _count; }
@@ -29,5 +29,10 @@ public class ProductData : ScriptableObject
     public List<RecipeObject> Recipes
     {
         get { return _recipes; }
+    }
+
+    public void Reset()
+    {
+        Count = new List<int>() { 0, 0, 0, 0 };
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Helmet1
   m_EditorClassIdentifier: 
   _name: Helmet1
-  _type: Helmet
+  _type: 3
   _subType: 3
   _icon: {fileID: 0}

@@ -54,6 +54,11 @@ namespace Scripts.Stores
             }
 
             _allStore.Add(subType, dict);
+
+            foreach(var a in _allStore.Keys)
+            {
+                Debug.Log(a);
+            }
         }
 
         public void LoadItemsCount(List<ProductLoadObject> storesInfo)

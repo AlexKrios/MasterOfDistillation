@@ -16,10 +16,8 @@ MonoBehaviour:
   _recipes:
   - Name: 
     Quality: 0
-    Parts:
-    - Data: {fileID: 11400000, guid: e89b45915fdd67541b324763195d67aa, type: 2}
-      Count: 1
-    CraftTime: 3
+    Parts: []
+    CraftTime: 0
   - Name: 
     Quality: 1
     Parts: []

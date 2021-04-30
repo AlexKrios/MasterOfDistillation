@@ -5,8 +5,6 @@ using Scripts.Stores;
 using Scripts.Stores.Level;
 using Scripts.Stores.Money;
 using Scripts.Stores.Product;
-using Scripts.Stores.Product.Equipment;
-using Scripts.Stores.Product.Weapon;
 using Scripts.Stores.Raw;
 using Scripts.Timer.Raw;
 using Scripts.UI;
@@ -37,17 +35,13 @@ namespace Scripts.DI.Game
 
         private void InstallStores()
         {
-            Container.Bind<IRecipesStore>().To<RecipesStore>().AsSingle().NonLazy();
-
             Container.Bind<IMoneyStore>().To<MoneyStore>().AsSingle().NonLazy();
             Container.Bind<ILevelStore>().To<LevelStore>().AsSingle().NonLazy();
 
             Container.Bind<IRawStore>().To<RawStore>().AsSingle().NonLazy();
             Container.Bind<IRawTimerController>().To<RawTimerController>().AsSingle().NonLazy();
 
-            Container.Bind<IStore>().To<RifleStore>().AsSingle();
-            Container.Bind<IStore>().To<PistolStore>().AsSingle();
-            Container.Bind<IStore>().To<HelmetStore>().AsSingle();
+            Container.Bind<IStore>().To<ProductStore>().AsSingle();
         }
 
         private void InstallUIComponents()

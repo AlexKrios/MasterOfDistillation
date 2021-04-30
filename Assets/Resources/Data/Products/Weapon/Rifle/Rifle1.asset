@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Rifle1
   _type: 2
-  _subType: 2
+  _subType: 1
   _icon: {fileID: 21300000, guid: f5826f2008aa8b9459a9c3fb9f9a108b, type: 3}

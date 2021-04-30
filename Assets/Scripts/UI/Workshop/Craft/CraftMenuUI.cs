@@ -5,7 +5,6 @@ using Scripts.UI.Workshop.Craft.Part;
 using Scripts.UI.Workshop.Craft.Product;
 using Scripts.UI.Workshop.Craft.Quality;
 using Scripts.UI.Workshop.Craft.TypeTab;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,9 +16,8 @@ namespace Scripts.UI.Workshop.Craft
         [Inject] private TypeTabsGroup.Factory _typeTabsFactory;
         [Inject] private ItemsGroup.Factory _itemGroupFactory;
 
-        [Inject] private List<IStore> _storeList;
-        private Dictionary<string, IStore> _stores;
-        public Dictionary<string, IStore> Stores { get => _stores; }
+        [Inject] private IStore _productStore;
+        public IStore ProductStore { get => _productStore; }
 
         [Header("Components")]
         [SerializeField] private Text _title;
@@ -48,20 +46,9 @@ namespace Scripts.UI.Workshop.Craft
         public QualityButton QualityBtn { get => _qualityBtn; }
 
         private void Start()
-        {
-            SubscribeStoresToDictionaty();
-            
+        {           
             _typeTabs = _typeTabsFactory.Create();
             _itemsGroup = _itemGroupFactory.Create();
-        }
-
-        private void SubscribeStoresToDictionaty()
-        {
-            _stores = new Dictionary<string, IStore>();
-            foreach (var store in _storeList)
-            {
-                _stores.Add(store.ItemSubType, store);
-            }
         }
 
         public class Factory : PlaceholderFactory<CraftMenuUI> { }

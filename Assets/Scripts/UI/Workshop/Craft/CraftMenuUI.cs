@@ -22,16 +22,8 @@ namespace Scripts.UI.Workshop.Craft
         [Header("Components")]
         [SerializeField] private Text _title;
         public Text Title { get => _title; }
-
-        private TypeTabsGroup _typeTabs;
-        public TypeTabsGroup TypeTabs 
-        {
-            get { return _typeTabs; }
-            set { _typeTabs = value; }
-        }
-
-        private ItemsGroup _itemsGroup;
-        public ItemsGroup ItemsGroup { get => _itemsGroup; }
+        public TypeTabsGroup TypeTabs { get; set; }
+        public ItemsGroup ItemsGroup { get; private set; }
 
         [SerializeField] private ProductCell _productCell;
         public ProductCell ProductCell { get => _productCell; }
@@ -47,8 +39,8 @@ namespace Scripts.UI.Workshop.Craft
 
         private void Start()
         {           
-            _typeTabs = _typeTabsFactory.Create();
-            _itemsGroup = _itemGroupFactory.Create();
+            TypeTabs = _typeTabsFactory.Create();
+            ItemsGroup = _itemGroupFactory.Create();
         }
 
         public class Factory : PlaceholderFactory<CraftMenuUI> { }

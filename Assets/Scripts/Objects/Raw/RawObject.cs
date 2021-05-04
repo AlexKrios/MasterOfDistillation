@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Scripts.Objects.Product;
+using System;
 
 namespace Scripts.Objects.Raw
 {
     [Serializable]
     public class RawObject
     {
-        public ObjectData Data;
+        public ProductData Data;
 
         public int Count;
         public int Level;

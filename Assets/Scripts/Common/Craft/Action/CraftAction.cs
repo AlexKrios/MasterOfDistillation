@@ -1,5 +1,6 @@
 ﻿using Scripts.Objects.Product;
 using Scripts.Stores;
+using Scripts.Stores.Level;
 using Scripts.UI;
 using Scripts.UI.Workshop.Craft;
 using Scripts.UI.Workshop.Craft.Item;
@@ -12,23 +13,27 @@ namespace Scripts.Common.Craft.Action
 {
     public class CraftAction
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private ICraftController _craftController;
-        [Inject] private IStore _productStore;
+        [Inject] private readonly CraftMenuUIFactory.Settings _menuSettings;
 
-        [Inject] private RawAction _rawAction;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly ILevelStore _levelStore;        
+        [Inject] private readonly ICraftController _craftController;
+        [Inject] private readonly IStore _productStore;
+
+        [Inject] private readonly RawAction _rawAction;
+        [Inject] private readonly ComponentAction _craftAction;
 
         private CraftMenuUI _menu;
 
-        private ItemButton _activeItem { get => _menu.ItemsGroup.ActiveItem; }
-        private ProductQuality _activeQuality { get => _menu.QualityBtn.ActiveQuality; }
+        private ItemButton ActiveItem { get => _menu.ItemsGroup.ActiveItem; }
+        private ProductQuality ActiveQuality { get => _menu.QualityBtn.ActiveQuality; }
 
         private RecipeObject _recipe;
 
         public bool IsEnoughParts()
         {
-            _menu = _uiController.FindByPart("CraftMenu").GetComponent<CraftMenuUI>();
-            _recipe = _activeItem.Product.Recipes.First(x => x.Quality == _activeQuality);
+            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenuUI>();
+            _recipe = ActiveItem.Product.Recipes.First(x => x.Quality == ActiveQuality);
 
             bool isEnough = true;
 
@@ -38,6 +43,10 @@ namespace Scripts.Common.Craft.Action
                 {
                     case ProductType.Raw:
                         isEnough = _rawAction.IsEnoughRaw(partObj);
+                        break;
+
+                    case ProductType.Component:
+                        isEnough = _craftAction.IsEnoughComponents(partObj);
                         break;
 
                     default:
@@ -77,6 +86,10 @@ namespace Scripts.Common.Craft.Action
                         _rawAction.RemoveRaw(partObj);
                         break;
 
+                    case ProductType.Component:
+                        _craftAction.RemoveComponents(partObj);
+                        break;
+
                     default:
                         break;
                 }
@@ -88,9 +101,9 @@ namespace Scripts.Common.Craft.Action
             var itemCraft = _craftController.CraftList[number].Item;
             var itemQuality = _craftController.CraftList[number].Quality;
             var store = _productStore.AllStore[itemCraft.Data.SubType.ToString()];
-            var itemStore = store[itemCraft.Data.Name];
 
-            itemStore.Count[(int)itemQuality]++;
+            store[itemCraft.Data.Name].Count[(int)itemQuality]++;
+            _levelStore.Experience += 10 * ((int)itemQuality + 1);
 
             Debug.Log($"Craft {itemCraft.Data.Name} complete");            
 

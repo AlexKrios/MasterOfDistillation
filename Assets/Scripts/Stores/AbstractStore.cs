@@ -1,4 +1,5 @@
-﻿using Scripts.Objects.Product.Load;
+﻿using Scripts.Objects.Product;
+using Scripts.Objects.Product.Load;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,11 +13,11 @@ namespace Scripts.Stores
 
         protected string itemFilesPath;
 
-        protected Dictionary<string, Dictionary<string, ProductData>> _allStore;
-        public Dictionary<string, Dictionary<string, ProductData>> AllStore { get => _allStore; }
+        protected Dictionary<string, Dictionary<string, ProductFullData>> _allStore;
+        public Dictionary<string, Dictionary<string, ProductFullData>> AllStore { get => _allStore; }
 
-        protected Dictionary<string, ProductData> _data = new Dictionary<string, ProductData>();
-        public Dictionary<string, ProductData> Data
+        protected Dictionary<string, ProductFullData> _data = new Dictionary<string, ProductFullData>();
+        public Dictionary<string, ProductFullData> Data
         {
             get { return _data; }
             set { _data = value; }
@@ -26,18 +27,18 @@ namespace Scripts.Stores
         {
             if (_allStore == null)
             {
-                _allStore = new Dictionary<string, Dictionary<string, ProductData>>();
+                _allStore = new Dictionary<string, Dictionary<string, ProductFullData>>();
             }
 
             if (_data == null)
             {
-                _data = new Dictionary<string, ProductData>();
+                _data = new Dictionary<string, ProductFullData>();
             }            
         }
 
-        protected void SetProductToStoreDictionary(Dictionary<string, ProductData> dict)
+        protected void SetProductToStoreDictionary(Dictionary<string, ProductFullData> dict)
         {
-            var files = Resources.LoadAll<ProductData>(itemFilesPath);
+            var files = Resources.LoadAll<ProductFullData>(itemFilesPath);
             foreach (var file in files)
             {
                 dict.Add(file.Data.Name, file);            
@@ -46,11 +47,11 @@ namespace Scripts.Stores
             SubscribeDictionaryToAll(itemSubType, dict);
         }
 
-        protected void SubscribeDictionaryToAll(string subType, Dictionary<string, ProductData> dict)
+        protected void SubscribeDictionaryToAll(string subType, Dictionary<string, ProductFullData> dict)
         {
             if (_allStore == null)
             {
-                _allStore = new Dictionary<string, Dictionary<string, ProductData>>();
+                _allStore = new Dictionary<string, Dictionary<string, ProductFullData>>();
             }
 
             _allStore.Add(subType, dict);

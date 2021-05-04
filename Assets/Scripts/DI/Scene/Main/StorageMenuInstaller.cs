@@ -1,3 +1,4 @@
+using Scripts.Objects.Product;
 using Scripts.UI.Workshop.Storage;
 using Scripts.UI.Workshop.Storage.Item;
 using Scripts.UI.Workshop.Storage.TypeTab;
@@ -12,7 +13,7 @@ namespace Scripts.DI.Scene.Main
             Container.BindFactory<StorageMenuUI, StorageMenuUI.Factory>().FromFactory<StorageMenuUIFactory>();
             Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
-            Container.BindFactory<ProductData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
+            Container.BindFactory<ProductFullData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
         }     
     }
 }

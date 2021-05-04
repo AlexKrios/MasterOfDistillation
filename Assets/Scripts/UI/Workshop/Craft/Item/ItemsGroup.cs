@@ -17,9 +17,7 @@ namespace Scripts.UI.Workshop.Craft.Item
         [Header("Links")]
         [SerializeField] private RectTransform _container;
         public RectTransform Container { get => _container; }
-
-        private Dictionary<string, ItemButton> _items;
-        public Dictionary<string, ItemButton> Items { get => _items; }
+        public Dictionary<string, ItemButton> Items { get; private set; }
 
         private ItemButton _activeItem;
         public ItemButton ActiveItem
@@ -51,12 +49,12 @@ namespace Scripts.UI.Workshop.Craft.Item
 
         public void SubscribeItemToList(ItemButton item)
         {
-            if (_items == null)
+            if (Items == null)
             {
-                _items = new Dictionary<string, ItemButton>();
+                Items = new Dictionary<string, ItemButton>();
             }
 
-            _items.Add(item.Product.Data.Name, item);
+            Items.Add(item.Product.Data.Name, item);
         }        
 
         public void CreateMenuItems()
@@ -72,7 +70,7 @@ namespace Scripts.UI.Workshop.Craft.Item
                 }
             }
 
-            ActiveItem = _items.First().Value;
+            ActiveItem = Items.First().Value;
 
             SetContainerHeight();
         }
@@ -81,7 +79,7 @@ namespace Scripts.UI.Workshop.Craft.Item
         {
             var itemsGroupSettings = _menuSettings.ItemsGroupSettings;
 
-            var rowCount = (int)Math.Ceiling((double)_items.Count / itemsGroupSettings.RowCount);
+            var rowCount = (int)Math.Ceiling((double)Items.Count / itemsGroupSettings.RowCount);
             var height = itemsGroupSettings.Height * rowCount + itemsGroupSettings.Padding * (rowCount - 1);
 
             _container.sizeDelta = new Vector2(_container.sizeDelta.x, height);
@@ -89,12 +87,12 @@ namespace Scripts.UI.Workshop.Craft.Item
 
         public void ResetMenuItems()
         {
-            foreach (var item in _items)
+            foreach (var item in Items)
             {
                 Destroy(item.Value.gameObject);
             }
 
-            _items.Clear();
+            Items.Clear();
         }
 
         public class Factory : PlaceholderFactory<ItemsGroup> { }

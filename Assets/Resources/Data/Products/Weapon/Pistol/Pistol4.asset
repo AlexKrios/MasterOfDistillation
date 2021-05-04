@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1559956c7f5fe744d8dcfc3038d016c7, type: 3}
+  m_Script: {fileID: 11500000, guid: ccc7b7f875e3040429e9fc425304d7d1, type: 3}
   m_Name: Pistol4
   m_EditorClassIdentifier: 
   _name: Pistol4

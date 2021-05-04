@@ -9,7 +9,7 @@
 	"RawInfo": [
 		{
 			"Name": "Iron",
-			"Count": 10,
+			"Count": 15,
 			"Level": 1,
 			"Settings": {
 				"AmountCap": 20,
@@ -24,7 +24,7 @@
 			"Items": [
 				{
 					"Name": "Rifle1",
-					"Count": [ 1, 0, 0, 0 ]
+					"Count": [ 0, 0, 0, 0 ]
 				},
 				{
 					"Name": "Component 1",

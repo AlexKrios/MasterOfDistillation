@@ -294,7 +294,7 @@ MonoBehaviour:
   _tabGroup: {fileID: 1913283469779920187}
   _icon: {fileID: 3722177220987448748}
   _keys: 01000000
-  _title: 2
+  _title: 4
 --- !u!223 &6998449655018377570
 Canvas:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
   _tabGroup: {fileID: 1913283469779920187}
   _icon: {fileID: 790126263268849713}
   _keys: 03000000
-  _title: 1
+  _title: 3
 --- !u!223 &8345313859922611943
 Canvas:
   m_ObjectHideFlags: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   _tabGroup: {fileID: 1913283469779920187}
   _icon: {fileID: 2783686863195808592}
   _keys: 0100000002000000
-  _title: 0
+  _title: 2
 --- !u!223 &2347231808404421052
 Canvas:
   m_ObjectHideFlags: 0

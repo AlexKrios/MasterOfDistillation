@@ -9,7 +9,6 @@ using Scripts.UI.Level;
 using Scripts.UI.Raw;
 using Scripts.Stores.Money;
 using Scripts.Timer;
-using System.Collections.Generic;
 using Scripts.Stores;
 
 namespace Scripts.Scenes.Main
@@ -26,7 +25,7 @@ namespace Scripts.Scenes.Main
         [Inject] private readonly ILevelStore _levelStore;
 
         [Inject] private readonly IRawStore _rawStore;
-        [Inject] private readonly List<IStore> _storeList;
+        [Inject] private readonly IStore _store;
 
         public TextAsset jsonFile;
         [NonSerialized] public LoadObject StartData;
@@ -60,7 +59,7 @@ namespace Scripts.Scenes.Main
 
             _rawStore.InitRawListData(StartData.RawInfo);
 
-            _storeList[0].LoadItemsCount(StartData.StoresInfo);
+            _store.LoadItemsCount(StartData.StoresInfo);
 
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }

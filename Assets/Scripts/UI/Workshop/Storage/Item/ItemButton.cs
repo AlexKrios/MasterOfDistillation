@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scripts.Objects.Product;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
@@ -24,8 +25,8 @@ namespace Scripts.UI.Workshop.Storage.Item
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive { get => _bgActive; }
 
-        private ProductData _product;
-        public ProductData Product { get => _product; }
+        private ProductFullData _product;
+        public ProductFullData Product { get => _product; }
 
         private void Start() 
         {
@@ -37,7 +38,7 @@ namespace Scripts.UI.Workshop.Storage.Item
             _itemGroup.ActiveItem = this;
         }
 
-        public void SetCellInfo(ProductData product)
+        public void SetCellInfo(ProductFullData product)
         {
             _product = product;
             _product.GameObject = gameObject;
@@ -71,6 +72,6 @@ namespace Scripts.UI.Workshop.Storage.Item
             _name.text = name;
         }
 
-        public class Factory : PlaceholderFactory<ProductData, ItemButton> { }
+        public class Factory : PlaceholderFactory<ProductFullData, ItemButton> { }
     }
 }

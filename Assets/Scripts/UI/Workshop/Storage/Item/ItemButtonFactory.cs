@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Scripts.Objects.Product;
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Scripts.UI.Workshop.Storage.Item
 {
-    public class ItemButtonFactory : IFactory<ProductData, ItemButton> 
+    public class ItemButtonFactory : IFactory<ProductFullData, ItemButton> 
     {
         [Inject] private IUiController _uiController;
         [Inject] private StorageMenuUIFactory.Settings _menuSettings;
@@ -16,7 +17,7 @@ namespace Scripts.UI.Workshop.Storage.Item
             _container = container;
         }
 
-        public ItemButton Create(ProductData product)
+        public ItemButton Create(ProductFullData product)
         {
             var itemSettings = _menuSettings.ItemButtonSettings;
 

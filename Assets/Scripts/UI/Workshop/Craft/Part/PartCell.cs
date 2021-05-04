@@ -1,7 +1,6 @@
 ﻿using Scripts.Objects.Product;
 using Scripts.Stores;
 using Scripts.Stores.Raw;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,7 +10,7 @@ namespace Scripts.UI.Workshop.Craft.Part
     public class PartCell : MonoBehaviour
     {        
         [Inject] private IRawStore _rawStore;
-        [Inject] private List<IStore> _storeList;
+        [Inject] private IStore _store;
 
         [Header("System")]
         [SerializeField] private int _id;
@@ -48,7 +47,7 @@ namespace Scripts.UI.Workshop.Craft.Part
                     return _rawStore.RawData[name].Count;
 
                 default:
-                    var store = _storeList[0].AllStore[subType.ToString()];
+                    var store = _store.AllStore[subType.ToString()];
                     return store[name].Count[(int)recipe.Quality];
             }
         }

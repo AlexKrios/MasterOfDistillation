@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.Objects.Product;
+using System;
 using UnityEngine;
 
 namespace Scripts.Objects.Craft
@@ -6,7 +7,7 @@ namespace Scripts.Objects.Craft
     [Serializable]
     public class CraftObject
     {
-        public ProductData Item;
+        public ProductFullData Item;
         public ProductQuality Quality;
         public Coroutine Coroutine;
     }

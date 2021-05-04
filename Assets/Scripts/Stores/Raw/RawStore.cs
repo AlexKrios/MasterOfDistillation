@@ -1,4 +1,5 @@
-﻿using Scripts.Objects.Raw;
+﻿using Scripts.Objects.Product;
+using Scripts.Objects.Raw;
 using Scripts.Objects.Raw.Load;
 using Scripts.UI;
 using Scripts.UI.Raw;
@@ -15,17 +16,13 @@ namespace Scripts.Stores.Raw
         [Inject] private IUiController _uiController;
         [Inject] private IRawUIController _rawUIController;
 
-        private Dictionary<string, RawObject> _rawData;
-        public Dictionary<string, RawObject> RawData
-        {
-            get { return _rawData; }
-        }
+        public Dictionary<string, RawObject> RawData { get; private set; }
 
         public void InitRawListData(List<RawLoadObject> rawInfo)
         {
-            var files = Resources.LoadAll<ObjectData>("Data/Raw");
+            var files = Resources.LoadAll<ProductData>("Data/Raw");
 
-            _rawData = new Dictionary<string, RawObject>();
+            RawData = new Dictionary<string, RawObject>();
             foreach (var raw in rawInfo)
             {
                 var fileData = files.First(x => x.Name == raw.Name);
@@ -39,13 +36,13 @@ namespace Scripts.Stores.Raw
                     Settings = raw.Settings
                 };
 
-                _rawData.Add(raw.Name, rawObj);
+                RawData.Add(raw.Name, rawObj);
             }         
         }
 
         public void SetRawListData(string type, int count)
         {
-            _rawData[type].Count += count;
+            RawData[type].Count += count;
 
             _rawUIController.RawTextEvent.Invoke(type);
 

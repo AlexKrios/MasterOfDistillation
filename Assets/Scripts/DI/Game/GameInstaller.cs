@@ -1,6 +1,5 @@
 using Scripts.Api;
 using Scripts.Common.Craft;
-using Scripts.Common.Craft.Action;
 using Scripts.Stores;
 using Scripts.Stores.Level;
 using Scripts.Stores.Money;
@@ -55,10 +54,7 @@ namespace Scripts.DI.Game
 
         private void InstallCraftComponents()
         {
-            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
-
-            Container.Bind<CraftAction>().AsSingle().NonLazy();
-            Container.Bind<RawAction>().AsSingle().NonLazy();
+            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();            
         }
     }
 }

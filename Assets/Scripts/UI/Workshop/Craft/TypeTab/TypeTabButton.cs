@@ -16,11 +16,11 @@ namespace Scripts.UI.Workshop.Craft.TypeTab
         private Canvas _canvas;
         private Image _background;
 
-        [SerializeField] private List<ProductSubType> _keys;
-        public List<ProductSubType> Keys { get => _keys; }
-
         [SerializeField] private ProductType _title;
         public ProductType Title { get => _title; }
+
+        [SerializeField] private List<ProductSubType> _keys;
+        public List<ProductSubType> Keys { get => _keys; }        
 
         private void Start()
         {

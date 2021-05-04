@@ -1,3 +1,5 @@
+using Scripts.Common.Craft.Action;
+using Scripts.Objects.Product;
 using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI.Level;
 using Scripts.UI.Money;
@@ -14,7 +16,9 @@ namespace Scripts.DI.Scene.Main
         public override void InstallBindings()
         {
             InstallCameraComponents();
-            InstallUIFactory();            
+            InstallUIFactory();
+
+            InstallCraftMenu();
         }
 
         private void InstallCameraComponents()
@@ -32,7 +36,14 @@ namespace Scripts.DI.Scene.Main
             Container.BindFactory<CraftMenuUI, CraftMenuUI.Factory>().FromFactory<CraftMenuUIFactory>();
             Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
-            Container.BindFactory<ProductData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
-        }        
+            Container.BindFactory<ProductFullData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
+        }
+
+        private void InstallCraftMenu()
+        {
+            Container.Bind<CraftAction>().AsSingle().NonLazy();
+            Container.Bind<RawAction>().AsSingle().NonLazy();
+            Container.Bind<ComponentAction>().AsSingle().NonLazy();
+        }
     }
 }

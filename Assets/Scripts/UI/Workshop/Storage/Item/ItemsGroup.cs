@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.Objects.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -84,7 +85,7 @@ namespace Scripts.UI.Workshop.Storage.Item
             SetContainerHeight();
         }
 
-        private bool CheckIfHaveCount(ProductData item)
+        private bool CheckIfHaveCount(ProductFullData item)
         {
             foreach (var count in item.Count)
             {

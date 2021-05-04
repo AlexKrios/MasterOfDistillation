@@ -6,6 +6,7 @@ namespace Scripts.Objects.Part
     public class PartObject
     {
         public ObjectData Data;
+        public ProductQuality Quality;
         public int Count;
     }
 }

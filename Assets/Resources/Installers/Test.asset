@@ -34,7 +34,7 @@ MonoBehaviour:
       Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
         type: 3}
       RowCount: 4
-      Padding: 25
+      Padding: 10
       Height: 250
     ItemButtonSettings:
       Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,

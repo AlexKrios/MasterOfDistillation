@@ -38,8 +38,9 @@ namespace Scripts.UI.Workshop.Craft.Part
 
         private int GetStoreCount(RecipeObject recipe)
         {
-            var type = recipe.Parts[_id - 1].Data.Type;
             var name = recipe.Parts[_id - 1].Data.Name;
+            var type = recipe.Parts[_id - 1].Data.Type;
+            var subType = recipe.Parts[_id - 1].Data.SubType;
 
             switch (type)
             {
@@ -47,7 +48,7 @@ namespace Scripts.UI.Workshop.Craft.Part
                     return _rawStore.RawData[name].Count;
 
                 default:
-                    var store = _storeList[0].AllStore[type.ToString()];
+                    var store = _storeList[0].AllStore[subType.ToString()];
                     return store[name].Count[(int)recipe.Quality];
             }
         }

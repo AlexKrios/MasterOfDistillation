@@ -23,7 +23,7 @@ public class ProductData : ScriptableObject
     public ObjectData Data 
     {
         get { return _data; }
-    }    
+    }
 
     [SerializeField] private List<RecipeObject> _recipes;
     public List<RecipeObject> Recipes

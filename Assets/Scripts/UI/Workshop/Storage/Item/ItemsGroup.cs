@@ -12,11 +12,7 @@ namespace Scripts.UI.Workshop.Storage.Item
         [Inject] private ItemButton.Factory _itemFactory;
         [Inject] private StorageMenuUIFactory.Settings _menuSettings;
 
-        private StorageMenuUI _menu;
-
-        [Header("Links")]
-        [SerializeField] private RectTransform _container;
-        public RectTransform Container { get => _container; }
+        private StorageMenuUI _menu;        
 
         private Dictionary<string, ItemButton> _items;
         public Dictionary<string, ItemButton> Items { get => _items; }
@@ -39,6 +35,10 @@ namespace Scripts.UI.Workshop.Storage.Item
                 }
             }
         }
+
+        [Header("Links")]
+        [SerializeField] private RectTransform _container;
+        public RectTransform Container { get => _container; }
 
         private void Start()
         {
@@ -72,6 +72,7 @@ namespace Scripts.UI.Workshop.Storage.Item
                         var newItem = _itemFactory.Create(item.Value);
                         SubscribeItemToList(newItem);
                     }
+
                 }
             }
 

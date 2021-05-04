@@ -17,9 +17,9 @@ MonoBehaviour:
   - Name: Common
     Quality: 0
     Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Count: 3
-    CraftTime: 3
+    - Data: {fileID: 11400000, guid: bacd6e33651de3141851c2afea13cc82, type: 2}
+      Count: 5
+    CraftTime: 5
   - Name: Bronze
     Quality: 1
     Parts:

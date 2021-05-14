@@ -1,4 +1,5 @@
-﻿using Scripts.Common.Craft.Action;
+﻿using Scripts.Common.Craft;
+using Scripts.Objects.Craft;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,34 +7,71 @@ using Zenject;
 
 namespace Scripts.UI.Craft.Order
 {
+    //TODO Переделать флаги на интерфейсы
     public class CraftCell : MonoBehaviour, IPointerClickHandler
     {
-        [Inject] private CraftAction _craftAction;
+        private ICraftController _craftController;
 
-        [SerializeField] private CraftCellsGroup _craftCellsGroup;
+        [SerializeField] private CraftCellsGroup _craftCellsGroup;        
 
         [Header("Product cell info")]
         [SerializeField] private Image _icon;
         [SerializeField] private Text _timer;
 
+        private int _id;
+
         public bool IsBusy { get; set; }
+        public bool IsComplete { get; set; }
+
+        [Inject]
+        private void Construct([Inject(Id = "SceneContext")] Transform sceneContext)
+        {
+            _craftController = sceneContext.GetComponent<ICraftController>();
+        }
 
         private void Start() 
         {
             _craftCellsGroup.SubscribeCellToList(this);
+            _id = _craftCellsGroup.Cells.Count - 1;
+
+            ResetCell();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            
-        }   
+            if (IsComplete)
+            {
+                _craftController.CompleteCraft(_id);
 
-        private void SetCellIcon(Sprite icon)
-        {
-            _icon.sprite = icon;
+                ResetCell();
+            }
         }
 
-        private void SetCellName(string timer)
+        public void SetCellInfo(CraftObject craftObject)
+        {
+            var itemData = craftObject.Item.Data;
+
+            SetCellIcon(itemData.Icon);
+        }
+
+        public void SetCellIcon(Sprite icon)
+        {
+            _icon.color = new Color(1, 1, 1, 1);
+            _icon.sprite = icon;
+        }
+        private void ResetCellIcon()
+        {
+            _icon.color = new Color(1, 1, 1, 0);
+            _icon.sprite = null;            
+        }
+
+        private void ResetCell()
+        {
+            ResetCellIcon();
+            SetCellTimer(null);
+        }
+
+        public void SetCellTimer(string timer)
         {
             _timer.text = timer;
         }

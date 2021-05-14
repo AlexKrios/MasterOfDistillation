@@ -1,4 +1,5 @@
 ﻿using Scripts.Objects.Craft;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Scripts.Common.Craft
@@ -7,6 +8,10 @@ namespace Scripts.Common.Craft
     {
         Dictionary<int, CraftObject> CraftList { get; }
 
-        int? CheckFreeIndex();
+        bool IsHaveFreeCell();
+        bool IsEnoughParts();
+        IEnumerator StartCraftTimer();
+        void StartCraft(CraftObject craftObject);
+        void CompleteCraft(int index);
     }
 }

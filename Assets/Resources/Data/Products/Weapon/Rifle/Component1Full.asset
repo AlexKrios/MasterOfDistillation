@@ -20,16 +20,24 @@ MonoBehaviour:
     - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
       Quality: 0
       Count: 5
-    CraftTime: 1
+    Level: 0
+    Expirience: 0
+    CraftTime: 5
   - Name: 
     Quality: 1
     Parts: []
+    Level: 0
+    Expirience: 0
     CraftTime: 5
   - Name: 
     Quality: 2
     Parts: []
+    Level: 0
+    Expirience: 0
     CraftTime: 8
   - Name: 
     Quality: 3
     Parts: []
+    Level: 0
+    Expirience: 0
     CraftTime: 10

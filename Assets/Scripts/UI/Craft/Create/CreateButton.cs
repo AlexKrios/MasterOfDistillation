@@ -1,5 +1,4 @@
 ﻿using Scripts.Common.Craft;
-using Scripts.Common.Craft.Action;
 using Scripts.Objects.Craft;
 using Scripts.Timer;
 using UnityEngine;
@@ -9,8 +8,7 @@ namespace Scripts.UI.Craft.Create
 {
     public class CreateButton : MonoBehaviour
     {
-        [Inject] private ICraftController _craftController;
-        [Inject] private CraftAction _craftAction;
+        private ICraftController _craftController;
 
         [SerializeField] private CraftMenu _menu;
 
@@ -20,35 +18,29 @@ namespace Scripts.UI.Craft.Create
         private void Construct([Inject(Id = "SceneContext")] Transform sceneContext)
         {
             _sceneContext = sceneContext;
+            _craftController = sceneContext.GetComponent<ICraftController>();
         }
 
         private void Start() { }
 
         public void CraftItem()
-        {
-            var index = _craftController.CheckFreeIndex();
-
-            if (!_craftAction.IsEnoughParts())
+        {            
+            if (!_craftController.IsEnoughParts())
             {
                 Debug.LogWarning("Нехватает ингридиентов");
                 return;
             }
-
-            if (index == null)
+            
+            if (!_craftController.IsHaveFreeCell())
             {
                 Debug.LogWarning("Нехватает ячеек для крафта");
                 return;
             }
 
-            var coroutine = StartCoroutine(_craftAction.StartCraft((int)index));
-            var craftObj = new CraftObject()
-            {
-                Item = _menu.ItemsGroup.ActiveItem.Product,
-                Quality = _menu.QualityBtn.ActiveQuality,
-                Coroutine = coroutine
-            };
+            var timer = StartCoroutine(_craftController.StartCraftTimer());
+            var craftObj = CraftObjectFactory(timer);
 
-            _craftController.CraftList.Add((int)index, craftObj);
+            _craftController.StartCraft(craftObj);
 
             _menu.PartGroup.SetPartsInfo();
         }
@@ -56,6 +48,16 @@ namespace Scripts.UI.Craft.Create
         public void StartRawTimer()
         {
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
-        }        
+        }
+
+        private CraftObject CraftObjectFactory(Coroutine timer)
+        {
+            return new CraftObject()
+            {
+                Item = _menu.ItemsGroup.ActiveItem.Product,
+                Quality = _menu.QualityBtn.ActiveQuality,
+                Coroutine = timer
+            };
+        }
     }
 }

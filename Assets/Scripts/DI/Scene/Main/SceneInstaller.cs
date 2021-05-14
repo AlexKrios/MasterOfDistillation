@@ -8,6 +8,7 @@ using Scripts.UI.Craft;
 using Scripts.UI.Craft.Item;
 using Scripts.UI.Craft.TypeTab;
 using Zenject;
+using Scripts.Common.Craft;
 
 namespace Scripts.DI.Scene.Main
 {
@@ -41,7 +42,7 @@ namespace Scripts.DI.Scene.Main
 
         private void InstallCraftMenu()
         {
-            Container.Bind<CraftAction>().AsSingle().NonLazy();
+            //Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
 
             Container.Bind<ICraftPartAction>().To<RawAction>().AsSingle().NonLazy();
             Container.Bind<ICraftPartAction>().To<ComponentAction>().AsSingle().NonLazy();

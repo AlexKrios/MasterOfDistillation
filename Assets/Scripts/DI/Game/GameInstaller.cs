@@ -22,8 +22,6 @@ namespace Scripts.DI.Game
             InstallApi();            
             InstallStores();
             InstallUIComponents();
-
-            InstallCraftComponents();
         }
 
         private void InstallApi()
@@ -49,11 +47,6 @@ namespace Scripts.DI.Game
             Container.Bind<IMoneyUIController>().To<MoneyUIController>().AsSingle().NonLazy();
             Container.Bind<ILevelUIController>().To<LevelUIController>().AsSingle().NonLazy();
             Container.Bind<IRawUIController>().To<RawUIController>().AsSingle().NonLazy();
-        }
-
-        private void InstallCraftComponents()
-        {
-            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
         }
     }
 }

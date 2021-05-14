@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Scripts.Objects.Product
 {
-    [CreateAssetMenu(fileName = "New Product Data", menuName = "Product Data", order = 51)]
+    [CreateAssetMenu(fileName = "ProductData", menuName = "Scriptable/Product Data", order = 51)]
     public class ProductData : ScriptableObject
     {
         [SerializeField] private string _name;

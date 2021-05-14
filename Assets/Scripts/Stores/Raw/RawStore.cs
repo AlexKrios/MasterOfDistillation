@@ -3,7 +3,7 @@ using Scripts.Objects.Raw;
 using Scripts.Objects.Raw.Load;
 using Scripts.UI;
 using Scripts.UI.Raw;
-using Scripts.UI.Workshop.Craft;
+using Scripts.UI.Craft;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -49,7 +49,7 @@ namespace Scripts.Stores.Raw
             var menu = _uiController.FindByPart("CraftMenu");
             if (_uiController.FindByPart("CraftMenu") != null)
             {
-                menu.GetComponent<CraftMenuUI>().PartGroup.SetPartsInfo();
+                menu.GetComponent<CraftMenu>().PartGroup.SetPartsInfo();
             }
         }
     }

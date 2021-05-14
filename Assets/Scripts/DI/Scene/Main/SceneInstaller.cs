@@ -4,9 +4,9 @@ using Scripts.Scenes.Main.MainCamera;
 using Scripts.UI.Level;
 using Scripts.UI.Money;
 using Scripts.UI.Raw;
-using Scripts.UI.Workshop.Craft;
-using Scripts.UI.Workshop.Craft.Item;
-using Scripts.UI.Workshop.Craft.TypeTab;
+using Scripts.UI.Craft;
+using Scripts.UI.Craft.Item;
+using Scripts.UI.Craft.TypeTab;
 using Zenject;
 
 namespace Scripts.DI.Scene.Main
@@ -33,7 +33,7 @@ namespace Scripts.DI.Scene.Main
             Container.BindFactory<LevelUI, LevelUI.Factory>().FromFactory<LevelUIFactory>();
             Container.BindFactory<RawUI, RawUI.Factory>().FromFactory<RawUIFactory>();
 
-            Container.BindFactory<CraftMenuUI, CraftMenuUI.Factory>().FromFactory<CraftMenuUIFactory>();
+            Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUIFactory>();
             Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
             Container.BindFactory<ProductFullData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
@@ -42,8 +42,9 @@ namespace Scripts.DI.Scene.Main
         private void InstallCraftMenu()
         {
             Container.Bind<CraftAction>().AsSingle().NonLazy();
-            Container.Bind<RawAction>().AsSingle().NonLazy();
-            Container.Bind<ComponentAction>().AsSingle().NonLazy();
+
+            Container.Bind<ICraftPartAction>().To<RawAction>().AsSingle().NonLazy();
+            Container.Bind<ICraftPartAction>().To<ComponentAction>().AsSingle().NonLazy();
         }
     }
 }

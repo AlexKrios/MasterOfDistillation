@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Objects.Product
 {
-    [CreateAssetMenu(fileName = "New ProductFullData", menuName = "Product Full Data", order = 51)]
+    [CreateAssetMenu(fileName = "ProductFullData", menuName = "Scriptable/Product Full Data", order = 51)]
     public class ProductFullData : ScriptableObject
     {
         public GameObject GameObject { get; set; }

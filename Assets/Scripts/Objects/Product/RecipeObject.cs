@@ -12,6 +12,9 @@ namespace Scripts.Objects.Product
         public ProductQuality Quality;
         public List<PartObject> Parts;
 
+        public int Level;
+        public int Expirience;
+
         public int CraftTime;
     }
 }

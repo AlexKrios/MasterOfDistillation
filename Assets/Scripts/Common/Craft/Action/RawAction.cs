@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Scripts.Common.Craft.Action
 {
-    public class RawAction
+    public class RawAction : ICraftPartAction
     {
         [Inject] private IRawStore _rawStore;
 
-        public bool IsEnoughRaw(PartObject part)
+        public bool IsEnough(PartObject part)
         {
             var partCount = part.Count;
             var storeValue = _rawStore.RawData[part.Data.Name].Count;
@@ -21,7 +21,7 @@ namespace Scripts.Common.Craft.Action
             return true;
         }
 
-        public void RemoveRaw(PartObject part)
+        public void Remove(PartObject part)
         {
             var partName = part.Data.Name;
             var partCount = part.Count;

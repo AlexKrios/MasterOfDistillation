@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-namespace Scripts.Objects
+namespace Scripts.Objects.Level
 {
-    [CreateAssetMenu(fileName = "Settings", menuName = "Level Settings", order = 51)]
-    public class LevelSettings : ScriptableObject
+    [Serializable]
+    public class LevelSettings
     {
-        [SerializeField] private List<LevelCaps> _caps;
-        public List<LevelCaps> Caps { get => _caps; }
+        public LevelCapsScriptable Caps;
     }
 }

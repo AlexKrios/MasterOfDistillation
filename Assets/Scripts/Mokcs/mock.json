@@ -23,11 +23,11 @@
 			"Name": "Rifle",
 			"Items": [
 				{
-					"Name": "Rifle1",
+					"Name": "Rifle",
 					"Count": [ 0, 0, 0, 0 ]
 				},
 				{
-					"Name": "Component 1",
+					"Name": "Rifle Component 1",
 					"Count": [ 0, 1, 0, 0 ]
 				}
 			]

@@ -1,10 +1,11 @@
-﻿using Scripts.Objects.Product;
-using Scripts.Stores;
+﻿using Scripts.Objects.Part;
+using Scripts.Objects.Product;
 using Scripts.Stores.Level;
+using Scripts.Stores.Product;
 using Scripts.UI;
-using Scripts.UI.Workshop.Craft;
-using Scripts.UI.Workshop.Craft.Item;
+using Scripts.UI.Craft;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -18,40 +19,25 @@ namespace Scripts.Common.Craft.Action
         [Inject] private readonly IUiController _uiController;
         [Inject] private readonly ILevelStore _levelStore;        
         [Inject] private readonly ICraftController _craftController;
-        [Inject] private readonly IStore _productStore;
+        [Inject] private readonly IProductStore _productStore;
 
-        [Inject] private readonly RawAction _rawAction;
-        [Inject] private readonly ComponentAction _craftAction;
-
-        private CraftMenuUI _menu;
-
-        private ItemButton ActiveItem { get => _menu.ItemsGroup.ActiveItem; }
-        private ProductQuality ActiveQuality { get => _menu.QualityBtn.ActiveQuality; }
+        [Inject] private readonly List<ICraftPartAction> _craftPartActionList;
 
         private RecipeObject _recipe;
+        private ICraftPartAction _action;        
 
         public bool IsEnoughParts()
         {
-            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenuUI>();
-            _recipe = ActiveItem.Product.Recipes.First(x => x.Quality == ActiveQuality);
+            var menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>();
+            var activeItem = menu.ItemsGroup.ActiveItem;
+            var activeQuality = menu.QualityBtn.ActiveQuality;
 
-            bool isEnough = true;
+            _recipe = activeItem.Product.Recipes.First(x => x.Quality == activeQuality);            
 
             foreach (var partObj in _recipe.Parts) 
-            {        
-                switch (partObj.Data.Type)
-                {
-                    case ProductType.Raw:
-                        isEnough = _rawAction.IsEnoughRaw(partObj);
-                        break;
-
-                    case ProductType.Component:
-                        isEnough = _craftAction.IsEnoughComponents(partObj);
-                        break;
-
-                    default:
-                        return true;
-                }
+            {
+                _action = SetActionType(partObj);
+                var isEnough = _action.IsEnough(partObj);
 
                 if (!isEnough)
                 {                    
@@ -59,7 +45,19 @@ namespace Scripts.Common.Craft.Action
                 }
             }
 
-            return isEnough;
+            return true;
+        }
+
+        private ICraftPartAction SetActionType(PartObject partObj)
+        {
+            switch (partObj.Data.Type)
+            {
+                case ProductType.Component:
+                    return _craftPartActionList[1];
+
+                default:
+                    return _craftPartActionList[0];
+            }
         }
 
         public IEnumerator StartCraft(int number)
@@ -80,19 +78,7 @@ namespace Scripts.Common.Craft.Action
         {
             foreach (var partObj in _recipe.Parts)
             {
-                switch (partObj.Data.Type)
-                {
-                    case ProductType.Raw:
-                        _rawAction.RemoveRaw(partObj);
-                        break;
-
-                    case ProductType.Component:
-                        _craftAction.RemoveComponents(partObj);
-                        break;
-
-                    default:
-                        break;
-                }
+                _action.Remove(partObj);
             }
         }
 
@@ -104,6 +90,7 @@ namespace Scripts.Common.Craft.Action
 
             store[itemCraft.Data.Name].Count[(int)itemQuality]++;
             _levelStore.Experience += 10 * ((int)itemQuality + 1);
+            _productStore.SetProductExpirience(itemCraft.Data.Name);
 
             Debug.Log($"Craft {itemCraft.Data.Name} complete");            
 

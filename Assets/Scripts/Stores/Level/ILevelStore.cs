@@ -1,4 +1,4 @@
-﻿using Scripts.Objects;
+﻿using Scripts.Objects.Level;
 using System.Collections.Generic;
 
 namespace Scripts.Stores.Level
@@ -7,7 +7,7 @@ namespace Scripts.Stores.Level
     {
         LevelObject LevelInfo { get; set; }
 
-        List<LevelCaps> LevelCaps { get; set; }
+        List<int> LevelCaps { get; set; }
         int Level { get; set; }
         float Experience { get; set; }
         float LevelCap { get; set; }

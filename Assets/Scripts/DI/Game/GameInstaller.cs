@@ -1,6 +1,5 @@
 using Scripts.Api;
 using Scripts.Common.Craft;
-using Scripts.Stores;
 using Scripts.Stores.Level;
 using Scripts.Stores.Money;
 using Scripts.Stores.Product;
@@ -40,7 +39,7 @@ namespace Scripts.DI.Game
             Container.Bind<IRawStore>().To<RawStore>().AsSingle().NonLazy();
             Container.Bind<IRawTimerController>().To<RawTimerController>().AsSingle().NonLazy();
 
-            Container.Bind<IStore>().To<ProductStore>().AsSingle();
+            Container.Bind<IProductStore>().To<ProductStore>().AsSingle();
         }
 
         private void InstallUIComponents()
@@ -54,7 +53,7 @@ namespace Scripts.DI.Game
 
         private void InstallCraftComponents()
         {
-            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();            
+            Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.Objects
+namespace Scripts.Objects.Level
 {
     [Serializable]
     public class LevelObject

@@ -1,7 +1,7 @@
 using Scripts.UI.Level;
 using Scripts.UI.Money;
 using Scripts.UI.Raw;
-using Scripts.UI.Workshop.Craft;
+using Scripts.UI.Craft;
 using Scripts.UI.Workshop.Storage;
 using UnityEngine;
 using Zenject;

@@ -1,4 +1,5 @@
 ﻿using Scripts.Objects;
+using Scripts.Objects.Level;
 using Scripts.UI.Level;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,8 @@ namespace Scripts.Stores.Level
     {
         [Inject] private ILevelUIController _levelUIController;
 
-        private List<LevelCaps> _levelCaps;
-        public List<LevelCaps> LevelCaps
+        private List<int> _levelCaps;
+        public List<int> LevelCaps
         {
             get { return _levelCaps; }
             set { _levelCaps = value; }
@@ -71,7 +72,7 @@ namespace Scripts.Stores.Level
 
         public LevelStore()
         {
-            var levelSettings = Resources.Load("Data/Level/Settings") as LevelSettings;
+            var levelSettings = Resources.Load("Data/Level/Caps") as LevelCapsScriptable;
 
             _levelCaps = levelSettings.Caps;
         }

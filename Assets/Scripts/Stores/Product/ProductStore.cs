@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.Stores.Product
 {
-    public class ProductStore : IStore
+    public class ProductStore : IProductStore
     {
         public Dictionary<string, Dictionary<string, ProductFullData>> AllStore { get; private set; }
 
@@ -18,6 +18,16 @@ namespace Scripts.Stores.Product
 
             var storeData = Resources.Load("Data/Products/ProductStoreData") as ProductStoreSettings;
             SetProductToStoreDictionary(storeData);
+        }
+
+        private void SubscribeDictionaryToAll(string subType, Dictionary<string, ProductFullData> dict)
+        {
+            if (AllStore == null)
+            {
+                AllStore = new Dictionary<string, Dictionary<string, ProductFullData>>();
+            }
+
+            AllStore.Add(subType, dict);
         }
 
         private void SetProductToStoreDictionary(ProductStoreSettings storeData)
@@ -35,17 +45,7 @@ namespace Scripts.Stores.Product
 
                 SubscribeDictionaryToAll(data.SubType, dict);
             }
-        }
-
-        private void SubscribeDictionaryToAll(string subType, Dictionary<string, ProductFullData> dict)
-        {
-            if (AllStore == null)
-            {
-                AllStore = new Dictionary<string, Dictionary<string, ProductFullData>>();
-            }
-
-            AllStore.Add(subType, dict);
-        }
+        }        
 
         public void LoadItemsCount(List<ProductLoadObject> storesInfo)
         {
@@ -57,6 +57,11 @@ namespace Scripts.Stores.Product
                     loadStore[item.Name].Count = item.Count;
                 }
             }
+        }
+
+        public void SetProductExpirience(string name)
+        {
+            
         }
     }
 }

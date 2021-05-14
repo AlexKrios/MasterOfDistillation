@@ -7,7 +7,6 @@ namespace Scripts.Scenes.Main.MainCamera
     {
         private List<string> _list = new List<string>();
 
-        // WorkshopSelect - When click on workshop
         public void Add(string value)
         {
             _list.Add(value);

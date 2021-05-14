@@ -1,14 +1,14 @@
 ﻿using Scripts.Objects.Part;
-using Scripts.Stores;
+using Scripts.Stores.Product;
 using Zenject;
 
 namespace Scripts.Common.Craft.Action
 {
-    public class ComponentAction
+    public class ComponentAction : ICraftPartAction
     {
-        [Inject] private IStore _store;
+        [Inject] private readonly IProductStore _store;
 
-        public bool IsEnoughComponents(PartObject part)
+        public bool IsEnough(PartObject part)
         {
             var partName = part.Data.Name;            
             var partSubType = part.Data.SubType;
@@ -26,7 +26,7 @@ namespace Scripts.Common.Craft.Action
             return true;
         }
 
-        public void RemoveComponents(PartObject part)
+        public void Remove(PartObject part)
         {
             var partName = part.Data.Name;
             var partSubType = part.Data.SubType;

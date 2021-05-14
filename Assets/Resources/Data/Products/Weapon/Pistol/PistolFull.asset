@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6630831db706d3b4aae2c3420365cfe7, type: 3}
+  m_Name: PistolFull
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: 6c9e23bcbf445764db48251fe7ab6226, type: 2}
+  _recipes:
+  - Name: Common
+    Quality: 0
+    Parts:
+    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
+      Quality: 0
+      Count: 1
+    Level: 0
+    Expirience: 0
+    CraftTime: 1
+  - Name: 
+    Quality: 1
+    Parts: []
+    Level: 0
+    Expirience: 0
+    CraftTime: 5
+  - Name: 
+    Quality: 2
+    Parts: []
+    Level: 0
+    Expirience: 0
+    CraftTime: 8
+  - Name: 
+    Quality: 3
+    Parts: []
+    Level: 0
+    Expirience: 0
+    CraftTime: 10

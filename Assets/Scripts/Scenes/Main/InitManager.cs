@@ -1,15 +1,15 @@
 using Scripts.Objects;
+using Scripts.Stores.Level;
+using Scripts.Stores.Money;
+using Scripts.Stores.Product;
+using Scripts.Stores.Raw;
+using Scripts.Timer;
+using Scripts.UI.Level;
+using Scripts.UI.Money;
+using Scripts.UI.Raw;
 using System;
 using UnityEngine;
 using Zenject;
-using Scripts.Stores.Level;
-using Scripts.Stores.Raw;
-using Scripts.UI.Money;
-using Scripts.UI.Level;
-using Scripts.UI.Raw;
-using Scripts.Stores.Money;
-using Scripts.Timer;
-using Scripts.Stores;
 
 namespace Scripts.Scenes.Main
 {
@@ -25,7 +25,7 @@ namespace Scripts.Scenes.Main
         [Inject] private readonly ILevelStore _levelStore;
 
         [Inject] private readonly IRawStore _rawStore;
-        [Inject] private readonly IStore _store;
+        [Inject] private readonly IProductStore _store;
 
         public TextAsset jsonFile;
         [NonSerialized] public LoadObject StartData;

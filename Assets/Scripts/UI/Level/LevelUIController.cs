@@ -39,7 +39,7 @@ namespace Scripts.UI.Level
             var _level = _levelStore.Level;
             var _levelsExpirience = _levelStore.LevelCaps;
 
-            _levelStore.LevelCap = _levelsExpirience[_level - 1].Max;
+            _levelStore.LevelCap = _levelsExpirience[_level - 1];
         }
 
         private void SetLevelPercent()

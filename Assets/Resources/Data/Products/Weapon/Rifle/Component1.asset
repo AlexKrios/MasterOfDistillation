@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc7b7f875e3040429e9fc425304d7d1, type: 3}
   m_Name: Component1
   m_EditorClassIdentifier: 
-  _name: Component 1
+  _name: Rifle Component 1
   _type: 1
   _subType: 1
   _icon: {fileID: 21300000, guid: f30b948b68496d14ab0f33f5b7f137b9, type: 3}

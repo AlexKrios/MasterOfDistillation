@@ -1,15 +1,16 @@
-﻿using Scripts.Objects.Product;
+﻿using Assets.Scripts.Objects.Product.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Workshop.Storage.Item
+namespace Assets.Scripts.UI.Storage.Item
 {
     public class ItemButton : MonoBehaviour, IPointerClickHandler
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly StorageMenuUiFactory.Settings _menuSettings;
 
         private ItemsGroup _itemGroup;
 
@@ -20,17 +21,17 @@ namespace Scripts.UI.Workshop.Storage.Item
 
         [Header("Assets")]
         [SerializeField] private Sprite _bgInactive;
-        public Sprite BgInactive { get => _bgInactive; }
+        public Sprite BgInactive => _bgInactive;
 
         [SerializeField] private Sprite _bgActive;
-        public Sprite BgActive { get => _bgActive; }
+        public Sprite BgActive => _bgActive;
 
-        private ProductFullData _product;
-        public ProductFullData Product { get => _product; }
+        public ProductFullData Product { get; private set; }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() 
         {
-            _itemGroup = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUI>().ItemsGroup;
+            _itemGroup = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUi>().ItemsGroup;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -40,8 +41,8 @@ namespace Scripts.UI.Workshop.Storage.Item
 
         public void SetCellInfo(ProductFullData product)
         {
-            _product = product;
-            _product.GameObject = gameObject;
+            Product = product;
+            Product.GameObject = gameObject;
 
             SetCellIcon(product.Data.Icon);
             SetCellName(product.Data.Name);
@@ -67,9 +68,9 @@ namespace Scripts.UI.Workshop.Storage.Item
             _icon.sprite = icon;
         }
 
-        private void SetCellName(string name)
+        private void SetCellName(string cellName)
         {
-            _name.text = name;
+            _name.text = cellName;
         }
 
         public class Factory : PlaceholderFactory<ProductFullData, ItemButton> { }

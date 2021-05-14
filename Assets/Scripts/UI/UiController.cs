@@ -2,17 +2,17 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Scripts.UI
+namespace Assets.Scripts.UI
 {
     public class UiController : IUiController
     {
-        private Dictionary<string, GameObject> _uiElements = new Dictionary<string, GameObject>();
-        
-        private GameObject _activeBuilding;
-        public GameObject ActiveBuilding 
+        private readonly Dictionary<string, GameObject> _uiElements;
+
+        public GameObject ActiveBuilding { get; set; }
+
+        public UiController()
         {
-            get { return _activeBuilding; }
-            set { _activeBuilding = value; }
+            _uiElements = new Dictionary<string, GameObject>();
         }
 
         public void Add(string key, GameObject value)
@@ -32,6 +32,7 @@ namespace Scripts.UI
 
         public void Remove(GameObject gameObject)
         {
+            // ReSharper disable once AccessToStaticMemberViaDerivedType
             GameObject.Destroy(gameObject);
             _uiElements.Remove(gameObject.name);
         }

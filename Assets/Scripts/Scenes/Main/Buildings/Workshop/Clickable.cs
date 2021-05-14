@@ -1,20 +1,17 @@
-﻿using Scripts.Common.Craft;
-using Scripts.Scenes.Main.MainCamera;
-using Scripts.UI;
-using Scripts.UI.Workshop;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Scripts.Scenes.Main.Buildings.Workshop
+namespace Assets.Scripts.Scenes.Main.Buildings.Workshop
 {
     public class Clickable : MonoBehaviour, IPointerClickHandler
     {
+        // ReSharper disable once NotAccessedField.Local
         private Camera _mainCamera;
 
-        [Inject] private IUiController _uiController;
-        [Inject] private ITarget _target;
-        [Inject] private IDisable _disable;        
+        //[Inject] private readonly IUiController _uiController;
+        //[Inject] private readonly ITarget _target;
+        //[Inject] private readonly IDisable _disable;        
 
         [Inject]
         public void Construct([Inject(Id = "MainCamera")] Transform mainCamera)

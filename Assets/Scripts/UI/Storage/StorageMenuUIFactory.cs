@@ -1,30 +1,30 @@
-﻿using Scripts.Scenes.Main.MainCamera;
-using Scripts.UI.Workshop.Storage.Item;
-using Scripts.UI.Workshop.Storage.TypeTab;
-using System;
+﻿using System;
+using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using Assets.Scripts.UI.Storage.Item;
+using Assets.Scripts.UI.Storage.TypeTab;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Storage
+namespace Assets.Scripts.UI.Storage
 {
-    public class StorageMenuUIFactory : IFactory<StorageMenuUI>
+    public class StorageMenuUiFactory : IFactory<StorageMenuUi>
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private IDisable _disable;
-        [Inject] private Settings _settings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly IDisable _disable;
+        [Inject] private readonly Settings _settings;
 
-        private DiContainer _container;
-        private StorageMenuUI _storageMenu;
-        private Transform _mainCanvas;                       
+        private readonly DiContainer _container;
+        private readonly Transform _mainCanvas;
+        private StorageMenuUi _storageMenu;
 
-        public StorageMenuUIFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        public StorageMenuUiFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
         {
             _container = container;
 
             _mainCanvas = mainCanvas.gameObject.transform;            
         }
 
-        public StorageMenuUI Create()
+        public StorageMenuUi Create()
         {
             var uiElementSimilar = _uiController.FindByPart(_settings.Name);
 
@@ -34,7 +34,7 @@ namespace Scripts.UI.Workshop.Storage
                 _disable.Remove(_settings.Name);
             }
 
-            _storageMenu = _container.InstantiatePrefabForComponent<StorageMenuUI>(_settings.Prefab, _mainCanvas);
+            _storageMenu = _container.InstantiatePrefabForComponent<StorageMenuUi>(_settings.Prefab, _mainCanvas);
             _storageMenu.name = _settings.Name;
 
             _uiController.Add(_storageMenu.name, _storageMenu.gameObject);

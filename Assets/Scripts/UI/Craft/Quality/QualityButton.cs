@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Quality
+namespace Assets.Scripts.UI.Craft.Quality
 {
     public class QualityButton : MonoBehaviour
     {
@@ -13,12 +14,13 @@ namespace Scripts.UI.Craft.Quality
         [SerializeField] private Image _icon;
 
         [Header("Assets")]
+        // ReSharper disable once CollectionNeverUpdated.Local
         [SerializeField] private List<Sprite> _qualityIcons;
 
         private ProductQuality _activeQuality = ProductQuality.Common;
         public ProductQuality ActiveQuality
         {
-            get { return _activeQuality; }
+            get => _activeQuality;
             set
             {
                 _activeQuality = value;
@@ -27,6 +29,7 @@ namespace Scripts.UI.Craft.Quality
             }
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         public void ChangeQuality()

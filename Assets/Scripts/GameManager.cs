@@ -1,11 +1,11 @@
-﻿namespace Scripts
+﻿namespace Assets.Scripts
 {
     public class GameManager
     {
-        public float moveSpeed = 1;
-        public float rotateSpeed = 1;
-        public float zoomSpeed = 1;
+        public float MoveSpeed = 1;
+        public float RotateSpeed = 1;
+        public float ZoomSpeed = 1;
 
-        public string initData;
+        public string InitData;
     }
 }

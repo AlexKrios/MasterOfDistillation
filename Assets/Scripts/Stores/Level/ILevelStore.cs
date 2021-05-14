@@ -1,7 +1,7 @@
-﻿using Scripts.Objects.Level;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Objects.Level;
 
-namespace Scripts.Stores.Level
+namespace Assets.Scripts.Stores.Level
 {
     public interface ILevelStore
     {

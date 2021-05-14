@@ -1,20 +1,20 @@
-﻿using Scripts.UI.Money;
+﻿using Assets.Scripts.UI.Money;
 using Zenject;
 
-namespace Scripts.Stores.Money
+namespace Assets.Scripts.Stores.Money
 {
     public class MoneyStore : IMoneyStore
     {
-        [Inject] private IMoneyUIController _moneyUIController;
+        [Inject] private readonly IMoneyUiController _moneyUiController;
 
         private int _money;
         public int Money
         {
-            get { return _money; }
+            get => _money;
             set 
             { 
                 _money = value;
-                _moneyUIController.OnSetMoneyText.Invoke();
+                _moneyUiController.OnSetMoneyText.Invoke();
             }
         }
     }

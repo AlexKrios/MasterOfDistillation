@@ -1,27 +1,22 @@
-﻿using Scripts.Objects;
-using Scripts.Objects.Level;
-using Scripts.UI.Level;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Objects;
+using Assets.Scripts.Objects.Level;
+using Assets.Scripts.UI.Level;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Stores.Level
+namespace Assets.Scripts.Stores.Level
 {
     public class LevelStore : ILevelStore
     {
-        [Inject] private ILevelUIController _levelUIController;
+        [Inject] private readonly ILevelUiController _levelUiController;
 
-        private List<int> _levelCaps;
-        public List<int> LevelCaps
-        {
-            get { return _levelCaps; }
-            set { _levelCaps = value; }
-        }
+        public List<int> LevelCaps { get; set; }
 
         private LevelObject _levelInfo;
         public LevelObject LevelInfo 
         {
-            get { return _levelInfo; }
+            get => _levelInfo;
             set 
             {
                 _levelInfo = value;
@@ -34,47 +29,43 @@ namespace Scripts.Stores.Level
         private int _level;
         public int Level
         {
-            get { return _level; }
+            get => _level;
             set 
             { 
                 _level = value;
-                _levelUIController.OnSetLevelText.Invoke();
-                _levelUIController.OnSetLevelExperience.Invoke();
-                _levelUIController.OnSetLevelPercent.Invoke();
+                _levelUiController.OnSetLevelText.Invoke();
+                _levelUiController.OnSetLevelExperience.Invoke();
+                _levelUiController.OnSetLevelPercent.Invoke();
             }
         }        
         
         private float _experience;
         public float Experience
         {
-            get { return _experience; }
+            get => _experience;
             set 
             { 
                 _experience = value;
-                _levelUIController.OnSetLevelPercent.Invoke();
+                _levelUiController.OnSetLevelPercent.Invoke();
 
-                if (_experience < _levelCap)
+                if (_experience < LevelCap)
                 {
                     return;
                 }
 
-                _experience -= _levelCap;
+                _experience -= LevelCap;
                 Level++;
             }
         }
 
-        private float _levelCap;
-        public float LevelCap
-        {
-            get { return _levelCap; }
-            set { _levelCap = value; }
-        }
+        public float LevelCap { get; set; }
 
         public LevelStore()
         {
-            var levelSettings = Resources.Load("Data/Level/Caps") as LevelCapsScriptable;
-
-            _levelCaps = levelSettings.Caps;
+            if (Resources.Load("Data/Level/Caps") is LevelCapsScriptable levelSettings)
+            {
+                LevelCaps = levelSettings.Caps;
+            }
         }
     }
 }

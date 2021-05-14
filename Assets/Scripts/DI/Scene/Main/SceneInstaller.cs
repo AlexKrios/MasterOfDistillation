@@ -1,23 +1,23 @@
-using Scripts.Common.Craft.Action;
-using Scripts.Objects.Product;
-using Scripts.Scenes.Main.MainCamera;
-using Scripts.UI.Level;
-using Scripts.UI.Money;
-using Scripts.UI.Raw;
-using Scripts.UI.Craft;
-using Scripts.UI.Craft.Item;
-using Scripts.UI.Craft.TypeTab;
+using Assets.Scripts.Common.Craft.Action;
+using Assets.Scripts.Objects.Product.Data;
+using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using Assets.Scripts.Scenes.Main.MainCamera.Target;
+using Assets.Scripts.UI.Craft;
+using Assets.Scripts.UI.Craft.Item;
+using Assets.Scripts.UI.Craft.TypeTab;
+using Assets.Scripts.UI.Level;
+using Assets.Scripts.UI.Money;
+using Assets.Scripts.UI.Raw;
 using Zenject;
-using Scripts.Common.Craft;
 
-namespace Scripts.DI.Scene.Main
+namespace Assets.Scripts.DI.Scene.Main
 {
     public class SceneInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
             InstallCameraComponents();
-            InstallUIFactory();
+            InstallUiFactory();
 
             InstallCraftMenu();
         }
@@ -28,13 +28,13 @@ namespace Scripts.DI.Scene.Main
             Container.Bind<ITarget>().To<Target>().AsSingle().NonLazy();
         }
 
-        private void InstallUIFactory()
+        private void InstallUiFactory()
         {
-            Container.BindFactory<MoneyUI, MoneyUI.Factory>().FromFactory<MoneyUIFactory>();
-            Container.BindFactory<LevelUI, LevelUI.Factory>().FromFactory<LevelUIFactory>();
-            Container.BindFactory<RawUI, RawUI.Factory>().FromFactory<RawUIFactory>();
+            Container.BindFactory<MoneyUi, MoneyUi.Factory>().FromFactory<MoneyUiFactory>();
+            Container.BindFactory<LevelUi, LevelUi.Factory>().FromFactory<LevelUiFactory>();
+            Container.BindFactory<RawUi, RawUi.Factory>().FromFactory<RawUiFactory>();
 
-            Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUIFactory>();
+            Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUiFactory>();
             Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
             Container.BindFactory<ProductFullData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();

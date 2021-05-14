@@ -1,25 +1,25 @@
-using Scripts.Objects;
-using Scripts.Stores.Level;
-using Scripts.Stores.Money;
-using Scripts.Stores.Product;
-using Scripts.Stores.Raw;
-using Scripts.Timer;
-using Scripts.UI.Level;
-using Scripts.UI.Money;
-using Scripts.UI.Raw;
 using System;
+using Assets.Scripts.Objects;
+using Assets.Scripts.Stores.Level;
+using Assets.Scripts.Stores.Money;
+using Assets.Scripts.Stores.Product;
+using Assets.Scripts.Stores.Raw;
+using Assets.Scripts.Timer;
+using Assets.Scripts.UI.Level;
+using Assets.Scripts.UI.Money;
+using Assets.Scripts.UI.Raw;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Scenes.Main
+namespace Assets.Scripts.Scenes.Main
 {
     public class InitManager : MonoBehaviour
     {
         private Transform _sceneContext;
 
-        [Inject] private readonly MoneyUI.Factory _moneyUI;
-        [Inject] private readonly LevelUI.Factory _levelUI;
-        [Inject] private readonly RawUI.Factory _rawUI;      
+        [Inject] private readonly MoneyUi.Factory _moneyUi;
+        [Inject] private readonly LevelUi.Factory _levelUi;
+        [Inject] private readonly RawUi.Factory _rawUi;      
 
         [Inject] private readonly IMoneyStore _moneyStore;
         [Inject] private readonly ILevelStore _levelStore;
@@ -27,7 +27,7 @@ namespace Scripts.Scenes.Main
         [Inject] private readonly IRawStore _rawStore;
         [Inject] private readonly IProductStore _store;
 
-        public TextAsset jsonFile;
+        public TextAsset JsonFile;
         [NonSerialized] public LoadObject StartData;
 
         [Inject]
@@ -36,11 +36,12 @@ namespace Scripts.Scenes.Main
             _sceneContext = sceneContext;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
-            _moneyUI.Create();
-            _levelUI.Create();
-            _rawUI.Create();
+            _moneyUi.Create();
+            _levelUi.Create();
+            _rawUi.Create();
 
             StartData = InitStartData();
 
@@ -49,7 +50,7 @@ namespace Scripts.Scenes.Main
 
         public LoadObject InitStartData()
         {
-            return JsonUtility.FromJson<LoadObject>(jsonFile.text);
+            return JsonUtility.FromJson<LoadObject>(JsonFile.text);
         }
 
         private void SetStartData()
@@ -64,6 +65,7 @@ namespace Scripts.Scenes.Main
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q))

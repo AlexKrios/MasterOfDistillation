@@ -1,20 +1,20 @@
-﻿using Scripts.Objects.Product;
-using Scripts.Objects.Raw;
-using Scripts.Objects.Raw.Load;
-using Scripts.UI;
-using Scripts.UI.Raw;
-using Scripts.UI.Craft;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Objects.Product.Data;
+using Assets.Scripts.Objects.Raw;
+using Assets.Scripts.Objects.Raw.Load;
+using Assets.Scripts.UI;
+using Assets.Scripts.UI.Craft;
+using Assets.Scripts.UI.Raw;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Stores.Raw
+namespace Assets.Scripts.Stores.Raw
 {
     public class RawStore : IRawStore
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private IRawUIController _rawUIController;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly IRawUiController _rawUiController;
 
         public Dictionary<string, RawObject> RawData { get; private set; }
 
@@ -44,7 +44,7 @@ namespace Scripts.Stores.Raw
         {
             RawData[type].Count += count;
 
-            _rawUIController.RawTextEvent.Invoke(type);
+            _rawUiController.RawTextEvent.Invoke(type);
 
             var menu = _uiController.FindByPart("CraftMenu");
             if (_uiController.FindByPart("CraftMenu") != null)

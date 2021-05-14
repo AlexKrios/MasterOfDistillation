@@ -2,36 +2,36 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Raw
+namespace Assets.Scripts.UI.Raw
 {
-    public class RawUIFactory : IFactory<RawUI> 
+    public class RawUiFactory : IFactory<RawUi> 
     {
-        [Inject] private DiContainer _container;
-        [Inject] private IUiController _uiController;
+        [Inject] private readonly DiContainer _container;
+        [Inject] private readonly IUiController _uiController;
 
-        [Inject] private Settings _settings;
+        [Inject] private readonly Settings _settings;
 
-        private Transform _mainCanvas;
+        private readonly Transform _mainCanvas;
 
-        public RawUIFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        public RawUiFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
         {
             _mainCanvas = mainCanvas.gameObject.transform;
         }
 
-        public RawUI Create()
+        public RawUi Create()
         {
-            var rawUI = _container.InstantiatePrefabForComponent<RawUI>(_settings.RawUIPrefab, _mainCanvas);
-            rawUI.name = "Raw";
+            var rawUi = _container.InstantiatePrefabForComponent<RawUi>(_settings.RawUiPrefab, _mainCanvas);
+            rawUi.name = "Raw";
 
-            _uiController.Add(rawUI.name, rawUI.gameObject);
+            _uiController.Add(rawUi.name, rawUi.gameObject);
 
-            return rawUI;
+            return rawUi;
         }
 
         [Serializable]
         public class Settings
         {
-            public GameObject RawUIPrefab;
+            public GameObject RawUiPrefab;
         }
     }
 }

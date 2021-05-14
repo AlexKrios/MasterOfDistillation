@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89b4c7eac6237547b39575cb7fb451d, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  MoneyUI:
-    MoneyUIPrefab: {fileID: 6843603260279845459, guid: a20c7e67eaaca1c42a3cd55efe6ce9c6,
+  MoneyUi:
+    MoneyUiPrefab: {fileID: 6843603260279845459, guid: a20c7e67eaaca1c42a3cd55efe6ce9c6,
       type: 3}
-  LevelUI:
-    LevelUIPrefab: {fileID: 9209229893864620261, guid: 49068a9f172410e4283921db703c7d2c,
+  LevelUi:
+    LevelUiPrefab: {fileID: 9209229893864620261, guid: 49068a9f172410e4283921db703c7d2c,
       type: 3}
-  RawUI:
-    RawUIPrefab: {fileID: 1345606372920616409, guid: 64cdbf4a9bf31b84c835bec848e2f14a,
+  RawUi:
+    RawUiPrefab: {fileID: 1345606372920616409, guid: 64cdbf4a9bf31b84c835bec848e2f14a,
       type: 3}
-  CraftMenuUI:
+  CraftMenuUi:
     Name: CraftMenu
     Prefab: {fileID: 7196737555349474873, guid: 9754840056129854cbc5a592d2bc5d89,
       type: 3}
@@ -33,27 +33,26 @@ MonoBehaviour:
       Name: Items
       Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
         type: 3}
-      RowCount: 4
+      RowCount: 5
       Padding: 10
       Height: 250
     ItemButtonSettings:
-      Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,
-        type: 3}
-  StorageMenuUI:
+      Prefab: {fileID: 0}
+  StorageMenuUi:
     Name: StorageMenu
     Prefab: {fileID: 7196737555349474873, guid: abb901f12c5d2634a9e3f013c693b766,
       type: 3}
     TabsSettings:
-      Name: TypeTabs
-      Prefab: {fileID: 2881336544839766366, guid: 7c8a783c2026fd046a72d3cf628a2397,
+      Name: Tabs
+      Prefab: {fileID: 2881336544839766366, guid: 3c4e2b3d219ce444d886f6be7ddc6830,
         type: 3}
     ItemsGroupSettings:
       Name: Items
-      Prefab: {fileID: 4785780335862507188, guid: ab4e02e0469015349bfc85a870177de4,
+      Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
         type: 3}
       RowCount: 4
       Padding: 25
       Height: 250
     ItemButtonSettings:
-      Prefab: {fileID: 500747981298187993, guid: de36a7b6eef725e47b19654311fd5b71,
+      Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,
         type: 3}

@@ -1,6 +1,6 @@
-﻿namespace Scripts.UI.Raw
+﻿namespace Assets.Scripts.UI.Raw
 {
-    public interface IRawUIController
+    public interface IRawUiController
     {
         RawTextEvent RawTextEvent { get; set; }
     }

@@ -2,14 +2,14 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Craft.Item
+namespace Assets.Scripts.UI.Craft.Item
 {
     public class ItemsGroupFactory : IFactory<ItemsGroup>
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
-        private DiContainer _container;
+        private readonly DiContainer _container;
 
         public ItemsGroupFactory(DiContainer container)
         {

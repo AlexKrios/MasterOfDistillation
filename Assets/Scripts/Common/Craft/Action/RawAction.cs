@@ -1,8 +1,8 @@
-﻿using Scripts.Objects.Part;
-using Scripts.Stores.Raw;
+﻿using Assets.Scripts.Objects.Product.Part;
+using Assets.Scripts.Stores.Raw;
 using Zenject;
 
-namespace Scripts.Common.Craft.Action
+namespace Assets.Scripts.Common.Craft.Action
 {
     public class RawAction : ICraftPartAction
     {

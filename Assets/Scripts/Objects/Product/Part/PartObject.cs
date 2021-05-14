@@ -1,7 +1,7 @@
-﻿using Scripts.Objects.Product;
-using System;
+﻿using System;
+using Assets.Scripts.Objects.Product.Data;
 
-namespace Scripts.Objects.Part
+namespace Assets.Scripts.Objects.Product.Part
 {
     [Serializable]
     public class PartObject

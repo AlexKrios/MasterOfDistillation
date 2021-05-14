@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Scripts;
+using UnityEngine;
 using Zenject;
 
-namespace Scripts.Scenes.Main.MainCamera
+namespace Assets.Scripts.Scenes.Main.MainCamera.Rotate
 {
     public class Rotate : MonoBehaviour
     {
@@ -13,9 +14,10 @@ namespace Scripts.Scenes.Main.MainCamera
         public void Construct(GameManager gameManager, [Inject(Id = "MainCamera")] Transform mainCamera)
         {            
             _mainCamera = mainCamera.parent;
-            _rotateSpeed = gameManager.rotateSpeed;
+            _rotateSpeed = gameManager.RotateSpeed;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         private void RotateDesktop()
@@ -34,12 +36,13 @@ namespace Scripts.Scenes.Main.MainCamera
         {
             if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {
-                Touch touch = Input.GetTouch(0);
+                var touch = Input.GetTouch(0);
 
                 _mainCamera.transform.Rotate(0f, touch.deltaPosition.x * _rotateSpeed * 5 * Time.deltaTime, 0f);
             }
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Update()
         {
             RotateDesktop();

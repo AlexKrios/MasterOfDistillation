@@ -2,36 +2,36 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Money
+namespace Assets.Scripts.UI.Money
 {
-    public class MoneyUIFactory : IFactory<MoneyUI> 
+    public class MoneyUiFactory : IFactory<MoneyUi> 
     {
-        [Inject] private DiContainer _container;
-        [Inject] private IUiController _uiController;
+        [Inject] private readonly DiContainer _container;
+        [Inject] private readonly IUiController _uiController;
 
-        [Inject] private Settings _settings;
+        [Inject] private readonly Settings _settings;
 
-        private Transform _mainCanvas;
+        private readonly Transform _mainCanvas;
 
-        public MoneyUIFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        public MoneyUiFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
         {
             _mainCanvas = mainCanvas.gameObject.transform;
         }
 
-        public MoneyUI Create()
+        public MoneyUi Create()
         {
-            var moneyUI = _container.InstantiatePrefabForComponent<MoneyUI>(_settings.MoneyUIPrefab, _mainCanvas);
-            moneyUI.name = "Money";
+            var moneyUi = _container.InstantiatePrefabForComponent<MoneyUi>(_settings.MoneyUiPrefab, _mainCanvas);
+            moneyUi.name = "Money";
 
-            _uiController.Add(moneyUI.name, moneyUI.gameObject);
+            _uiController.Add(moneyUi.name, moneyUi.gameObject);
 
-            return moneyUI;
+            return moneyUi;
         }
 
         [Serializable]
         public class Settings
         {
-            public GameObject MoneyUIPrefab;
+            public GameObject MoneyUiPrefab;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Scripts.Timer
+﻿namespace Assets.Scripts.Timer
 {
     public interface ITimerController
     {

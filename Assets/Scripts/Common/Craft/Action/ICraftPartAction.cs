@@ -1,6 +1,6 @@
-﻿using Scripts.Objects.Part;
+﻿using Assets.Scripts.Objects.Product.Part;
 
-namespace Scripts.Common.Craft.Action
+namespace Assets.Scripts.Common.Craft.Action
 {
     public interface ICraftPartAction
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.Stores.Product
+namespace Assets.Scripts.Stores.Product
 {
     [Serializable]
     public class ProductStoreData

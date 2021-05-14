@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.Objects.Raw
+namespace Assets.Scripts.Objects.Raw
 {
     [Serializable]
     public class RawSettingsObject

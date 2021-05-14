@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace Scripts.Api
+namespace Assets.Scripts.Api
 {
     public interface IApiManager
     {

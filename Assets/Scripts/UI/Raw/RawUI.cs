@@ -2,13 +2,13 @@
 using UnityEngine.UI;
 using Zenject;
 
-namespace Scripts.UI.Raw
+namespace Assets.Scripts.UI.Raw
 {
-    public class RawUI : MonoBehaviour
+    public class RawUi : MonoBehaviour
     {
         public Image IronIcon;
         public Text IronText;
 
-        public class Factory : PlaceholderFactory<RawUI> { }
+        public class Factory : PlaceholderFactory<RawUi> { }
     }
 }

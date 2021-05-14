@@ -1,8 +1,8 @@
 ﻿using UnityEngine.Events;
 
-namespace Scripts.UI.Level
+namespace Assets.Scripts.UI.Level
 {
-    public interface ILevelUIController
+    public interface ILevelUiController
     {
         UnityEvent OnSetLevelText { get; set; }
         UnityEvent OnSetLevelExperience { get; set; }

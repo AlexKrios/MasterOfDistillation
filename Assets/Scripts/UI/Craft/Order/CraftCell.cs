@@ -1,18 +1,19 @@
-﻿using Scripts.Common.Craft;
-using Scripts.Objects.Craft;
+﻿using Assets.Scripts.Common.Craft;
+using Assets.Scripts.Objects.Craft;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Order
+namespace Assets.Scripts.UI.Craft.Order
 {
     //TODO Переделать флаги на интерфейсы
     public class CraftCell : MonoBehaviour, IPointerClickHandler
     {
         private ICraftController _craftController;
 
-        [SerializeField] private CraftCellsGroup _craftCellsGroup;        
+        [SerializeField] private CraftCellsGroup _craftCellsGroup;
 
         [Header("Product cell info")]
         [SerializeField] private Image _icon;
@@ -29,6 +30,7 @@ namespace Scripts.UI.Craft.Order
             _craftController = sceneContext.GetComponent<ICraftController>();
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() 
         {
             _craftCellsGroup.SubscribeCellToList(this);
@@ -41,10 +43,12 @@ namespace Scripts.UI.Craft.Order
         {
             if (IsComplete)
             {
-                _craftController.CompleteCraft(_id);
-
-                ResetCell();
+                return;
             }
+
+            _craftController.CompleteCraft(_id);
+
+            ResetCell();
         }
 
         public void SetCellInfo(CraftObject craftObject)

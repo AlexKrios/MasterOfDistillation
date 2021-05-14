@@ -1,11 +1,11 @@
-﻿using Scripts.Objects.Level;
-using Scripts.Objects.Money;
-using Scripts.Objects.Product.Load;
-using Scripts.Objects.Raw.Load;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Objects.Level;
+using Assets.Scripts.Objects.Money;
+using Assets.Scripts.Objects.Raw.Load;
+using Scripts.Objects.Product.Load;
 
-namespace Scripts.Objects
+namespace Assets.Scripts.Objects
 {
     [Serializable]
     public class LoadObject

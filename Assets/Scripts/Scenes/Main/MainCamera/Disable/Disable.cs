@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Scripts.Scenes.Main.MainCamera
+namespace Assets.Scripts.Scenes.Main.MainCamera.Disable
 {
     public class Disable : IDisable
     {
-        private List<string> _list = new List<string>();
+        private readonly List<string> _list;
+
+        public Disable()
+        {
+            _list = new List<string>();
+        }
 
         public void Add(string value)
         {

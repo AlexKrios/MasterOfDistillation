@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Scripts.Objects.Product
+namespace Assets.Scripts.Objects.Product
 {
     [Serializable]
     public class ProductObject

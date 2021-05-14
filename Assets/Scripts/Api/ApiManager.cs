@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Scripts.Api
+namespace Assets.Scripts.Api
 {
     public class ApiManager : IApiManager
     {

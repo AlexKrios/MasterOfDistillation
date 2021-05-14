@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Scripts;
+using UnityEngine;
 using Zenject;
 
-namespace Scripts.Scenes.Main.MainCamera
+namespace Assets.Scripts.Scenes.Main.MainCamera.Zoom
 {
     public class Zoom : MonoBehaviour
     {
@@ -15,9 +16,10 @@ namespace Scripts.Scenes.Main.MainCamera
         public void Construct(GameManager gameManager, [Inject(Id = "MainCamera")] Transform mainCamera)
         {
             _mainCamera = mainCamera.GetComponent<Camera>();
-            _zoomSpeed = gameManager.zoomSpeed;
+            _zoomSpeed = gameManager.ZoomSpeed;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             _targetZoom = _mainCamera.orthographicSize;
@@ -59,6 +61,7 @@ namespace Scripts.Scenes.Main.MainCamera
             }
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Update()
         {
             DesktopZoom();

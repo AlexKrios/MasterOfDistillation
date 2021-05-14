@@ -1,16 +1,16 @@
-﻿using Scripts.Objects.Product;
-using System;
+﻿using System;
+using Assets.Scripts.Objects.Product.Data;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Craft.Item
+namespace Assets.Scripts.UI.Craft.Item
 {
     public class ItemButtonFactory : IFactory<ProductFullData, ItemButton> 
     {
         [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private CraftMenuUiFactory.Settings _menuSettings;
 
-        private DiContainer _container;
+        private readonly DiContainer _container;
 
         public ItemButtonFactory(DiContainer container)
         {

@@ -1,16 +1,18 @@
-﻿using Scripts.Objects.Product;
-using Scripts.Stores.Product;
-using Scripts.Stores.Raw;
+﻿using Assets.Scripts.Objects.Product;
+using Assets.Scripts.Stores.Product;
+using Assets.Scripts.Stores.Raw;
+using Scripts.Objects.Product;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Part
+namespace Assets.Scripts.UI.Craft.Part
 {
     public class PartCell : MonoBehaviour
     {        
-        [Inject] private IRawStore _rawStore;
-        [Inject] private IProductStore _store;
+        [Inject] private readonly IRawStore _rawStore;
+        [Inject] private readonly IProductStore _store;
 
         [Header("System")]
         [SerializeField] private int _id;
@@ -37,18 +39,18 @@ namespace Scripts.UI.Craft.Part
 
         private int GetStoreCount(RecipeObject recipe)
         {
-            var name = recipe.Parts[_id - 1].Data.Name;
+            var dataName = recipe.Parts[_id - 1].Data.Name;
             var type = recipe.Parts[_id - 1].Data.Type;
             var subType = recipe.Parts[_id - 1].Data.SubType;
 
             switch (type)
             {
                 case ProductType.Raw:
-                    return _rawStore.RawData[name].Count;
+                    return _rawStore.RawData[dataName].Count;
 
                 default:
                     var store = _store.AllStore[subType.ToString()];
-                    return store[name].Count[(int)recipe.Quality];
+                    return store[dataName].Count[(int)recipe.Quality];
             }
         }
 
@@ -58,6 +60,7 @@ namespace Scripts.UI.Craft.Part
             SetPartText(null);
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void SetPartBackground(Sprite background)
         {
             _background.sprite = background;

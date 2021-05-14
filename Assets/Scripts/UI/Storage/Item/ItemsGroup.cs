@@ -1,61 +1,63 @@
-﻿using Scripts.Objects.Product;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Objects.Product.Data;
 using UnityEngine;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Workshop.Storage.Item
+namespace Assets.Scripts.UI.Storage.Item
 {
     public class ItemsGroup : MonoBehaviour
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private ItemButton.Factory _itemFactory;
-        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly ItemButton.Factory _itemFactory;
+        [Inject] private readonly StorageMenuUiFactory.Settings _menuSettings;
 
-        private StorageMenuUI _menu;        
+        private StorageMenuUi _menu;
 
-        private Dictionary<string, ItemButton> _items;
-        public Dictionary<string, ItemButton> Items { get => _items; }
+        public Dictionary<string, ItemButton> Items { get; private set; }
 
         private ItemButton _activeItem;
         public ItemButton ActiveItem
         {
-            get { return _activeItem; }
+            get => _activeItem;
             set
             {
-                if (_activeItem != value)
+                if (_activeItem == value)
                 {
-                    if (_activeItem != null)
-                    {
-                        _activeItem.SetItemInactive();
-                    }                    
-                    _activeItem = value;
-                    _activeItem.SetItemActive();
-                    _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
+                    return;
                 }
+                if (_activeItem != null)
+                {
+                    _activeItem.SetItemInactive();
+                }                    
+                _activeItem = value;
+                _activeItem.SetItemActive();
+                _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
             }
         }
 
         [Header("Links")]
         [SerializeField] private RectTransform _container;
-        public RectTransform Container { get => _container; }
+        public RectTransform Container => _container;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
-            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUI>();
+            _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUi>();
 
             CreateMenuItems();
         }
 
         public void SubscribeItemToList(ItemButton item)
         {
-            if (_items == null)
+            if (Items == null)
             {
-                _items = new Dictionary<string, ItemButton>();
+                Items = new Dictionary<string, ItemButton>();
             }
 
-            _items.Add(item.Product.Data.Name, item);
+            Items.Add(item.Product.Data.Name, item);
         }
 
         public void CreateMenuItems()
@@ -77,9 +79,9 @@ namespace Scripts.UI.Workshop.Storage.Item
                 }
             }
 
-            if (_items.Count != 0)
+            if (Items.Count != 0)
             {
-                ActiveItem = _items.First().Value;
+                ActiveItem = Items.First().Value;
             }
 
             SetContainerHeight();
@@ -103,7 +105,7 @@ namespace Scripts.UI.Workshop.Storage.Item
         {
             var itemsGroupSettings = _menuSettings.ItemsGroupSettings;
 
-            var rowCount = (int)Math.Ceiling((double)_items.Count / itemsGroupSettings.RowCount);
+            var rowCount = (int)Math.Ceiling((double)Items.Count / itemsGroupSettings.RowCount);
             var height = itemsGroupSettings.Height * rowCount + itemsGroupSettings.Padding * (rowCount - 1);
 
             _container.sizeDelta = new Vector2(_container.sizeDelta.x, height);
@@ -111,12 +113,12 @@ namespace Scripts.UI.Workshop.Storage.Item
 
         public void ResetMenuItems()
         {
-            foreach (var item in _items)
+            foreach (var item in Items)
             {
                 Destroy(item.Value.gameObject);
             }
 
-            _items.Clear();
+            Items.Clear();
         }
 
         public class Factory : PlaceholderFactory<ItemsGroup> { }

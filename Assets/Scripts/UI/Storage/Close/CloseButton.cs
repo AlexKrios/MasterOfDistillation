@@ -1,23 +1,25 @@
-﻿using Scripts.Scenes.Main.MainCamera;
+﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Workshop.Storage.Close
+namespace Assets.Scripts.UI.Storage.Close
 {
     public class CloseButton : MonoBehaviour
     {
         [Inject] private IUiController _uiController;
         [Inject] private IDisable _disable;
-        [Inject] private StorageMenuUIFactory.Settings _settings;
+        [Inject] private StorageMenuUiFactory.Settings _settings;
 
-        [SerializeField] private StorageMenuUI _menu;
-        public StorageMenuUI Menu { get => _menu; }
+        [SerializeField] private StorageMenuUi _menu;
+        public StorageMenuUi Menu => _menu;
 
         [Header("Components")]
         [SerializeField] private Image _icon;
-        public Image Icon { get => _icon; }
+        public Image Icon => _icon;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         public void Click()

@@ -1,15 +1,15 @@
-﻿using Scripts.Stores.Raw;
-using System;
+﻿using System;
+using Assets.Scripts.Stores.Raw;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Scripts.UI.Raw
+namespace Assets.Scripts.UI.Raw
 {
     [Serializable]
     public class RawTextEvent : UnityEvent<string> { }
 
-    public class RawUIController : IRawUIController
+    public class RawUiController : IRawUiController
     {
         [Inject] private IUiController _uiController;
         [Inject] private IRawStore _rawStore;
@@ -18,7 +18,7 @@ namespace Scripts.UI.Raw
 
         private Text _ironText;
 
-        public RawUIController()
+        public RawUiController()
         {
             if (RawTextEvent == null)
             {
@@ -43,7 +43,7 @@ namespace Scripts.UI.Raw
         {
             if (!_ironText)
             {
-                _ironText = _uiController.Find("Raw").GetComponent<RawUI>().IronText;
+                _ironText = _uiController.Find("Raw").GetComponent<RawUi>().IronText;
             }
 
             _ironText.text = _rawStore.RawData["Iron"].Count.ToString();

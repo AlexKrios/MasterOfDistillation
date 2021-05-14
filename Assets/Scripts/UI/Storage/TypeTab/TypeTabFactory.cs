@@ -2,14 +2,14 @@
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Storage.TypeTab
+namespace Assets.Scripts.UI.Storage.TypeTab
 {
     public class TypeTabFactory : IFactory<TypeTabsGroup>
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly StorageMenuUiFactory.Settings _menuSettings;
 
-        private DiContainer _container;
+        private readonly DiContainer _container;
         private TypeTabsGroup _typeTab;
 
         public TypeTabFactory(DiContainer container)

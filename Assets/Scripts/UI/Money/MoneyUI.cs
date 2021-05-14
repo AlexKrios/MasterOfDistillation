@@ -2,13 +2,13 @@
 using UnityEngine.UI;
 using Zenject;
 
-namespace Scripts.UI.Money
+namespace Assets.Scripts.UI.Money
 {
-    public class MoneyUI : MonoBehaviour
+    public class MoneyUi : MonoBehaviour
     {
         public Image MoneyIcon;
         public Text MoneyText;
 
-        public class Factory : PlaceholderFactory<MoneyUI> { }
+        public class Factory : PlaceholderFactory<MoneyUi> { }
     }
 }

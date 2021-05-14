@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Craft
+namespace Assets.Scripts.UI.Craft
 {
     public class CraftButton : MonoBehaviour
     {
-        [Inject] private CraftMenu.Factory _craftMenuUI;
+        [Inject] private readonly CraftMenu.Factory _craftMenuUi;
 
         public void Click()
         {
-            _craftMenuUI.Create();
+            _craftMenuUi.Create();
         }
     }
 }

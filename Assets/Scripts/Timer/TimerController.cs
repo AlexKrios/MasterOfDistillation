@@ -1,15 +1,16 @@
-﻿using Scripts.Stores.Raw;
-using Scripts.Timer.Raw;
+﻿using Assets.Scripts.Stores.Raw;
+using Assets.Scripts.Timer.Raw;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Timer
+namespace Assets.Scripts.Timer
 {
     public class TimerController : MonoBehaviour, ITimerController
     {
-        [Inject] private IRawStore _rawStore;
-        [Inject] private IRawTimerController _rawTimerController;
+        [Inject] private readonly IRawStore _rawStore;
+        [Inject] private readonly IRawTimerController _rawTimerController;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         public void SetRawTimers()

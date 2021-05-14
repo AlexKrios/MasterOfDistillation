@@ -1,8 +1,8 @@
 ﻿using UnityEngine.Events;
 
-namespace Scripts.UI.Money
+namespace Assets.Scripts.UI.Money
 {
-    public interface IMoneyUIController
+    public interface IMoneyUiController
     {
         UnityEvent OnSetMoneyText { get; set; }
     }

@@ -1,14 +1,14 @@
-﻿using Scripts.Objects.Product;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Objects.Product.Data;
 using Scripts.Objects.Product.Load;
-using System.Collections.Generic;
 
-namespace Scripts.Stores.Product
+namespace Assets.Scripts.Stores.Product
 {
     public interface IProductStore
     {
         Dictionary<string, Dictionary<string, ProductFullData>> AllStore { get; }
 
         void LoadItemsCount(List<ProductLoadObject> storesInfo);
-        void SetProductExpirience(string name);
+        void SetProductExperience(string name);
     }
 }

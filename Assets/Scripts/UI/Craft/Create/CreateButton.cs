@@ -1,10 +1,11 @@
-﻿using Scripts.Common.Craft;
-using Scripts.Objects.Craft;
-using Scripts.Timer;
+﻿using Assets.Scripts.Common.Craft;
+using Assets.Scripts.Objects.Craft;
+using Assets.Scripts.Timer;
 using UnityEngine;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Create
+namespace Assets.Scripts.UI.Craft.Create
 {
     public class CreateButton : MonoBehaviour
     {
@@ -21,6 +22,7 @@ namespace Scripts.UI.Craft.Create
             _craftController = sceneContext.GetComponent<ICraftController>();
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         public void CraftItem()
@@ -37,9 +39,7 @@ namespace Scripts.UI.Craft.Create
                 return;
             }
 
-            var timer = StartCoroutine(_craftController.StartCraftTimer());
-            var craftObj = CraftObjectFactory(timer);
-
+            var craftObj = CraftObjectFactory();
             _craftController.StartCraft(craftObj);
 
             _menu.PartGroup.SetPartsInfo();
@@ -50,13 +50,12 @@ namespace Scripts.UI.Craft.Create
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }
 
-        private CraftObject CraftObjectFactory(Coroutine timer)
+        private CraftObject CraftObjectFactory()
         {
             return new CraftObject()
             {
                 Item = _menu.ItemsGroup.ActiveItem.Product,
                 Quality = _menu.QualityBtn.ActiveQuality,
-                Coroutine = timer
             };
         }
     }

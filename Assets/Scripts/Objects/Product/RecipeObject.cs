@@ -1,8 +1,8 @@
-﻿using Scripts.Objects.Part;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Objects.Product.Part;
 
-namespace Scripts.Objects.Product
+namespace Assets.Scripts.Objects.Product
 {
     [Serializable]
     public class RecipeObject
@@ -13,7 +13,7 @@ namespace Scripts.Objects.Product
         public List<PartObject> Parts;
 
         public int Level;
-        public int Expirience;
+        public int Experience;
 
         public int CraftTime;
     }

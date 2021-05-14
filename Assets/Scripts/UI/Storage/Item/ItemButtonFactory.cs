@@ -1,16 +1,16 @@
-﻿using Scripts.Objects.Product;
-using System;
+﻿using System;
+using Assets.Scripts.Objects.Product.Data;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Storage.Item
+namespace Assets.Scripts.UI.Storage.Item
 {
     public class ItemButtonFactory : IFactory<ProductFullData, ItemButton> 
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private StorageMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly StorageMenuUiFactory.Settings _menuSettings;
 
-        private DiContainer _container;
+        private readonly DiContainer _container;
 
         public ItemButtonFactory(DiContainer container)
         {
@@ -21,7 +21,7 @@ namespace Scripts.UI.Workshop.Storage.Item
         {
             var itemSettings = _menuSettings.ItemButtonSettings;
 
-            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUI>().ItemsGroup.Container;
+            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<StorageMenuUi>().ItemsGroup.Container;
             var item = _container.InstantiatePrefabForComponent<ItemButton>(itemSettings.Prefab, parent);
 
             item.SetCellInfo(product);

@@ -1,11 +1,10 @@
-﻿using Scripts.Stores.Raw;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Assets.Scripts.Stores.Raw;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Timer.Raw 
+namespace Assets.Scripts.Timer.Raw 
 {
     public class RawTimerController : IRawTimerController
     {

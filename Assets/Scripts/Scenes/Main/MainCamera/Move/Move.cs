@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using Assets.Scripts.Scenes.Main.MainCamera.Target;
+using Scripts;
+using UnityEngine;
 using Zenject;
 
-namespace Scripts.Scenes.Main.MainCamera
+namespace Assets.Scripts.Scenes.Main.MainCamera.Move
 {
     public class Move : MonoBehaviour
     {
@@ -20,9 +23,10 @@ namespace Scripts.Scenes.Main.MainCamera
             _target = target;
             _disable = disable;
 
-            _moveSpeed = gameManager.moveSpeed;
+            _moveSpeed = gameManager.MoveSpeed;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         private void DesktopMovement()
@@ -77,6 +81,7 @@ namespace Scripts.Scenes.Main.MainCamera
             _mainCamera.transform.position = new Vector3(x, y, z);
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Update()
         {
             DesktopMovement();

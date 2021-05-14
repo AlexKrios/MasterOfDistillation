@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Workshop.Storage
+namespace Assets.Scripts.UI.Storage
 {
     public class StorageButton : MonoBehaviour
     {
-        [Inject] private StorageMenuUI.Factory _storageMenuUI;
+        [Inject] private readonly StorageMenuUi.Factory _storageMenuUi;
 
         public void Click()
         {
-            _storageMenuUI.Create();
+            _storageMenuUi.Create();
         }
     }
 }

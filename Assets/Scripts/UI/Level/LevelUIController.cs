@@ -1,25 +1,29 @@
-﻿using Scripts.Stores.Level;
+﻿using Assets.Scripts.Stores.Level;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Scripts.UI.Level
+namespace Assets.Scripts.UI.Level
 {
-    public class LevelUIController : ILevelUIController
+    public class LevelUiController : ILevelUiController
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private ILevelStore _levelStore;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly ILevelStore _levelStore;
 
         private Text _levelText;
         private Text _levelPercentText;
 
-        public UnityEvent OnSetLevelText { get; set; } = new UnityEvent();
-        public UnityEvent OnSetLevelExperience { get; set; } = new UnityEvent();
-        public UnityEvent OnSetLevelPercent { get; set; } = new UnityEvent();
+        public UnityEvent OnSetLevelText { get; set; }
+        public UnityEvent OnSetLevelExperience { get; set; }
+        public UnityEvent OnSetLevelPercent { get; set; }
 
-        public LevelUIController()
+        public LevelUiController()
         {
-            OnSetLevelText.AddListener(SetLevelText);
+            OnSetLevelText = new UnityEvent();
+            OnSetLevelExperience = new UnityEvent();
+            OnSetLevelPercent  = new UnityEvent();
+
+        OnSetLevelText.AddListener(SetLevelText);
             OnSetLevelExperience.AddListener(SetLevelExperience);
             OnSetLevelPercent.AddListener(SetLevelPercent);
         }
@@ -28,7 +32,7 @@ namespace Scripts.UI.Level
         {            
             if (!_levelText)
             {
-                _levelText = _uiController.Find("Level").GetComponent<LevelUI>().LevelText;
+                _levelText = _uiController.Find("Level").GetComponent<LevelUi>().LevelText;
             }
 
             _levelText.text = _levelStore.Level.ToString();
@@ -36,25 +40,25 @@ namespace Scripts.UI.Level
 
         private void SetLevelExperience()
         {
-            var _level = _levelStore.Level;
-            var _levelsExpirience = _levelStore.LevelCaps;
+            var level = _levelStore.Level;
+            var levelsExperience = _levelStore.LevelCaps;
 
-            _levelStore.LevelCap = _levelsExpirience[_level - 1];
+            _levelStore.LevelCap = levelsExperience[level - 1];
         }
 
         private void SetLevelPercent()
         {
-            var _curExpirience = _levelStore.Experience;
-            var _levelExpirience = _levelStore.LevelCap;
+            var curExperience = _levelStore.Experience;
+            var levelExperience = _levelStore.LevelCap;
 
-            var levelPercent = _curExpirience / (_levelExpirience / 100);
+            var levelPercent = curExperience / (levelExperience / 100);
 
             if (!_levelPercentText) 
             {
-                _levelPercentText = _uiController.Find("Level").GetComponent<LevelUI>().LevelPercentText;
+                _levelPercentText = _uiController.Find("Level").GetComponent<LevelUi>().LevelPercentText;
             }
 
-            _levelPercentText.text = string.Format("{0:f0}%", levelPercent);
+            _levelPercentText.text = $"{levelPercent:f0}%";
         }
     }
 }

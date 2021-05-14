@@ -1,31 +1,28 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using UnityEngine;
 using Zenject;
 
-namespace Scripts.Scenes.Main.MainCamera
+namespace Assets.Scripts.Scenes.Main.MainCamera.Target
 {
     public class Target : ITarget
     {
-        private Camera _mainCamera;
+        private readonly Camera _mainCamera;
 
-        private IDisable _disable;
+        private readonly IDisable _disable;
 
-        private Vector3 _position;
-        public Vector3 Position 
-        {
-            get { return _position; }
-            set { _position = value; }
-        }
+        public Vector3 Position { get; set; }
 
-        public Target([Inject(Id = "MainCamera")] Transform mainCamera, IDisable disable, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        public Target([Inject(Id = "MainCamera")] Transform mainCamera, IDisable disable)
         {
             _mainCamera = mainCamera.GetComponent<Camera>();
 
             _disable = disable;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
-            _position = _mainCamera.transform.parent.position;
+            Position = _mainCamera.transform.parent.position;
         }
 
         public void SetTargetPos()
@@ -35,7 +32,7 @@ namespace Scripts.Scenes.Main.MainCamera
                 return;
             }
 
-            _position = _mainCamera.transform.parent.position;
+            Position = _mainCamera.transform.parent.position;
         }
     }
 }

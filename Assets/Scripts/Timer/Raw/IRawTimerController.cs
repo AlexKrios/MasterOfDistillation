@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Timer.Raw 
+namespace Assets.Scripts.Timer.Raw 
 {
     public interface IRawTimerController
     {

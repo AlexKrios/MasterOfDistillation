@@ -1,65 +1,66 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Workshop.Storage.TypeTab
+namespace Assets.Scripts.UI.Storage.TypeTab
 {
     public class TypeTabsGroup : MonoBehaviour
     {
         [Inject] private IUiController _uiController;
 
-        private StorageMenuUI _menu;
-        public StorageMenuUI Menu { get => _menu; }
+        public StorageMenuUi Menu { get; private set; }
 
-        private List<TypeTabButton> _tabs;
-        public List<TypeTabButton> Tabs { get => _tabs; }
+        public List<TypeTabButton> Tabs { get; private set; }
 
         private TypeTabButton _activeTab;
         public TypeTabButton ActiveTab 
         {
-            get { return _activeTab; }
-            set 
+            get => _activeTab;
+            set
             {
-                if (_activeTab != value)
+                if (_activeTab == value)
                 {
-                    _activeTab.SetInactiveTabImage();
-                    _activeTab = value;
-                    _activeTab.SetActiveTabImage();
-                    _menu.Title.text = _activeTab.Title.ToString();
-                }                
+                    return;
+                }
+                _activeTab.SetInactiveTabImage();
+                _activeTab = value;
+                _activeTab.SetActiveTabImage();
+                Menu.Title.text = _activeTab.Title.ToString();
             }
         }
 
         [Header("Assets")]
         [SerializeField] private Sprite _bgInactive;
-        public Sprite BgInactive { get => _bgInactive; }
+        public Sprite BgInactive => _bgInactive;
 
         [SerializeField] private Sprite _bgActive;
-        public Sprite BgActive { get => _bgActive; }
+        public Sprite BgActive => _bgActive;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
-            _menu = _uiController.FindByPart("StorageMenu").GetComponent<StorageMenuUI>();
+            Menu = _uiController.FindByPart("StorageMenu").GetComponent<StorageMenuUi>();
         }
 
         public void SubscribeTabToList(TypeTabButton button)
         {
-            if (_tabs == null)
+            if (Tabs == null)
             {
-                _tabs = new List<TypeTabButton>();
+                Tabs = new List<TypeTabButton>();
             }
 
-            _tabs.Add(button);
+            Tabs.Add(button);
 
-            if (transform.childCount == _tabs.Count)
+            if (transform.childCount == Tabs.Count)
             {
-                _activeTab = _tabs[0];
+                _activeTab = Tabs[0];
             }
         }
 
         public void ClearTabList()
         {
-            _tabs.Clear();
+            Tabs.Clear();
         }
 
         public class Factory : PlaceholderFactory<TypeTabsGroup> { }

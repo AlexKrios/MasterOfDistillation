@@ -5,50 +5,55 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadScript : MonoBehaviour
+namespace Assets
 {
-    public Slider progressBar;
-
-    private AsyncOperation loadingOperation;
-
-    private bool loading = true;
-
-    private void Start()
+    public class LoadScript : MonoBehaviour
     {
-        StartCoroutine(loadData((string data) => loading = false));
-        StartCoroutine(StartLoad());
-    }
+        public Slider ProgressBar;
 
-    private void Update()
-    {
-        progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
-    }
+        private AsyncOperation _loadingOperation;
 
-    private IEnumerator StartLoad()
-    {
-        loadingOperation = SceneManager.LoadSceneAsync(1);
-        loadingOperation.allowSceneActivation = false;
-        while (loading)
+        private bool _loading = true;
+
+        // ReSharper disable once UnusedMember.Local
+        private void Start()
         {
-            yield return null;
+            StartCoroutine(LoadData(_ => _loading = false));
+            StartCoroutine(StartLoad());
         }
 
-        loadingOperation.allowSceneActivation = true;
-    }
-
-    public IEnumerator loadData(Action<string> finishDelegate)
-    {
-        var _baseUrl = "http://localhost:8080/api";
-        var requestUrl = _baseUrl + "/admin/users";
-        var request = UnityWebRequest.Get(requestUrl);
-
-        yield return request.SendWebRequest();
-
-        if (!request.isNetworkError && !request.isHttpError && request.isDone)
+        // ReSharper disable once UnusedMember.Local
+        private void Update()
         {
-            yield return request.downloadHandler.text;
+            ProgressBar.value = Mathf.Clamp01(_loadingOperation.progress / 0.9f);
         }
 
-        finishDelegate(request.downloadHandler.text);
+        private IEnumerator StartLoad()
+        {
+            _loadingOperation = SceneManager.LoadSceneAsync(1);
+            _loadingOperation.allowSceneActivation = false;
+            while (_loading)
+            {
+                yield return null;
+            }
+
+            _loadingOperation.allowSceneActivation = true;
+        }
+
+        public IEnumerator LoadData(Action<string> finishDelegate)
+        {
+            var _baseUrl = "http://localhost:8080/api";
+            var requestUrl = _baseUrl + "/admin/users";
+            var request = UnityWebRequest.Get(requestUrl);
+
+            yield return request.SendWebRequest();
+
+            if (!request.isNetworkError && !request.isHttpError && request.isDone)
+            {
+                yield return request.downloadHandler.text;
+            }
+
+            finishDelegate(request.downloadHandler.text);
+        }
     }
 }

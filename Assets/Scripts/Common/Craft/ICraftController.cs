@@ -1,8 +1,8 @@
-﻿using Scripts.Objects.Craft;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Objects.Craft;
 
-namespace Scripts.Common.Craft
+namespace Assets.Scripts.Common.Craft
 {
     public interface ICraftController
     {

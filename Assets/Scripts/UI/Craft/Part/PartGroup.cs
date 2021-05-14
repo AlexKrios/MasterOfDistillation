@@ -1,9 +1,10 @@
-﻿using Scripts.UI.Craft.Item;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.UI.Craft.Item;
 using UnityEngine;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Part
+namespace Assets.Scripts.UI.Craft.Part
 {
     public class PartGroup : MonoBehaviour
     {
@@ -11,16 +12,17 @@ namespace Scripts.UI.Craft.Part
 
         [Header("Links")]
         [SerializeField] private List<PartCell> _parts;
-        public List<PartCell> Parts { get => _parts; }
+        public List<PartCell> Parts => _parts;
 
-        private ItemButton _activeItem { get => _menu.ItemsGroup.ActiveItem; }
-        private ProductQuality _activeQuality { get => _menu.QualityBtn.ActiveQuality; }
+        private ItemButton ActiveItem => _menu.ItemsGroup.ActiveItem;
+        private ProductQuality ActiveQuality => _menu.QualityBtn.ActiveQuality;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start() { }
 
         public void SetPartsInfo()
         {            
-            var recipe = _activeItem.Product.Recipes.First(x => x.Quality == _activeQuality);
+            var recipe = ActiveItem.Product.Recipes.First(x => x.Quality == ActiveQuality);
 
             for (var i = 0; i < _menu.PartGroup.Parts.Count; i++)
             {

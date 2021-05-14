@@ -1,8 +1,8 @@
-﻿using Scripts.Objects.Raw;
-using Scripts.Objects.Raw.Load;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Objects.Raw;
+using Assets.Scripts.Objects.Raw.Load;
 
-namespace Scripts.Stores.Raw
+namespace Assets.Scripts.Stores.Raw
 {
     public interface IRawStore
     {

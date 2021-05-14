@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.Objects.Money
+namespace Assets.Scripts.Objects.Money
 {
     [Serializable]
     public class MoneyObject

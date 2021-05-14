@@ -1,23 +1,23 @@
-﻿using Scripts.Scenes.Main.MainCamera;
-using Scripts.UI.Craft.Item;
-using Scripts.UI.Craft.TypeTab;
-using System;
+﻿using System;
+using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using Assets.Scripts.UI.Craft.Item;
+using Assets.Scripts.UI.Craft.TypeTab;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.UI.Craft
+namespace Assets.Scripts.UI.Craft
 {
-    public class CraftMenuUIFactory : IFactory<CraftMenu>
+    public class CraftMenuUiFactory : IFactory<CraftMenu>
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private IDisable _disable;
-        [Inject] private Settings _settings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly IDisable _disable;
+        [Inject] private readonly Settings _settings;
 
-        private DiContainer _container;
+        private readonly DiContainer _container;
+        private readonly Transform _mainCanvas;
         private CraftMenu _craftMenu;
-        private Transform _mainCanvas;
 
-        public CraftMenuUIFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
+        public CraftMenuUiFactory(DiContainer container, [Inject(Id = "MainCanvas")] RectTransform mainCanvas)
         {
             _container = container;
 

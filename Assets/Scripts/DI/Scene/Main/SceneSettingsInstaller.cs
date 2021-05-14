@@ -1,31 +1,31 @@
-using Scripts.UI.Level;
-using Scripts.UI.Money;
-using Scripts.UI.Raw;
-using Scripts.UI.Craft;
-using Scripts.UI.Workshop.Storage;
+using Assets.Scripts.UI.Craft;
+using Assets.Scripts.UI.Level;
+using Assets.Scripts.UI.Money;
+using Assets.Scripts.UI.Raw;
+using Assets.Scripts.UI.Storage;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.DI.Scene.Main
+namespace Assets.Scripts.DI.Scene.Main
 {
     [CreateAssetMenu(menuName = "DI Settings/Main Scene")]
     public class SceneSettingsInstaller : ScriptableObjectInstaller<SceneSettingsInstaller>
     {
-        public MoneyUIFactory.Settings MoneyUI;
-        public LevelUIFactory.Settings LevelUI;
-        public RawUIFactory.Settings RawUI;
+        public MoneyUiFactory.Settings MoneyUi;
+        public LevelUiFactory.Settings LevelUi;
+        public RawUiFactory.Settings RawUi;
 
-        public CraftMenuUIFactory.Settings CraftMenuUI;
-        public StorageMenuUIFactory.Settings StorageMenuUI;
+        public CraftMenuUiFactory.Settings CraftMenuUi;
+        public StorageMenuUiFactory.Settings StorageMenuUi;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(MoneyUI);
-            Container.BindInstance(LevelUI);
-            Container.BindInstance(RawUI);
+            Container.BindInstance(MoneyUi);
+            Container.BindInstance(LevelUi);
+            Container.BindInstance(RawUi);
 
-            Container.BindInstance(CraftMenuUI);
-            Container.BindInstance(StorageMenuUI);
+            Container.BindInstance(CraftMenuUi);
+            Container.BindInstance(StorageMenuUi);
         }
     }
 }

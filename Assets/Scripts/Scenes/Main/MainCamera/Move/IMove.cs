@@ -1,4 +1,4 @@
-﻿namespace Scripts.Scenes.Main.MainCamera
+﻿namespace Assets.Scripts.Scenes.Main.MainCamera.Move
 {
     public interface IMove
     {

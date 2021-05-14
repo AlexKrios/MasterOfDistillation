@@ -1,45 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Item
+namespace Assets.Scripts.UI.Craft.Item
 {
     public class ItemsGroup : MonoBehaviour
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private ItemButton.Factory _itemFactory;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly ItemButton.Factory _itemFactory;
+        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
         private CraftMenu _menu;
 
         [Header("Links")]
         [SerializeField] private RectTransform _container;
-        public RectTransform Container { get => _container; }
+        public RectTransform Container => _container;
         public Dictionary<string, ItemButton> Items { get; private set; }
 
         private ItemButton _activeItem;
         public ItemButton ActiveItem
         {
-            get { return _activeItem; }
+            get => _activeItem;
             set
             {
-                if (_activeItem != value)
+                if (_activeItem == value)
                 {
-                    if (_activeItem != null)
-                    {
-                        _activeItem.SetItemInactive();
-                    }                    
-                    _activeItem = value;
-                    _activeItem.SetItemActive();
-                    _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
-                    _menu.QualityBtn.ResetQuality();
-                    _menu.PartGroup.SetPartsInfo();
+                    return;
                 }
+                if (_activeItem != null)
+                {
+                    _activeItem.SetItemInactive();
+                }                    
+                _activeItem = value;
+                _activeItem.SetItemActive();
+                _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
+                _menu.QualityBtn.ResetQuality();
+                _menu.PartGroup.SetPartsInfo();
             }
         }
 
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private void Start()
         {
             _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>();

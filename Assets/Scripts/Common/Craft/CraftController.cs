@@ -1,23 +1,24 @@
-﻿using Scripts.Common.Craft.Action;
-using Scripts.Objects.Craft;
-using Scripts.Objects.Part;
-using Scripts.Objects.Product;
-using Scripts.Stores.Level;
-using Scripts.Stores.Product;
-using Scripts.UI;
-using Scripts.UI.Craft;
-using Scripts.UI.Craft.Order;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Common.Craft.Action;
+using Assets.Scripts.Objects.Craft;
+using Assets.Scripts.Objects.Product;
+using Assets.Scripts.Objects.Product.Part;
+using Assets.Scripts.Stores.Level;
+using Assets.Scripts.Stores.Product;
+using Assets.Scripts.UI;
+using Assets.Scripts.UI.Craft;
+using Assets.Scripts.UI.Craft.Order;
+using Scripts.Objects.Product;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.Common.Craft
+namespace Assets.Scripts.Common.Craft
 {
     public class CraftController : MonoBehaviour, ICraftController
     {
-        [Inject] private readonly CraftMenuUIFactory.Settings _craftMenuSettings;
+        [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
         [Inject] private readonly IUiController _uiController;
         [Inject] private readonly ILevelStore _levelStore;
         [Inject] private readonly IProductStore _productStore;
@@ -37,6 +38,7 @@ namespace Scripts.Common.Craft
             _craftCellsGroup = craftOrder;
         }
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             CraftList = new Dictionary<int, CraftObject>();
@@ -48,13 +50,15 @@ namespace Scripts.Common.Craft
 
             for (var i = 0; i < craftCells.Count; i++)
             {
-                if (!craftCells[i].IsBusy)
+                if (craftCells[i].IsBusy)
                 {
-                    craftCells[i].IsBusy = true;
-                    _currentIndex = i;
-                    return true;
+                    continue;
                 }
-            }
+
+                craftCells[i].IsBusy = true;
+                _currentIndex = i;
+                return true;
+            }            
 
             return false;
         }
@@ -111,12 +115,13 @@ namespace Scripts.Common.Craft
 
         public void StartCraft(CraftObject craftObject)
         {
+            var timer = StartCoroutine(StartCraftTimer());
+            craftObject.Timer = timer;
+
             CraftList.Add(_currentIndex, craftObject);
             RemoveParts();
 
             SetCraftCellInfo();
-
-            //CompleteCraft(number);
         }
 
         private void RemoveParts()
@@ -148,7 +153,7 @@ namespace Scripts.Common.Craft
 
             store[itemCraft.Data.Name].Count[(int)itemQuality]++;
             _levelStore.Experience += 10 * ((int)itemQuality + 1);
-            _productStore.SetProductExpirience(itemCraft.Data.Name);
+            _productStore.SetProductExperience(itemCraft.Data.Name);
 
             Debug.Log($"Craft {itemCraft.Data.Name} complete");
 

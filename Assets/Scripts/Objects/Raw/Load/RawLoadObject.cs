@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.Objects.Raw.Load
+namespace Assets.Scripts.Objects.Raw.Load
 {
     [Serializable]
     public class RawLoadObject

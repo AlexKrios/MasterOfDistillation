@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.TypeTab
+namespace Assets.Scripts.UI.Craft.TypeTab
 {
     public class TypeTabsGroup : MonoBehaviour
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUIFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
         public CraftMenu Menu { get; private set; }
         public List<TypeTabButton> Tabs { get; private set; }
@@ -15,26 +16,28 @@ namespace Scripts.UI.Craft.TypeTab
         private TypeTabButton _activeTab;
         public TypeTabButton ActiveTab 
         {
-            get { return _activeTab; }
-            set 
+            get => _activeTab;
+            set
             {
-                if (_activeTab != value)
+                if (_activeTab == value)
                 {
-                    _activeTab.SetInactiveTabImage();
-                    _activeTab = value;
-                    _activeTab.SetActiveTabImage();
-                    Menu.Title.text = _activeTab.Title.ToString();
-                }                
+                    return;
+                }
+                _activeTab.SetInactiveTabImage();
+                _activeTab = value;
+                _activeTab.SetActiveTabImage();
+                Menu.Title.text = _activeTab.Title.ToString();
             }
         }
 
         [Header("Assets")]
         [SerializeField] private Sprite _bgInactive;
-        public Sprite BgInactive { get => _bgInactive; }
+        public Sprite BgInactive => _bgInactive;
 
         [SerializeField] private Sprite _bgActive;
-        public Sprite BgActive { get => _bgActive; }
+        public Sprite BgActive => _bgActive;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             Menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>();

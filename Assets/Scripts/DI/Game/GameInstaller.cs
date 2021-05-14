@@ -1,17 +1,17 @@
-using Scripts.Api;
-using Scripts.Common.Craft;
-using Scripts.Stores.Level;
-using Scripts.Stores.Money;
-using Scripts.Stores.Product;
-using Scripts.Stores.Raw;
-using Scripts.Timer.Raw;
-using Scripts.UI;
-using Scripts.UI.Level;
-using Scripts.UI.Money;
-using Scripts.UI.Raw;
+using Assets.Scripts.Api;
+using Assets.Scripts.Stores.Level;
+using Assets.Scripts.Stores.Money;
+using Assets.Scripts.Stores.Product;
+using Assets.Scripts.Stores.Raw;
+using Assets.Scripts.Timer.Raw;
+using Assets.Scripts.UI;
+using Assets.Scripts.UI.Level;
+using Assets.Scripts.UI.Money;
+using Assets.Scripts.UI.Raw;
+using Scripts;
 using Zenject;
 
-namespace Scripts.DI.Game
+namespace Assets.Scripts.DI.Game
 {
     public class GameInstaller : MonoInstaller<GameInstaller>
     {
@@ -21,7 +21,7 @@ namespace Scripts.DI.Game
             
             InstallApi();            
             InstallStores();
-            InstallUIComponents();
+            InstallUiComponents();
         }
 
         private void InstallApi()
@@ -40,13 +40,13 @@ namespace Scripts.DI.Game
             Container.Bind<IProductStore>().To<ProductStore>().AsSingle();
         }
 
-        private void InstallUIComponents()
+        private void InstallUiComponents()
         {
             Container.Bind<IUiController>().To<UiController>().AsSingle().NonLazy();
 
-            Container.Bind<IMoneyUIController>().To<MoneyUIController>().AsSingle().NonLazy();
-            Container.Bind<ILevelUIController>().To<LevelUIController>().AsSingle().NonLazy();
-            Container.Bind<IRawUIController>().To<RawUIController>().AsSingle().NonLazy();
+            Container.Bind<IMoneyUiController>().To<MoneyUiController>().AsSingle().NonLazy();
+            Container.Bind<ILevelUiController>().To<LevelUiController>().AsSingle().NonLazy();
+            Container.Bind<IRawUiController>().To<RawUiController>().AsSingle().NonLazy();
         }
     }
 }

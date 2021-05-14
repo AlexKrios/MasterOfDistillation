@@ -1,10 +1,11 @@
-﻿using Scripts.Objects.Product;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Scripts.Objects.Product;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.TypeTab
+namespace Assets.Scripts.UI.Craft.TypeTab
 {
     public class TypeTabButton : MonoBehaviour, IPointerClickHandler
     {
@@ -17,11 +18,12 @@ namespace Scripts.UI.Craft.TypeTab
         private Image _background;
 
         [SerializeField] private ProductType _title;
-        public ProductType Title { get => _title; }
+        public ProductType Title => _title;
 
         [SerializeField] private List<ProductSubType> _keys;
         public List<ProductSubType> Keys { get => _keys; }        
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             _position = GetComponent<RectTransform>();

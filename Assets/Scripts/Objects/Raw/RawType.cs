@@ -1,4 +1,4 @@
-﻿namespace Scripts.Objects.Raw
+﻿namespace Assets.Scripts.Objects.Raw
 {
     public enum RawType
     {

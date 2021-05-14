@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+#pragma warning disable 649
 
-namespace Scripts.UI.Craft.Product
+namespace Assets.Scripts.UI.Craft.Product
 {
     public class ProductCell : MonoBehaviour
     {
@@ -9,6 +10,7 @@ namespace Scripts.UI.Craft.Product
         private Image _background;
         [SerializeField] private Image _icon;
 
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             _background = GetComponent<Image>();

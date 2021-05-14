@@ -1,4 +1,4 @@
-﻿namespace Scripts.Stores.Money
+﻿namespace Assets.Scripts.Stores.Money
 {
     public interface IMoneyStore
     {

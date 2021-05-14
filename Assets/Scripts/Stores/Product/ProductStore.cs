@@ -1,9 +1,9 @@
-﻿using Scripts.Objects.Product;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Objects.Product.Data;
 using Scripts.Objects.Product.Load;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Stores.Product
+namespace Assets.Scripts.Stores.Product
 {
     public class ProductStore : IProductStore
     {
@@ -59,7 +59,7 @@ namespace Scripts.Stores.Product
             }
         }
 
-        public void SetProductExpirience(string name)
+        public void SetProductExperience(string name)
         {
             
         }

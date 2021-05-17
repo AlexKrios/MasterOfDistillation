@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Scripts.Common.Craft.Action;
-using Assets.Scripts.Objects.Craft;
-using Assets.Scripts.Objects.Product;
-using Assets.Scripts.Objects.Product.Part;
+﻿using Assets.Scripts.Common.Craft.Action;
+using Assets.Scripts.Objects.Item;
+using Assets.Scripts.Objects.Item.Craft;
+using Assets.Scripts.Objects.Item.Recipe;
+using Assets.Scripts.Scriptable;
 using Assets.Scripts.Stores.Level;
 using Assets.Scripts.Stores.Product;
 using Assets.Scripts.UI;
 using Assets.Scripts.UI.Craft;
 using Assets.Scripts.UI.Craft.Order;
-using Scripts.Objects.Product;
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Common.Craft
 {
+    [UsedImplicitly]
     public class CraftController : MonoBehaviour, ICraftController
     {
         [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
@@ -29,7 +31,7 @@ namespace Assets.Scripts.Common.Craft
         private CraftCellsGroup _craftCellsGroup;
 
         private int _currentIndex;
-        private RecipeObject _recipe;
+        private RecipeScriptable _recipe;
         private ICraftPartAction _action;
 
         [Inject]
@@ -87,9 +89,9 @@ namespace Assets.Scripts.Common.Craft
 
         private ICraftPartAction SetActionType(PartObject partObj)
         {
-            switch (partObj.Data.Type)
+            switch (partObj.Data.ItemType)
             {
-                case ProductType.Component:
+                case ItemType.Component:
                     return _craftPartActionList[1];
 
                 default:
@@ -100,6 +102,7 @@ namespace Assets.Scripts.Common.Craft
         public IEnumerator StartCraftTimer()
         {
             var currentCraftCell = _craftCellsGroup.Cells[_currentIndex];
+            Debug.Log(currentCraftCell);
 
             var countdownValue = _recipe.CraftTime;
             while (countdownValue > 0)
@@ -109,6 +112,7 @@ namespace Assets.Scripts.Common.Craft
                 currentCraftCell.SetCellTimer(countdownValue.ToString());
             }
 
+            Debug.Log(currentCraftCell);
             currentCraftCell.SetCellTimer("Готово");
             currentCraftCell.IsComplete = true;
         }
@@ -138,7 +142,7 @@ namespace Assets.Scripts.Common.Craft
 
             var craftItem = CraftList[_currentIndex].Item;
             var craftQuality = CraftList[_currentIndex].Quality;
-            var craftItemIcon = craftItem.Data.Icon;            
+            var craftItemIcon = craftItem.Icon;            
             var craftTime = craftItem.Recipes[(int)craftQuality].CraftTime;
 
             currentCraftCell.SetCellIcon(craftItemIcon);
@@ -149,13 +153,12 @@ namespace Assets.Scripts.Common.Craft
         {
             var itemCraft = CraftList[index].Item;
             var itemQuality = CraftList[index].Quality;
-            var store = _productStore.AllStore[itemCraft.Data.SubType.ToString()];
 
-            store[itemCraft.Data.Name].Count[(int)itemQuality]++;
+            _productStore.Store[itemCraft.Name].Count[(int)itemQuality]++;
             _levelStore.Experience += 10 * ((int)itemQuality + 1);
-            _productStore.SetProductExperience(itemCraft.Data.Name);
+            //_productStore.SetProductExperience(itemCraft.Data.Name);
 
-            Debug.Log($"Craft {itemCraft.Data.Name} complete");
+            Debug.Log($"Craft {itemCraft.Name} complete");
 
             CraftList.Remove(index);
 

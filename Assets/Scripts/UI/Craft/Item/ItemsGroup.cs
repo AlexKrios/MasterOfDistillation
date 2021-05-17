@@ -1,6 +1,6 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -8,6 +8,7 @@ using Zenject;
 
 namespace Assets.Scripts.UI.Craft.Item
 {
+    [UsedImplicitly]
     public class ItemsGroup : MonoBehaviour
     {
         [Inject] private readonly IUiController _uiController;
@@ -37,13 +38,13 @@ namespace Assets.Scripts.UI.Craft.Item
                 }                    
                 _activeItem = value;
                 _activeItem.SetItemActive();
-                _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
+                _menu.ProductCell.SetProductIcon(_activeItem.Product.Icon);
                 _menu.QualityBtn.ResetQuality();
                 _menu.PartGroup.SetPartsInfo();
             }
         }
 
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        // ReSharper disable once UnusedMember.Local
         private void Start()
         {
             _menu = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>();
@@ -58,7 +59,7 @@ namespace Assets.Scripts.UI.Craft.Item
                 Items = new Dictionary<string, ItemButton>();
             }
 
-            Items.Add(item.Product.Data.Name, item);
+            Items.Add(item.Product.Name, item);
         }        
 
         public void CreateMenuItems()
@@ -66,7 +67,7 @@ namespace Assets.Scripts.UI.Craft.Item
             var keys = _menu.TypeTabs.ActiveTab.Keys;
             foreach (var key in keys)
             {
-                var items = _menu.ProductStore.AllStore[key.ToString()];
+                var items = _menu.ProductStore.Store.Where(x => x.Value.ProductType == key);
                 foreach (var item in items)
                 {
                     var newItem = _itemFactory.Create(item.Value);

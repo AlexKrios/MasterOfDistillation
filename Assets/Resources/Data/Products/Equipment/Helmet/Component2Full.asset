@@ -9,44 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6630831db706d3b4aae2c3420365cfe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e44f94ac056774c800d78f8ae05ab3, type: 3}
   m_Name: Component2Full
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 4d428e79e43196b4eaab2f7ea6f5671b, type: 2}
-  _recipes:
-  - Name: Common
-    Quality: 0
-    Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Quality: 0
-      Count: 3
-    Level: 0
-    Expirience: 0
-    CraftTime: 3
-  - Name: Bronze
-    Quality: 1
-    Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Quality: 0
-      Count: 5
-    Level: 0
-    Expirience: 0
-    CraftTime: 5
-  - Name: Silver
-    Quality: 2
-    Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Quality: 0
-      Count: 8
-    Level: 0
-    Expirience: 0
-    CraftTime: 8
-  - Name: Gold
-    Quality: 3
-    Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Quality: 0
-      Count: 10
-    Level: 0
-    Expirience: 0
-    CraftTime: 10
+  _recipes: []

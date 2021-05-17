@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6630831db706d3b4aae2c3420365cfe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e44f94ac056774c800d78f8ae05ab3, type: 3}
   m_Name: RifleFull
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: e89b45915fdd67541b324763195d67aa, type: 2}
@@ -30,23 +30,23 @@ MonoBehaviour:
       Quality: 0
       Count: 1
     Level: 0
-    Expirience: 0
-    CraftTime: 5
+    Experience: 10
+    CraftTime: 3
   - Name: 
     Quality: 0
     Parts: []
     Level: 0
-    Expirience: 0
+    Experience: 0
     CraftTime: 0
   - Name: 
     Quality: 0
     Parts: []
     Level: 0
-    Expirience: 0
+    Experience: 0
     CraftTime: 0
   - Name: 
     Quality: 0
     Parts: []
     Level: 0
-    Expirience: 0
+    Experience: 0
     CraftTime: 0

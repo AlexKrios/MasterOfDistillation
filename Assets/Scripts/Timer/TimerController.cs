@@ -17,14 +17,14 @@ namespace Assets.Scripts.Timer
         {
             foreach (var raw in _rawStore.RawData)
             {                
-                if (_rawTimerController.RawTimers.ContainsKey(raw.Value.Data.Name))
+                if (_rawTimerController.RawTimers.ContainsKey(raw.Value.Name))
                 {
                     return;
                 }
 
                 _rawTimerController.RawTimers.Add(
-                    raw.Value.Data.Name, 
-                    StartCoroutine(_rawTimerController.RawTimerExecute(raw.Value.Data.Name))
+                    raw.Value.Name, 
+                    StartCoroutine(_rawTimerController.RawTimerExecute(raw.Value.Name))
                 );
             }
         }

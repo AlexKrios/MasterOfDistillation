@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Objects.Item.Craft;
+using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Objects.Craft;
 
 namespace Assets.Scripts.Common.Craft
 {

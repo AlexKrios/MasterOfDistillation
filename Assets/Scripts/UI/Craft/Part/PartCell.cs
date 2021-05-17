@@ -1,7 +1,8 @@
-﻿using Assets.Scripts.Objects.Product;
+﻿using Assets.Scripts.Objects.Item;
+using Assets.Scripts.Scriptable;
 using Assets.Scripts.Stores.Product;
 using Assets.Scripts.Stores.Raw;
-using Scripts.Objects.Product;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,10 +10,11 @@ using Zenject;
 
 namespace Assets.Scripts.UI.Craft.Part
 {
+    [UsedImplicitly]
     public class PartCell : MonoBehaviour
     {        
         [Inject] private readonly IRawStore _rawStore;
-        [Inject] private readonly IProductStore _store;
+        [Inject] private readonly IProductStore _productStore;
 
         [Header("System")]
         [SerializeField] private int _id;
@@ -22,11 +24,13 @@ namespace Assets.Scripts.UI.Craft.Part
         [SerializeField] private Image _icon;
         [SerializeField] private Text _count;
 
-        public void SetPartInfo(RecipeObject recipe)
+        public void SetPartInfo(RecipeScriptable recipe)
         {
             if (_id <= recipe.Parts.Count)
             {
                 var storeCount = GetStoreCount(recipe);
+
+                Debug.Log(recipe.Parts[_id - 1].Data.Name);
 
                 SetPartIcon(recipe.Parts[_id - 1].Data.Icon, 1f);
                 SetPartText($"{storeCount}/{recipe.Parts[_id - 1].Count}");
@@ -37,20 +41,18 @@ namespace Assets.Scripts.UI.Craft.Part
             }
         }
 
-        private int GetStoreCount(RecipeObject recipe)
+        private int GetStoreCount(RecipeScriptable recipe)
         {
             var dataName = recipe.Parts[_id - 1].Data.Name;
-            var type = recipe.Parts[_id - 1].Data.Type;
-            var subType = recipe.Parts[_id - 1].Data.SubType;
+            var type = recipe.Parts[_id - 1].Data.ItemType;
 
             switch (type)
             {
-                case ProductType.Raw:
+                case ItemType.Raw:
                     return _rawStore.RawData[dataName].Count;
 
                 default:
-                    var store = _store.AllStore[subType.ToString()];
-                    return store[dataName].Count[(int)recipe.Quality];
+                    return _productStore.Store[dataName].Count[(int)recipe.Quality];
             }
         }
 

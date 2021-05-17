@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Objects;
 using Assets.Scripts.Objects.Level;
+using Assets.Scripts.Scriptable;
 using Assets.Scripts.UI.Level;
 using UnityEngine;
 using Zenject;

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.Objects.Raw;
-using Assets.Scripts.Objects.Raw.Load;
+﻿using Assets.Scripts.Objects.Item.Raw;
+using Assets.Scripts.Objects.Item.Raw.Load;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Stores.Raw
 {
     public interface IRawStore
     {
-        Dictionary<string, RawObject> RawData { get; }
+        Dictionary<string, IRaw> RawData { get; }
 
         void InitRawListData(List<RawLoadObject> rawInfo);
 

@@ -4,8 +4,6 @@ namespace Assets.Scripts.UI
 {
     public interface IUiController
     {
-        GameObject ActiveBuilding { get; set; }
-
         void Add(string key, GameObject value);
         GameObject Find(string key);
         GameObject FindByPart(string part);

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f99f6561293f64e85ae342300d572b, type: 3}
+  m_Script: {fileID: 11500000, guid: 26849dadf433ba04595fc642c2b674b5, type: 3}
   m_Name: Caps
   m_EditorClassIdentifier: 
   _caps: 64000000c80000002c01000090010000f401000058020000bc0200002003000084030000e8030000

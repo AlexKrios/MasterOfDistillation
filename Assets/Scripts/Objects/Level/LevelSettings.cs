@@ -1,5 +1,5 @@
 ﻿using System;
-using Scripts.Objects;
+using Assets.Scripts.Scriptable;
 
 namespace Assets.Scripts.Objects.Level
 {

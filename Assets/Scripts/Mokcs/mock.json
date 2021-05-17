@@ -8,10 +8,10 @@
 	},
 	"RawInfo": [
 		{
-			"Name": "Iron",
+			"Name": "Weapon",
 			"Count": 15,
-			"Level": 1,
 			"Settings": {
+        "Level": 1,
 				"AmountCap": 20,
 				"LevelMax": 10,
 				"Cooldown": 1
@@ -20,14 +20,13 @@
 	],
 	"StoresInfo": [
 		{
-			"Name": "Rifle",
-			"Items": [
+      "Items": [
 				{
-					"Name": "Rifle",
+					"Name": "Pistol",
 					"Count": [ 0, 0, 0, 0 ]
 				},
 				{
-					"Name": "Rifle Component 1",
+					"Name": "Pistol Component 1",
 					"Count": [ 0, 1, 0, 0 ]
 				}
 			]

@@ -1,9 +1,12 @@
 ﻿using System;
 
-public class EnumParse
+namespace Assets.Scripts.Utils
 {
-    public static T ParseStringToEnum<T>(string value)
+    public class EnumParse
     {
-        return (T)Enum.Parse(typeof(T), value, true);
+        public static T ParseStringToEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
     }
 }

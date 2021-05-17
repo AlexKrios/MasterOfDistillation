@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
 using Assets.Scripts.Scenes.Main.MainCamera.Target;
-using Scripts;
 using UnityEngine;
 using Zenject;
 

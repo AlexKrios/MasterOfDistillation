@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: ProductStoreData
   m_EditorClassIdentifier: 
   _data:
-  - SubType: Rifle
-    DirPath: Data/Products/Weapon/Rifle
   - SubType: Pistol
     DirPath: Data/Products/Weapon/Pistol
-  - SubType: Helmet
-    DirPath: Data/Products/Equipment/Helmet

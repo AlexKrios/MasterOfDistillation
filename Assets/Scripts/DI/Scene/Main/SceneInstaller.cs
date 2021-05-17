@@ -1,5 +1,5 @@
 using Assets.Scripts.Common.Craft.Action;
-using Assets.Scripts.Objects.Product.Data;
+using Assets.Scripts.Objects.Item;
 using Assets.Scripts.Scenes.Main.MainCamera.Disable;
 using Assets.Scripts.Scenes.Main.MainCamera.Target;
 using Assets.Scripts.UI.Craft;
@@ -37,7 +37,7 @@ namespace Assets.Scripts.DI.Scene.Main
             Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUiFactory>();
             Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
-            Container.BindFactory<ProductFullData, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
+            Container.BindFactory<ICraftable, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
         }
 
         private void InstallCraftMenu()

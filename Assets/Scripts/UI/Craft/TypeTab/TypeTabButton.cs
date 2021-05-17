@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Scripts.Objects.Product;
+﻿using Assets.Scripts.Objects.Item.Product.Types;
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Craft.TypeTab
 {
+    [UsedImplicitly]
     public class TypeTabButton : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private TypeTabsGroup _tabGroup;
@@ -20,8 +22,8 @@ namespace Assets.Scripts.UI.Craft.TypeTab
         [SerializeField] private ProductType _title;
         public ProductType Title => _title;
 
-        [SerializeField] private List<ProductSubType> _keys;
-        public List<ProductSubType> Keys { get => _keys; }        
+        [SerializeField] private List<ProductType> _keys;
+        public List<ProductType> Keys => _keys;
 
         // ReSharper disable once UnusedMember.Local
         private void Start()

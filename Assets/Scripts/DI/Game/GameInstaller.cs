@@ -8,7 +8,6 @@ using Assets.Scripts.UI;
 using Assets.Scripts.UI.Level;
 using Assets.Scripts.UI.Money;
 using Assets.Scripts.UI.Raw;
-using Scripts;
 using Zenject;
 
 namespace Assets.Scripts.DI.Game

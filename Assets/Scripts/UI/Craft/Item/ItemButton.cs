@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Objects.Product.Data;
+﻿using Assets.Scripts.Objects.Item;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,10 +8,11 @@ using Zenject;
 
 namespace Assets.Scripts.UI.Craft.Item
 {
+    [UsedImplicitly]
     public class ItemButton : MonoBehaviour, IPointerClickHandler
     {
-        [Inject] private IUiController _uiController;
-        [Inject] private CraftMenuUiFactory.Settings _menuSettings;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
         private ItemsGroup _itemGroup;
 
@@ -25,7 +27,7 @@ namespace Assets.Scripts.UI.Craft.Item
 
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive => _bgActive;
-        public ProductFullData Product { get; private set; }
+        public ICraftable Product { get; private set; }
 
         // ReSharper disable once UnusedMember.Local
         private void Start() 
@@ -38,13 +40,13 @@ namespace Assets.Scripts.UI.Craft.Item
             _itemGroup.ActiveItem = this;
         }
 
-        public void SetCellInfo(ProductFullData product)
+        public void SetCellInfo(ICraftable product)
         {
             Product = product;
             Product.GameObject = gameObject;
 
-            SetCellIcon(product.Data.Icon);
-            SetCellName(product.Data.Name);
+            SetCellIcon(product.Icon);
+            SetCellName(product.Name);
         }
 
         public void SetItemInactive()
@@ -72,6 +74,6 @@ namespace Assets.Scripts.UI.Craft.Item
             _name.text = cellName;
         }
 
-        public class Factory : PlaceholderFactory<ProductFullData, ItemButton> { }
+        public class Factory : PlaceholderFactory<ICraftable, ItemButton> { }
     }
 }

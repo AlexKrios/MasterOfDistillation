@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccc7b7f875e3040429e9fc425304d7d1, type: 3}
+  m_Script: {fileID: 11500000, guid: fb24679e8eb42fd43ab25d8c18dbc5dd, type: 3}
   m_Name: Component1
   m_EditorClassIdentifier: 
   _name: Helmet Component 1
-  _type: 3
+  _type: 1
   _subType: 3
   _icon: {fileID: 21300000, guid: f30b948b68496d14ab0f33f5b7f137b9, type: 3}

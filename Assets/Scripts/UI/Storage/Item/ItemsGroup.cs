@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Assets.Scripts.Objects.Item;
+using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Objects.Product.Data;
 using UnityEngine;
 using Zenject;
 #pragma warning disable 649
 
 namespace Assets.Scripts.UI.Storage.Item
 {
+    [UsedImplicitly]
     public class ItemsGroup : MonoBehaviour
     {
         [Inject] private readonly IUiController _uiController;
@@ -34,7 +36,7 @@ namespace Assets.Scripts.UI.Storage.Item
                 }                    
                 _activeItem = value;
                 _activeItem.SetItemActive();
-                _menu.ProductCell.SetProductIcon(_activeItem.Product.Data.Icon);
+                _menu.ProductCell.SetProductIcon(_activeItem.Product.Icon);
             }
         }
 
@@ -57,7 +59,7 @@ namespace Assets.Scripts.UI.Storage.Item
                 Items = new Dictionary<string, ItemButton>();
             }
 
-            Items.Add(item.Product.Data.Name, item);
+            Items.Add(item.Product.Name, item);
         }
 
         public void CreateMenuItems()
@@ -65,7 +67,7 @@ namespace Assets.Scripts.UI.Storage.Item
             var keys = _menu.TypeTabs.ActiveTab.Keys;
             foreach (var key in keys)
             {
-                var items = _menu.ProductStore.AllStore[key.ToString()];
+                var items = _menu.ProductStore.Store.Where(x => x.Value.ProductType == key);
                 if (items == null) { return; }
 
                 foreach (var item in items)
@@ -87,7 +89,7 @@ namespace Assets.Scripts.UI.Storage.Item
             SetContainerHeight();
         }
 
-        private bool CheckIfHaveCount(ProductFullData item)
+        private bool CheckIfHaveCount(ICraftable item)
         {
             foreach (var count in item.Count)
             {

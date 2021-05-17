@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Objects.Product.Data;
+﻿using Assets.Scripts.Objects.Item;
+using Assets.Scripts.Objects.Item.Craft;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,6 +9,7 @@ using Zenject;
 
 namespace Assets.Scripts.UI.Storage.Item
 {
+    [UsedImplicitly]
     public class ItemButton : MonoBehaviour, IPointerClickHandler
     {
         [Inject] private readonly IUiController _uiController;
@@ -26,7 +29,7 @@ namespace Assets.Scripts.UI.Storage.Item
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive => _bgActive;
 
-        public ProductFullData Product { get; private set; }
+        public ICraftable Product { get; private set; }
 
         // ReSharper disable once UnusedMember.Local
         private void Start() 
@@ -39,13 +42,13 @@ namespace Assets.Scripts.UI.Storage.Item
             _itemGroup.ActiveItem = this;
         }
 
-        public void SetCellInfo(ProductFullData product)
+        public void SetCellInfo(ICraftable product)
         {
             Product = product;
             Product.GameObject = gameObject;
 
-            SetCellIcon(product.Data.Icon);
-            SetCellName(product.Data.Name);
+            SetCellIcon(product.Icon);
+            SetCellName(product.Name);
         }
 
         public void SetItemInactive()
@@ -73,6 +76,6 @@ namespace Assets.Scripts.UI.Storage.Item
             _name.text = cellName;
         }
 
-        public class Factory : PlaceholderFactory<ProductFullData, ItemButton> { }
+        public class Factory : PlaceholderFactory<ICraftable, ItemButton> { }
     }
 }

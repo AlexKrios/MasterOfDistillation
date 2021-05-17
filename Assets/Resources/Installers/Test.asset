@@ -37,7 +37,8 @@ MonoBehaviour:
       Padding: 10
       Height: 250
     ItemButtonSettings:
-      Prefab: {fileID: 0}
+      Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,
+        type: 3}
   StorageMenuUi:
     Name: StorageMenu
     Prefab: {fileID: 7196737555349474873, guid: abb901f12c5d2634a9e3f013c693b766,

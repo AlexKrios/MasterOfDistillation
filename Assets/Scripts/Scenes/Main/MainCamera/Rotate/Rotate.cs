@@ -1,5 +1,4 @@
-﻿using Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Scenes.Main.MainCamera.Rotate

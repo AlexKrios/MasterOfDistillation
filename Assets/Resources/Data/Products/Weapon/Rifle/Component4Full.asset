@@ -9,27 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6630831db706d3b4aae2c3420365cfe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e44f94ac056774c800d78f8ae05ab3, type: 3}
   m_Name: Component4Full
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 453937662f07fbe41a09bad26cc0d330, type: 2}
   _recipes:
-  - Name: Common
+  - Name: 
     Quality: 0
-    Parts:
-    - Data: {fileID: 11400000, guid: 0959d16890714874383037a7cbed5867, type: 2}
-      Quality: 0
-      Count: 5
-    CraftTime: 1
-  - Name: 
-    Quality: 1
     Parts: []
-    CraftTime: 5
+    Level: 0
+    Experience: 0
+    CraftTime: 0
   - Name: 
-    Quality: 2
+    Quality: 0
     Parts: []
-    CraftTime: 8
+    Level: 0
+    Experience: 0
+    CraftTime: 0
   - Name: 
-    Quality: 3
+    Quality: 0
     Parts: []
-    CraftTime: 10
+    Level: 0
+    Experience: 0
+    CraftTime: 0
+  - Name: 
+    Quality: 0
+    Parts: []
+    Level: 0
+    Experience: 0
+    CraftTime: 0

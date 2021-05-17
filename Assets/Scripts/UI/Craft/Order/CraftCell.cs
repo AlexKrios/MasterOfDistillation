@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Common.Craft;
-using Assets.Scripts.Objects.Craft;
+using Assets.Scripts.Objects.Item.Craft;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ using Zenject;
 namespace Assets.Scripts.UI.Craft.Order
 {
     //TODO Переделать флаги на интерфейсы
+    [UsedImplicitly]
     public class CraftCell : MonoBehaviour, IPointerClickHandler
     {
         private ICraftController _craftController;
@@ -41,7 +43,7 @@ namespace Assets.Scripts.UI.Craft.Order
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (IsComplete)
+            if (!IsComplete)
             {
                 return;
             }
@@ -53,7 +55,7 @@ namespace Assets.Scripts.UI.Craft.Order
 
         public void SetCellInfo(CraftObject craftObject)
         {
-            var itemData = craftObject.Item.Data;
+            var itemData = craftObject.Item;
 
             SetCellIcon(itemData.Icon);
         }

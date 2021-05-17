@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable UnassignedField.Global
 
 namespace Assets.Scripts.Objects.Level
 {

@@ -1,12 +1,14 @@
 ﻿using Assets.Scripts.Common.Craft;
-using Assets.Scripts.Objects.Craft;
+using Assets.Scripts.Objects.Item.Craft;
 using Assets.Scripts.Timer;
+using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 #pragma warning disable 649
 
 namespace Assets.Scripts.UI.Craft.Create
 {
+    [UsedImplicitly]
     public class CreateButton : MonoBehaviour
     {
         private ICraftController _craftController;
@@ -50,9 +52,10 @@ namespace Assets.Scripts.UI.Craft.Create
             _sceneContext.GetComponent<ITimerController>().SetRawTimers();
         }
 
+        //TODO Переделать в отдельынй класс и добавть в DI
         private CraftObject CraftObjectFactory()
         {
-            return new CraftObject()
+            return new CraftObject
             {
                 Item = _menu.ItemsGroup.ActiveItem.Product,
                 Quality = _menu.QualityBtn.ActiveQuality,

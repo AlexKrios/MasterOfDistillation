@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Product.Part;
+﻿using Assets.Scripts.Objects.Item.Recipe;
 using Assets.Scripts.Stores.Product;
 using Zenject;
 
@@ -6,34 +6,25 @@ namespace Assets.Scripts.Common.Craft.Action
 {
     public class ComponentAction : ICraftPartAction
     {
-        [Inject] private readonly IProductStore _store;
+        [Inject] private readonly IProductStore _productStore;
 
         public bool IsEnough(PartObject part)
         {
-            var partName = part.Data.Name;            
-            var partSubType = part.Data.SubType;
+            var partName = part.Data.Name;
             var partQuality = part.Quality;
             var partCount = part.Count;
 
-            var store = _store.AllStore[partSubType.ToString()];
-            var storeValue = store[partName].Count[(int)partQuality];
+            var storeValue = _productStore.Store[partName].Count[(int)partQuality];
 
-            if (storeValue - partCount < 0)
-            {
-                return false;
-            }
-
-            return true;
+            return storeValue - partCount >= 0;
         }
 
         public void Remove(PartObject part)
         {
             var partName = part.Data.Name;
-            var partSubType = part.Data.SubType;
             var partQuality = part.Quality;
 
-            var store = _store.AllStore[partSubType.ToString()];
-            store[partName].Count[(int)partQuality]--;
+            _productStore.Store[partName].Count[(int)partQuality]--;
         }
     }    
 }

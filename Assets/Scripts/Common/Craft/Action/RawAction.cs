@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Product.Part;
+﻿using Assets.Scripts.Objects.Item.Recipe;
 using Assets.Scripts.Stores.Raw;
 using Zenject;
 

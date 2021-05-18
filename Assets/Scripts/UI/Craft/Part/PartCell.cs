@@ -30,8 +30,6 @@ namespace Assets.Scripts.UI.Craft.Part
             {
                 var storeCount = GetStoreCount(recipe);
 
-                Debug.Log(recipe.Parts[_id - 1].Data.Name);
-
                 SetPartIcon(recipe.Parts[_id - 1].Data.Icon, 1f);
                 SetPartText($"{storeCount}/{recipe.Parts[_id - 1].Count}");
             }

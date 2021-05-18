@@ -1,7 +1,7 @@
-﻿using System;
-using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
+using Assets.Scripts.Ui.Craft.Tab;
 using Assets.Scripts.UI.Craft.Item;
-using Assets.Scripts.UI.Craft.TypeTab;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -49,7 +49,7 @@ namespace Assets.Scripts.UI.Craft
             public string Name;
             public GameObject Prefab;
 
-            public TypeTabFactory.Settings TabsSettings;
+            public TabFactory.Settings TabsSettings;
             public ItemsGroupFactory.Settings ItemsGroupSettings;
             public ItemButtonFactory.Settings ItemButtonSettings;
         }

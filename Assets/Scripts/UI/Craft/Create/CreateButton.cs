@@ -57,7 +57,7 @@ namespace Assets.Scripts.UI.Craft.Create
         {
             return new CraftObject
             {
-                Item = _menu.ItemsGroup.ActiveItem.Product,
+                Item = _menu.Items.ActiveItem.Product,
                 Quality = _menu.QualityBtn.ActiveQuality,
             };
         }

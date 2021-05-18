@@ -2,9 +2,9 @@ using Assets.Scripts.Common.Craft.Action;
 using Assets.Scripts.Objects.Item;
 using Assets.Scripts.Scenes.Main.MainCamera.Disable;
 using Assets.Scripts.Scenes.Main.MainCamera.Target;
+using Assets.Scripts.Ui.Craft.Tab;
 using Assets.Scripts.UI.Craft;
 using Assets.Scripts.UI.Craft.Item;
-using Assets.Scripts.UI.Craft.TypeTab;
 using Assets.Scripts.UI.Level;
 using Assets.Scripts.UI.Money;
 using Assets.Scripts.UI.Raw;
@@ -35,7 +35,7 @@ namespace Assets.Scripts.DI.Scene.Main
             Container.BindFactory<RawUi, RawUi.Factory>().FromFactory<RawUiFactory>();
 
             Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUiFactory>();
-            Container.BindFactory<TypeTabsGroup, TypeTabsGroup.Factory>().FromFactory<TypeTabFactory>();
+            Container.BindFactory<TabsGroup, TabsGroup.Factory>().FromFactory<TabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
             Container.BindFactory<ICraftable, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
         }

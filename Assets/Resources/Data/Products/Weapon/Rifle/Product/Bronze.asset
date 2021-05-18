@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efa45a36ed2377488502f389c1606c9, type: 3}
+  m_Name: Bronze
+  m_EditorClassIdentifier: 
+  _quality: 1
+  _parts:
+  - Data: {fileID: 11400000, guid: 7d163dd5c001205468db0f8671e863a3, type: 2}
+    Quality: 0
+    Count: 1
+  - Data: {fileID: 11400000, guid: 52a877383894bd74aa44e8f87a4957ca, type: 2}
+    Quality: 0
+    Count: 1
+  - Data: {fileID: 11400000, guid: ae39701678d865241a2a0248a5d1aceb, type: 2}
+    Quality: 0
+    Count: 1
+  - Data: {fileID: 11400000, guid: ca96b495213446049a1a2586d669ed00, type: 2}
+    Quality: 0
+    Count: 1
+  _level: 0
+  _experience: 10
+  _craftTime: 3

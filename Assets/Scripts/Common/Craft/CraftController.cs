@@ -21,9 +21,11 @@ namespace Assets.Scripts.Common.Craft
     public class CraftController : MonoBehaviour, ICraftController
     {
         [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
+
         [Inject] private readonly IUiController _uiController;
         [Inject] private readonly ILevelStore _levelStore;
         [Inject] private readonly IProductStore _productStore;
+
         [Inject] private readonly List<ICraftPartAction> _craftPartActionList;
 
         public Dictionary<int, CraftObject> CraftList { get; private set; }
@@ -68,7 +70,7 @@ namespace Assets.Scripts.Common.Craft
         public bool IsEnoughParts()
         {
             var menu = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<CraftMenu>();
-            var activeItem = menu.ItemsGroup.ActiveItem;
+            var activeItem = menu.Items.ActiveItem;
             var activeQuality = menu.QualityBtn.ActiveQuality;
 
             _recipe = activeItem.Product.Recipes.First(x => x.Quality == activeQuality);
@@ -102,7 +104,6 @@ namespace Assets.Scripts.Common.Craft
         public IEnumerator StartCraftTimer()
         {
             var currentCraftCell = _craftCellsGroup.Cells[_currentIndex];
-            Debug.Log(currentCraftCell);
 
             var countdownValue = _recipe.CraftTime;
             while (countdownValue > 0)
@@ -112,7 +113,6 @@ namespace Assets.Scripts.Common.Craft
                 currentCraftCell.SetCellTimer(countdownValue.ToString());
             }
 
-            Debug.Log(currentCraftCell);
             currentCraftCell.SetCellTimer("Готово");
             currentCraftCell.IsComplete = true;
         }

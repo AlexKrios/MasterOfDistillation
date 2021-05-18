@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Ui.Common.ProductMenu;
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.UI.Craft.Item;
 using UnityEngine;
 #pragma warning disable 649
 
 namespace Assets.Scripts.UI.Craft.Part
 {
+    [UsedImplicitly]
     public class PartGroup : MonoBehaviour
     {
         [SerializeField] private CraftMenu _menu;
@@ -14,7 +16,7 @@ namespace Assets.Scripts.UI.Craft.Part
         [SerializeField] private List<PartCell> _parts;
         public List<PartCell> Parts => _parts;
 
-        private ItemButton ActiveItem => _menu.ItemsGroup.ActiveItem;
+        private IItemButton ActiveItem => _menu.Items.ActiveItem;
         private ProductQuality ActiveQuality => _menu.QualityBtn.ActiveQuality;
 
         // ReSharper disable once UnusedMember.Local

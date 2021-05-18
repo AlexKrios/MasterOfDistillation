@@ -24,7 +24,7 @@ namespace Assets.Scripts.UI.Craft.Item
         {
             var itemSettings = _menuSettings.ItemButtonSettings;
 
-            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>().ItemsGroup.Container;
+            var parent = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>().Items.Container;
             var item = _container.InstantiatePrefabForComponent<ItemButton>(itemSettings.Prefab, parent);
 
             item.SetCellInfo(product);

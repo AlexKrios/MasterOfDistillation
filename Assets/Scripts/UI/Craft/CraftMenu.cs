@@ -1,10 +1,12 @@
 ﻿using Assets.Scripts.Stores.Product;
+using Assets.Scripts.Ui.Common.ProductMenu;
 using Assets.Scripts.UI.Craft.Create;
 using Assets.Scripts.UI.Craft.Item;
 using Assets.Scripts.UI.Craft.Part;
 using Assets.Scripts.UI.Craft.Product;
 using Assets.Scripts.UI.Craft.Quality;
-using Assets.Scripts.UI.Craft.TypeTab;
+using Assets.Scripts.Ui.Craft.Tab;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,9 +14,10 @@ using Zenject;
 
 namespace Assets.Scripts.UI.Craft
 {
-    public class CraftMenu : MonoBehaviour
+    [UsedImplicitly]
+    public class CraftMenu : MonoBehaviour, IProductMenu
     {
-        [Inject] private readonly TypeTabsGroup.Factory _typeTabsFactory;
+        [Inject] private readonly TabsGroup.Factory _typeTabsFactory;
         [Inject] private readonly ItemsGroup.Factory _itemGroupFactory;
 
         [Inject] private readonly IProductStore _productStore;
@@ -23,8 +26,8 @@ namespace Assets.Scripts.UI.Craft
         [Header("Components")]
         [SerializeField] private Text _title;
         public Text Title => _title;
-        public TypeTabsGroup TypeTabs { get; set; }
-        public ItemsGroup ItemsGroup { get; private set; }
+        public ITabsGroup Tabs { get; set; }
+        public IItemsGroup Items { get; set; }
 
         [SerializeField] private ProductCell _productCell;
         public ProductCell ProductCell => _productCell;
@@ -41,10 +44,11 @@ namespace Assets.Scripts.UI.Craft
         // ReSharper disable once UnusedMember.Local
         private void Start()
         {           
-            TypeTabs = _typeTabsFactory.Create();
-            ItemsGroup = _itemGroupFactory.Create();
+            Tabs = _typeTabsFactory.Create();
+            Items = _itemGroupFactory.Create();
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<CraftMenu> { }
     }
 }

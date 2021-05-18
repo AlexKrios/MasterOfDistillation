@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Objects.Item;
+using Assets.Scripts.Ui.Common.ProductMenu;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,12 +10,13 @@ using Zenject;
 namespace Assets.Scripts.UI.Craft.Item
 {
     [UsedImplicitly]
-    public class ItemButton : MonoBehaviour, IPointerClickHandler
+    public class ItemButton : MonoBehaviour, IItemButton, IPointerClickHandler
     {
         [Inject] private readonly IUiController _uiController;
-        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
-        private ItemsGroup _itemGroup;
+        [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
+
+        private IItemsGroup _itemGroup;
 
         [Header("Product cell info")]
         [SerializeField] private Image _background;
@@ -27,12 +29,12 @@ namespace Assets.Scripts.UI.Craft.Item
 
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive => _bgActive;
-        public ICraftable Product { get; private set; }
+        public ICraftable Product { get; set; }
 
         // ReSharper disable once UnusedMember.Local
         private void Start() 
         {
-            _itemGroup = _uiController.FindByPart(_menuSettings.Name).GetComponent<CraftMenu>().ItemsGroup;
+            _itemGroup = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<IProductMenu>().Items;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -74,6 +76,7 @@ namespace Assets.Scripts.UI.Craft.Item
             _name.text = cellName;
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<ICraftable, ItemButton> { }
     }
 }

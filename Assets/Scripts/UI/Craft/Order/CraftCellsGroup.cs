@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Craft.Order
 {
+    [UsedImplicitly]
     public class CraftCellsGroup : MonoBehaviour
     {
         public List<CraftCell> Cells { get; private set; }

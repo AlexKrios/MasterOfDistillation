@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Objects.Item.Craft;
+﻿using Assets.Scripts.Objects.Item;
 using JetBrains.Annotations;
 using System;
-using Assets.Scripts.Objects.Item;
 using UnityEngine;
 using Zenject;
 

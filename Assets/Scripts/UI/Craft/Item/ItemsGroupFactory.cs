@@ -1,13 +1,15 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.UI.Craft.Item
 {
+    [UsedImplicitly]
     public class ItemsGroupFactory : IFactory<ItemsGroup>
     {
+        [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
         [Inject] private readonly IUiController _uiController;
-        [Inject] private readonly CraftMenuUiFactory.Settings _menuSettings;
 
         private readonly DiContainer _container;
 
@@ -18,9 +20,9 @@ namespace Assets.Scripts.UI.Craft.Item
 
         public ItemsGroup Create()
         {
-            var itemsSettings = _menuSettings.ItemsGroupSettings;
+            var itemsSettings = _craftMenuSettings.ItemsGroupSettings;
 
-            var parent = _uiController.FindByPart(_menuSettings.Name).transform;
+            var parent = _uiController.FindByPart(_craftMenuSettings.Name).transform;
             var itemGroup = _container.InstantiatePrefabForComponent<ItemsGroup>(itemsSettings.Prefab, parent);
             itemGroup.name = itemsSettings.Name;
 

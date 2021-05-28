@@ -5,6 +5,7 @@ using Assets.Scripts.Scenes.Main.MainCamera.Target;
 using Assets.Scripts.Ui.Craft.Tab;
 using Assets.Scripts.UI.Craft;
 using Assets.Scripts.UI.Craft.Item;
+using Assets.Scripts.Ui.Craft.Title;
 using Assets.Scripts.UI.Level;
 using Assets.Scripts.UI.Money;
 using Assets.Scripts.UI.Raw;
@@ -35,6 +36,7 @@ namespace Assets.Scripts.DI.Scene.Main
             Container.BindFactory<RawUi, RawUi.Factory>().FromFactory<RawUiFactory>();
 
             Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUiFactory>();
+            Container.BindFactory<TitleSection, TitleSection.Factory>().FromFactory<TitleFactory>();
             Container.BindFactory<TabsGroup, TabsGroup.Factory>().FromFactory<TabFactory>();
             Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
             Container.BindFactory<ICraftable, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
@@ -42,8 +44,6 @@ namespace Assets.Scripts.DI.Scene.Main
 
         private void InstallCraftMenu()
         {
-            //Container.Bind<ICraftController>().To<CraftController>().AsSingle().NonLazy();
-
             Container.Bind<ICraftPartAction>().To<RawAction>().AsSingle().NonLazy();
             Container.Bind<ICraftPartAction>().To<ComponentAction>().AsSingle().NonLazy();
         }

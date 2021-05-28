@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Ui.Common.ProductMenu;
+using Assets.Scripts.Ui.Craft;
+using Assets.Scripts.Ui.Craft.Item;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,34 +13,55 @@ namespace Assets.Scripts.UI.Craft.Item
     [UsedImplicitly]
     public class ItemButton : MonoBehaviour, IItemButton, IPointerClickHandler
     {
-        [Inject] private readonly IUiController _uiController;
+        #region Links
 
         [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
+        [Inject] private readonly IUiController _uiController;
 
+        private ICraftMenu _menu;
         private IItemsGroup _itemGroup;
+        private IItemButton ActiveItem
+        {
+            get => _itemGroup?.ActiveItem;
+            set => _itemGroup.ActiveItem = value;
+        }
 
-        [Header("Product cell info")]
+        #endregion
+
+        #region Assets
+
+        [Header("Assets")]
         [SerializeField] private Image _background;
         [SerializeField] private Image _icon;
         [SerializeField] private Text _name;
 
-        [Header("Assets")]
         [SerializeField] private Sprite _bgInactive;
         public Sprite BgInactive => _bgInactive;
 
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive => _bgActive;
-        public ICraftable Product { get; set; }
+
+        #endregion
+        
+        public ICraftable Product { get; private set; }
 
         // ReSharper disable once UnusedMember.Local
-        private void Start() 
+        private void Awake() 
         {
-            _itemGroup = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<IProductMenu>().Items;
+            _menu = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<ICraftMenu>();
+            _itemGroup = _menu.Items;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _itemGroup.ActiveItem = this;
+            if ((ItemButton)ActiveItem == this)
+            {
+                return;
+            }
+
+            ActiveItem?.SetItemInactive();
+            ActiveItem = this;
+            ActiveItem.SetItemActive();
         }
 
         public void SetCellInfo(ICraftable product)
@@ -59,6 +81,10 @@ namespace Assets.Scripts.UI.Craft.Item
         public void SetItemActive()
         {
             SetItemBackground(_bgActive);
+
+            _menu.Product.SetProductIcon(ActiveItem.Product.Icon);
+            _menu.QualityBtn.ResetQuality();
+            _menu.PartGroup.SetPartsInfo();
         }        
 
         private void SetItemBackground(Sprite background)

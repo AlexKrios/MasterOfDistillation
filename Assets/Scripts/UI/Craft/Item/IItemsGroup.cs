@@ -1,13 +1,10 @@
-﻿using Assets.Scripts.UI.Craft.Item;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Ui.Common.ProductMenu
+namespace Assets.Scripts.Ui.Craft.Item
 {
     public interface IItemsGroup
     {
         RectTransform Container { get; }
-        Dictionary<string, ItemButton> Items { get; set; }
         IItemButton ActiveItem { get; set; }
 
         void CreateMenuItems();

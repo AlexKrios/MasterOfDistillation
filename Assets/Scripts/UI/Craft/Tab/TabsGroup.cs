@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Ui.Common.ProductMenu;
-using Assets.Scripts.UI;
-using Assets.Scripts.UI.Craft;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -13,29 +10,14 @@ namespace Assets.Scripts.Ui.Craft.Tab
     [UsedImplicitly]
     public class TabsGroup : MonoBehaviour, ITabsGroup
     {
-        [Inject] private readonly IUiController _uiController;
+        #region Links
 
-        [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
+        private List<ITabButton> _tabs;
+        public ITabButton ActiveTab { get; set; }
 
-        public IProductMenu Menu { get; private set; }
-        public List<ITabButton> Tabs { get; set; }
+        #endregion
 
-        private ITabButton _activeTab;
-        public ITabButton ActiveTab 
-        {
-            get => _activeTab;
-            set
-            {
-                if (_activeTab == value)
-                {
-                    return;
-                }
-                _activeTab.SetInactiveTabImage();
-                _activeTab = value;
-                _activeTab.SetActiveTabImage();
-                Menu.Title.text = _activeTab.Title.ToString();
-            }
-        }
+        #region Assets
 
         [Header("Assets")]
         [SerializeField] private Sprite _bgInactive;
@@ -44,30 +26,21 @@ namespace Assets.Scripts.Ui.Craft.Tab
         [SerializeField] private Sprite _bgActive;
         public Sprite BgActive => _bgActive;
 
-        // ReSharper disable once UnusedMember.Local
-        private void Start()
-        {
-            Menu = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<IProductMenu>();
-        }
+        #endregion
 
         public void SubscribeTabToList(TabButton button)
         {
-            if (Tabs == null)
+            if (_tabs == null)
             {
-                Tabs = new List<ITabButton>();
+                _tabs = new List<ITabButton>();
             }
 
-            Tabs.Add(button);
+            _tabs.Add(button);
 
-            if (transform.childCount == Tabs.Count)
+            if (transform.childCount == _tabs.Count)
             {
-                _activeTab = Tabs[0];
+                ActiveTab = _tabs[0];
             }
-        }
-
-        public void ClearTabList()
-        {
-            Tabs.Clear();
         }
 
         [UsedImplicitly]

@@ -1,12 +1,10 @@
-﻿using Assets.Scripts.Objects.Item;
+﻿using System.Collections.Generic;
 using Assets.Scripts.Objects.Item.Product.Types;
-using System.Collections.Generic;
 
-namespace Assets.Scripts.Ui.Common.ProductMenu
+namespace Assets.Scripts.Ui.Craft.Tab
 {
     public interface ITabButton
     {
-        ItemType Title { get; }
         List<ProductType> Keys { get; }
 
         void SetInactiveTabImage();

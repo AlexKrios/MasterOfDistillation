@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Ui.Common.ProductMenu;
+﻿using Assets.Scripts.Stores.Product;
+using Assets.Scripts.Ui.Craft;
+using Assets.Scripts.Ui.Craft.Item;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -12,45 +14,29 @@ namespace Assets.Scripts.UI.Craft.Item
     [UsedImplicitly]
     public class ItemsGroup : MonoBehaviour, IItemsGroup
     {
-        [Inject] private readonly IUiController _uiController;
-
         [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
         [Inject] private readonly ItemButton.Factory _itemFactory;
 
-        private CraftMenu _menu;
+        [Inject] private readonly IUiController _uiController;
+        [Inject] private readonly IProductStore _productStore;
+
+        private ICraftMenu _menu;
 
         [Header("Links")]
         [SerializeField] private RectTransform _container;
         public RectTransform Container => _container;
         public Dictionary<string, ItemButton> Items { get; set; }
+        public IItemButton ActiveItem { get; set; }
 
-        private IItemButton _activeItem;
-        public IItemButton ActiveItem
+        // ReSharper disable once UnusedMember.Local
+        private void Awake()
         {
-            get => _activeItem;
-            set
-            {
-                if (_activeItem == value)
-                {
-                    return;
-                }
-                if (_activeItem != null)
-                {
-                    _activeItem.SetItemInactive();
-                }                    
-                _activeItem = value;
-                _activeItem.SetItemActive();
-                _menu.ProductCell.SetProductIcon(_activeItem.Product.Icon);
-                _menu.QualityBtn.ResetQuality();
-                _menu.PartGroup.SetPartsInfo();
-            }
+            _menu = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<ICraftMenu>();
         }
 
         // ReSharper disable once UnusedMember.Local
         private void Start()
         {
-            _menu = _uiController.FindByPart(_craftMenuSettings.Name).GetComponent<CraftMenu>();
-
             CreateMenuItems();
         }
 
@@ -69,7 +55,7 @@ namespace Assets.Scripts.UI.Craft.Item
             var keys = _menu.Tabs.ActiveTab.Keys;
             foreach (var key in keys)
             {
-                var items = _menu.ProductStore.Store.Where(x => x.Value.ProductType == key);
+                var items = _productStore.Store.Where(x => x.Value.ProductType == key);
                 foreach (var item in items)
                 {
                     var newItem = _itemFactory.Create(item.Value);
@@ -78,6 +64,7 @@ namespace Assets.Scripts.UI.Craft.Item
             }
 
             ActiveItem = Items.First().Value;
+            ActiveItem.SetItemActive();
 
             SetContainerHeight();
         }

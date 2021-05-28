@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Objects.Item.Craft;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;

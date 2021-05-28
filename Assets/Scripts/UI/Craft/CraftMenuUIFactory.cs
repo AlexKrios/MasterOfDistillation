@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Scenes.Main.MainCamera.Disable;
 using Assets.Scripts.Ui.Craft.Tab;
+using Assets.Scripts.Ui.Craft.Title;
 using Assets.Scripts.UI.Craft.Item;
 using System;
 using UnityEngine;
@@ -49,6 +50,7 @@ namespace Assets.Scripts.UI.Craft
             public string Name;
             public GameObject Prefab;
 
+            public TitleFactory.Settings TitleSettings;
             public TabFactory.Settings TabsSettings;
             public ItemsGroupFactory.Settings ItemsGroupSettings;
             public ItemButtonFactory.Settings ItemButtonSettings;

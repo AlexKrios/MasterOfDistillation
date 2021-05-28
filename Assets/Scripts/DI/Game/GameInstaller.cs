@@ -4,6 +4,7 @@ using Assets.Scripts.Stores.Money;
 using Assets.Scripts.Stores.Product;
 using Assets.Scripts.Stores.Raw;
 using Assets.Scripts.Timer.Raw;
+using Assets.Scripts.Ui.Craft.Order.State;
 using Assets.Scripts.UI;
 using Assets.Scripts.UI.Level;
 using Assets.Scripts.UI.Money;

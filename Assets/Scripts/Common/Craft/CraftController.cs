@@ -1,10 +1,7 @@
 ﻿using Assets.Scripts.Common.Craft.Action;
 using Assets.Scripts.Objects.Item;
 using Assets.Scripts.Objects.Item.Craft;
-using Assets.Scripts.Objects.Item.Recipe;
 using Assets.Scripts.Scriptable;
-using Assets.Scripts.Stores.Level;
-using Assets.Scripts.Stores.Product;
 using Assets.Scripts.UI;
 using Assets.Scripts.UI.Craft;
 using Assets.Scripts.UI.Craft.Order;
@@ -23,10 +20,8 @@ namespace Assets.Scripts.Common.Craft
         [Inject] private readonly CraftMenuUiFactory.Settings _craftMenuSettings;
 
         [Inject] private readonly IUiController _uiController;
-        [Inject] private readonly ILevelStore _levelStore;
-        [Inject] private readonly IProductStore _productStore;
-
         [Inject] private readonly List<ICraftPartAction> _craftPartActionList;
+        private Dictionary<ItemType, ICraftPartAction> _actionDictionary;
 
         public Dictionary<int, CraftObject> CraftList { get; private set; }
 
@@ -34,7 +29,6 @@ namespace Assets.Scripts.Common.Craft
 
         private int _currentIndex;
         private RecipeScriptable _recipe;
-        private ICraftPartAction _action;
 
         [Inject]
         private void Construct([Inject(Id = "CraftOrder")] CraftCellsGroup craftOrder)
@@ -46,25 +40,18 @@ namespace Assets.Scripts.Common.Craft
         private void Start()
         {
             CraftList = new Dictionary<int, CraftObject>();
+
+            InitDictionary();
         }
 
-        public bool IsHaveFreeCell()
+        private void InitDictionary()
         {
-            var craftCells = _craftCellsGroup.Cells;
+            _actionDictionary = new Dictionary<ItemType, ICraftPartAction>();
 
-            for (var i = 0; i < craftCells.Count; i++)
+            for (var i = 0; i < _craftPartActionList.Count; i++)
             {
-                if (craftCells[i].IsBusy)
-                {
-                    continue;
-                }
-
-                craftCells[i].IsBusy = true;
-                _currentIndex = i;
-                return true;
-            }            
-
-            return false;
+                _actionDictionary.Add((ItemType)i, _craftPartActionList[i]);
+            }
         }
 
         public bool IsEnoughParts()
@@ -77,29 +64,43 @@ namespace Assets.Scripts.Common.Craft
 
             foreach (var partObj in _recipe.Parts)
             {
-                _action = SetActionType(partObj);
-                var isEnough = _action.IsEnough(partObj);
+                var actionType = partObj.Data.ItemType;
+                var isEnough = _actionDictionary[actionType].IsEnough(partObj);
 
-                if (!isEnough)
-                {
-                    return false;
-                }
+                if (!isEnough) { return false; }
             }
 
             return true;
         }
 
-        private ICraftPartAction SetActionType(PartObject partObj)
+        public bool IsHaveFreeCell()
         {
-            switch (partObj.Data.ItemType)
-            {
-                case ItemType.Component:
-                    return _craftPartActionList[1];
+            var craftCells = _craftCellsGroup.Cells;
 
-                default:
-                    return _craftPartActionList[0];
-            }
-        }        
+            for (var i = 0; i < craftCells.Count; i++)
+            {
+                if (!craftCells[i].IsFreeForCraft())
+                {
+                    continue;
+                }
+
+                _currentIndex = i;
+                return true;
+            }            
+
+            return false;
+        }
+
+        public void StartCraft(CraftObject craftObject)
+        {
+            var timer = StartCoroutine(StartCraftTimer());
+            craftObject.Timer = timer;
+
+            CraftList.Add(_currentIndex, craftObject);
+            RemoveParts();
+
+            _craftCellsGroup.Cells[_currentIndex].SetStateBusy();
+        }
 
         public IEnumerator StartCraftTimer()
         {
@@ -113,57 +114,16 @@ namespace Assets.Scripts.Common.Craft
                 currentCraftCell.SetCellTimer(countdownValue.ToString());
             }
 
-            currentCraftCell.SetCellTimer("Готово");
-            currentCraftCell.IsComplete = true;
-        }
-
-        public void StartCraft(CraftObject craftObject)
-        {
-            var timer = StartCoroutine(StartCraftTimer());
-            craftObject.Timer = timer;
-
-            CraftList.Add(_currentIndex, craftObject);
-            RemoveParts();
-
-            SetCraftCellInfo();
+            currentCraftCell.SetStateFinish();
         }
 
         private void RemoveParts()
         {
             foreach (var partObj in _recipe.Parts)
             {
-                _action.Remove(partObj);
+                var actionType = partObj.Data.ItemType;
+                _actionDictionary[actionType].Remove(partObj);
             }
-        }
-
-        private void SetCraftCellInfo()
-        {
-            var currentCraftCell = _craftCellsGroup.Cells[_currentIndex];
-
-            var craftItem = CraftList[_currentIndex].Item;
-            var craftQuality = CraftList[_currentIndex].Quality;
-            var craftItemIcon = craftItem.Icon;            
-            var craftTime = craftItem.Recipes[(int)craftQuality].CraftTime;
-
-            currentCraftCell.SetCellIcon(craftItemIcon);
-            currentCraftCell.SetCellTimer(craftTime.ToString());
-        }
-
-        public void CompleteCraft(int index)
-        {
-            var itemCraft = CraftList[index].Item;
-            var itemQuality = CraftList[index].Quality;
-
-            _productStore.Store[itemCraft.Name].Count[(int)itemQuality]++;
-            _levelStore.Experience += 10 * ((int)itemQuality + 1);
-            //_productStore.SetProductExperience(itemCraft.Data.Name);
-
-            Debug.Log($"Craft {itemCraft.Name} complete");
-
-            CraftList.Remove(index);
-
-            _craftCellsGroup.Cells[_currentIndex].IsBusy = false;
-            _craftCellsGroup.Cells[_currentIndex].IsComplete = false;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Objects.Item;
 using UnityEngine;
 
-namespace Assets.Scripts.Ui.Common.ProductMenu
+namespace Assets.Scripts.Ui.Craft.Item
 {
     public interface IItemButton
     {
-        ICraftable Product { get; set; }
+        ICraftable Product { get; }
 
         Sprite BgInactive { get; }
         Sprite BgActive { get; }

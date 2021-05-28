@@ -12,6 +12,5 @@ namespace Assets.Scripts.Common.Craft
         bool IsEnoughParts();
         IEnumerator StartCraftTimer();
         void StartCraft(CraftObject craftObject);
-        void CompleteCraft(int index);
     }
 }

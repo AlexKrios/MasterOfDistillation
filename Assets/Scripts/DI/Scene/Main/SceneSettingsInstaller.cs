@@ -1,12 +1,14 @@
-using Assets.Scripts.UI.Craft;
-using Assets.Scripts.UI.Level;
-using Assets.Scripts.UI.Money;
-using Assets.Scripts.UI.Raw;
-using Assets.Scripts.UI.Storage;
+using Assets.Scripts.Ui.Level;
+using Assets.Scripts.Ui.Money;
+using Assets.Scripts.Ui.Order;
+using Assets.Scripts.Ui.Order.Result;
+using Assets.Scripts.Ui.Raw;
 using UnityEngine;
 using Zenject;
+// ReSharper disable UnassignedField.Global
+// ReSharper disable MemberCanBePrivate.Global
 
-namespace Assets.Scripts.DI.Scene.Main
+namespace Assets.Scripts.Di.Scene.Main
 {
     [CreateAssetMenu(menuName = "DI Settings/Main Scene")]
     public class SceneSettingsInstaller : ScriptableObjectInstaller<SceneSettingsInstaller>
@@ -15,8 +17,8 @@ namespace Assets.Scripts.DI.Scene.Main
         public LevelUiFactory.Settings LevelUi;
         public RawUiFactory.Settings RawUi;
 
-        public CraftMenuUiFactory.Settings CraftMenuUi;
-        public StorageMenuUiFactory.Settings StorageMenuUi;
+        public CraftGroupFactory.Settings CraftGroup;
+        public ResultCanvasFactory.Settings ResultCanvas;
 
         public override void InstallBindings()
         {
@@ -24,8 +26,8 @@ namespace Assets.Scripts.DI.Scene.Main
             Container.BindInstance(LevelUi);
             Container.BindInstance(RawUi);
 
-            Container.BindInstance(CraftMenuUi);
-            Container.BindInstance(StorageMenuUi);
+            Container.BindInstance(CraftGroup);
+            Container.BindInstance(ResultCanvas);
         }
     }
 }

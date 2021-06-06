@@ -1,21 +1,42 @@
-﻿using Assets.Scripts.UI.Money;
+﻿using Assets.Scripts.Ui;
+using Assets.Scripts.Ui.Money;
+using JetBrains.Annotations;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.Scripts.Stores.Money
 {
+    [UsedImplicitly]
     public class MoneyStore : IMoneyStore
     {
-        [Inject] private readonly IMoneyUiController _moneyUiController;
+        [Inject] private readonly IUiController _uiController;
+
+        public SetMoneyEvent OnSetMoney { get; }
+
+        private Text _moneyText;
 
         private int _money;
-        public int Money
+
+        public MoneyStore()
         {
-            get => _money;
-            set 
-            { 
-                _money = value;
-                _moneyUiController.OnSetMoneyText.Invoke();
+            OnSetMoney = new SetMoneyEvent();
+
+            OnSetMoney.AddListener(SetMoney);
+        }
+
+        private void SetMoney(int money)
+        {
+            _money = money;
+
+            if (!_moneyText)
+            {
+                _moneyText = _uiController.Find("Money").GetComponent<MoneyUi>().MoneyText;
             }
+
+            _moneyText.text = _money.ToString();
         }
     }
+
+    public class SetMoneyEvent : UnityEvent<int> { }
 }

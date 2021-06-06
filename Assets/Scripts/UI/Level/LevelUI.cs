@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.UI.Level
+namespace Assets.Scripts.Ui.Level
 {
+    [UsedImplicitly]
     public class LevelUi : MonoBehaviour
     {
         public Image LevelIcon;

@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.UI.Raw
+﻿namespace Assets.Scripts.Ui.Raw
 {
     public interface IRawUiController
     {

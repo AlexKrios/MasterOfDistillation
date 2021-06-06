@@ -2,14 +2,14 @@
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.UI.Level
+namespace Assets.Scripts.Ui.Level
 {
-    public class LevelUiFactory : IFactory<LevelUi> 
+    public class LevelUiFactory : IFactory<LevelUi>
     {
         [Inject] private readonly DiContainer _container;
-        [Inject] private readonly IUiController _uiController;
-
         [Inject] private readonly Settings _settings;
+        
+        [Inject] private readonly IUiController _uiController;
 
         private readonly Transform _mainCanvas;
 
@@ -20,8 +20,8 @@ namespace Assets.Scripts.UI.Level
 
         public LevelUi Create()
         {
-            var levelUi = _container.InstantiatePrefabForComponent<LevelUi>(_settings.LevelUiPrefab, _mainCanvas);
-            levelUi.name = "Level";
+            var levelUi = _container.InstantiatePrefabForComponent<LevelUi>(_settings.Prefab, _mainCanvas);
+            levelUi.name = _settings.Name;
 
             _uiController.Add(levelUi.name, levelUi.gameObject);
 
@@ -31,7 +31,8 @@ namespace Assets.Scripts.UI.Level
         [Serializable]
         public class Settings
         {
-            public GameObject LevelUiPrefab;
+            public string Name;
+            public GameObject Prefab;
         }
     }
 }

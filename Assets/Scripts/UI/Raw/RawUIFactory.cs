@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.UI.Raw
+namespace Assets.Scripts.Ui.Raw
 {
     public class RawUiFactory : IFactory<RawUi> 
     {
@@ -20,8 +20,8 @@ namespace Assets.Scripts.UI.Raw
 
         public RawUi Create()
         {
-            var rawUi = _container.InstantiatePrefabForComponent<RawUi>(_settings.RawUiPrefab, _mainCanvas);
-            rawUi.name = "Raw";
+            var rawUi = _container.InstantiatePrefabForComponent<RawUi>(_settings.Prefab, _mainCanvas);
+            rawUi.name = _settings.Name;
 
             _uiController.Add(rawUi.name, rawUi.gameObject);
 
@@ -31,7 +31,8 @@ namespace Assets.Scripts.UI.Raw
         [Serializable]
         public class Settings
         {
-            public GameObject RawUiPrefab;
+            public string Name;
+            public GameObject Prefab;
         }
     }
 }

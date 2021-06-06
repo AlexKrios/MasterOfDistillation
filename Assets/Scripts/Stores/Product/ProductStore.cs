@@ -1,12 +1,12 @@
 ﻿using Assets.Scripts.Objects.Item;
 using Assets.Scripts.Objects.Item.Product;
 using Assets.Scripts.Objects.Item.Product.Load;
+using Assets.Scripts.Objects.Item.Product.Types;
 using Assets.Scripts.Scriptable;
+using Assets.Scripts.Utils;
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Objects.Item.Product.Types;
-using Assets.Scripts.Utils;
 using UnityEngine;
 
 namespace Assets.Scripts.Stores.Product
@@ -14,13 +14,13 @@ namespace Assets.Scripts.Stores.Product
     [UsedImplicitly]
     public class ProductStore : IProductStore
     {
-        public Dictionary<string, ICraftable> Store { get; }
+        public Dictionary<string, ICraftable> ItemsDictionary { get; }
 
         public ProductStore()
         {
-            if (Store == null)
+            if (ItemsDictionary == null)
             {
-                Store = new Dictionary<string, ICraftable>();
+                ItemsDictionary = new Dictionary<string, ICraftable>();
             }
 
             var storeData = Resources.Load("Data/Products/ProductStoreData") as ProductStoreSettings;
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Stores.Product
                     var path = i != 5 ? $"{data.DirPath}/Component{i}" : $"{data.DirPath}/Product";
 
                     var product = ProductObjectFactory(path, data.SubType);
-                    Store.Add(product.Name, product);
+                    ItemsDictionary.Add(product.Name, product);
                 }
             }
         }
@@ -49,17 +49,29 @@ namespace Assets.Scripts.Stores.Product
             var filesRecipes = Resources.LoadAll<RecipeScriptable>(path);
             var recipesList = new List<RecipeScriptable>(filesRecipes);
 
+            var levelCapsFile = Resources.Load<LevelCapsScriptable>("Data/Products/LevelCaps");
+
             return new ProductObject
             {
                 Name = fileData.Name,
                 ItemType = fileData.ItemType,
                 ProductType = EnumParse.ParseStringToEnum<ProductType>(subType),
                 Icon = fileData.Icon,
+                Model = fileData.Model,
+
+                Level = 1,
+                Experience = 0,
+                LevelCaps = levelCapsFile.Caps,
 
                 Count = new List<int> { 0, 0, 0, 0 },
 
                 Recipes = recipesList
             };
+        }
+
+        public static bool CheckIfHaveCount(ICraftable item)
+        {
+            return item.Count.Any(count => count != 0);
         }
 
         public void LoadItemsCount(List<ProductLoadObject> storesInfo)
@@ -68,7 +80,7 @@ namespace Assets.Scripts.Stores.Product
             {
                 foreach (var item in store.Items)
                 {
-                    Store[item.Name].Count = item.Count;
+                    ItemsDictionary[item.Name].Count = item.Count;
                 }
             }
         }

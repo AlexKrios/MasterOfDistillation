@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Scriptable
 {
-    [CreateAssetMenu(fileName = "LevelCaps", menuName = "Level Caps", order = 51)]
+    [CreateAssetMenu(fileName = "_levelCaps", menuName = "Level Caps", order = 51)]
     public class LevelCapsScriptable : ScriptableObject
     {
         [SerializeField] private List<int> _caps;

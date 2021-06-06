@@ -13,7 +13,13 @@ namespace Assets.Scripts.Objects.Item
         string Name { get; set; }
         ProductType ProductType { get; set; }
         List<int> Count { get; set; }
+
         Sprite Icon { get; set; }
+        GameObject Model { get; set; }
+
+        int Level { get; set; }
+        int Experience { get; set; }
+        List<int> LevelCaps { get; set; }
 
         List<RecipeScriptable> Recipes { get; set; }
     }

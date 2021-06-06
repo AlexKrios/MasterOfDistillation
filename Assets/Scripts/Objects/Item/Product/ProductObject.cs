@@ -18,6 +18,11 @@ namespace Assets.Scripts.Objects.Item.Product
         public ProductType ProductType { get; set; }
 
         public Sprite Icon { get; set; }
+        public GameObject Model { get; set; }
+
+        public int Level { get; set; }
+        public int Experience { get; set; }
+        public List<int> LevelCaps { get; set; }
 
         public List<int> Count { get; set; }
 

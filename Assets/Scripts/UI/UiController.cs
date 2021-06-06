@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.UI
+namespace Assets.Scripts.Ui
 {
+    [UsedImplicitly]
     public class UiController : IUiController
     {
         private readonly Dictionary<string, GameObject> _uiElements;
-
-        public GameObject ActiveBuilding { get; set; }
 
         public UiController()
         {
@@ -16,8 +16,16 @@ namespace Assets.Scripts.UI
         }
 
         public void Add(string key, GameObject value)
-        {      
+        {
             _uiElements.Add(key, value);
+        }
+
+        public void GetAll()
+        {
+            foreach (var element in _uiElements)
+            {
+                Debug.Log(element.Key);
+            }
         }
 
         public GameObject Find(string key)
@@ -25,9 +33,9 @@ namespace Assets.Scripts.UI
             return _uiElements.FirstOrDefault(x => x.Key == key).Value;
         }
 
-        public GameObject FindByPart(string part)
+        public GameObject FindByPart(string key)
         {
-            return _uiElements.FirstOrDefault(x => x.Key.Contains(part)).Value;
+            return _uiElements.FirstOrDefault(x => x.Key.Contains(key)).Value;
         }
 
         public void Remove(GameObject gameObject)
@@ -35,11 +43,6 @@ namespace Assets.Scripts.UI
             // ReSharper disable once AccessToStaticMemberViaDerivedType
             GameObject.Destroy(gameObject);
             _uiElements.Remove(gameObject.name);
-        }
-
-        public void Clear()
-        {
-            _uiElements.Clear();
         }
     }
 }

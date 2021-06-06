@@ -1,71 +1,97 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.Objects.Level;
+﻿using Assets.Scripts.Objects.Level;
 using Assets.Scripts.Scriptable;
-using Assets.Scripts.UI.Level;
+using Assets.Scripts.Ui;
+using Assets.Scripts.Ui.Level;
+using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.Scripts.Stores.Level
 {
+    [UsedImplicitly]
     public class LevelStore : ILevelStore
     {
-        [Inject] private readonly ILevelUiController _levelUiController;
+        [Inject] private readonly IUiController _uiController;
 
-        public List<int> LevelCaps { get; set; }
+        public InitLevelEvent OnInitLevel { get; }
+        public SetExperienceEvent OnSetExperience { get; }
 
-        private LevelObject _levelInfo;
-        public LevelObject LevelInfo 
-        {
-            get => _levelInfo;
-            set 
-            {
-                _levelInfo = value;
+        private Text _levelText;
+        private Text _percentText;
 
-                Level = _levelInfo.Level;
-                Experience = _levelInfo.Experience;
-            }
-        }        
-
+        private readonly List<int> _levelCaps;
         private int _level;
-        public int Level
-        {
-            get => _level;
-            set 
-            { 
-                _level = value;
-                _levelUiController.OnSetLevelText.Invoke();
-                _levelUiController.OnSetLevelExperience.Invoke();
-                _levelUiController.OnSetLevelPercent.Invoke();
-            }
-        }        
-        
         private float _experience;
-        public float Experience
-        {
-            get => _experience;
-            set 
-            { 
-                _experience = value;
-                _levelUiController.OnSetLevelPercent.Invoke();
-
-                if (_experience < LevelCap)
-                {
-                    return;
-                }
-
-                _experience -= LevelCap;
-                Level++;
-            }
-        }
-
-        public float LevelCap { get; set; }
+        private float _levelCap;
 
         public LevelStore()
         {
             if (Resources.Load("Data/Level/Caps") is LevelCapsScriptable levelSettings)
             {
-                LevelCaps = levelSettings.Caps;
+                _levelCaps = levelSettings.Caps;
             }
+
+            OnInitLevel = new InitLevelEvent();
+            OnInitLevel.AddListener(SetInitData);
+
+            OnSetExperience = new SetExperienceEvent();
+            OnSetExperience.AddListener(SetExperience);
+        }
+
+        private void SetInitData(LevelObject obj)
+        {
+            SetLevel(obj.Level);
+            SetExperience(obj.Experience);
+        }
+
+        private void SetLevel(int level)
+        {
+            _level = level;
+
+            if (!_levelText)
+            {
+                _levelText = _uiController.Find("Level").GetComponent<LevelUi>().LevelText;
+            }
+
+            SetLevelCap();
+
+            _levelText.text = _level.ToString();
+        }
+
+        private void SetExperience(int experience)
+        {
+            _experience += experience;
+
+            if (_experience >= _levelCap)
+            {
+                _experience -= _levelCap;
+                SetLevel(_level + 1);
+            }
+
+            SetPercent();
+        }
+
+        private void SetLevelCap()
+        {
+            _levelCap = _levelCaps[_level - 1];
+        }
+
+        private void SetPercent()
+        {
+            var levelPercent = _experience / (_levelCap / 100);
+
+            if (!_percentText)
+            {
+                _percentText = _uiController.Find("Level").GetComponent<LevelUi>().LevelPercentText;
+            }
+
+            _percentText.text = $"{levelPercent:f0}%";
         }
     }
+
+    public class InitLevelEvent : UnityEvent<LevelObject> { }
+    public class SetExperienceEvent : UnityEvent<int> { }
 }

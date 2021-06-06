@@ -1,9 +1,9 @@
 ﻿using Assets.Scripts.Objects.Item.Raw;
 using Assets.Scripts.Objects.Item.Raw.Load;
 using Assets.Scripts.Scriptable;
-using Assets.Scripts.UI;
-using Assets.Scripts.UI.Craft;
-using Assets.Scripts.UI.Raw;
+using Assets.Scripts.Ui;
+using Assets.Scripts.Ui.FullMenu.Common;
+using Assets.Scripts.Ui.Raw;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Stores.Raw
             foreach (var raw in rawInfo)
             {
                 var fileData = files.First(x => x.Name == raw.Name);
-                //TODO создать фэктори и добавит в DI
+                //TODO создать фабрику и добавить в DI
                 var rawObj = new RawObject
                 {
                     Name = fileData.Name,
@@ -52,11 +52,9 @@ namespace Assets.Scripts.Stores.Raw
 
             _rawUiController.RawTextEvent.Invoke(type);
 
-            var menu = _uiController.FindByPart("CraftMenu");
-            if (_uiController.FindByPart("CraftMenu") != null)
-            {
-                menu.GetComponent<CraftMenu>().PartGroup.SetPartsInfo();
-            }
+            var menu = _uiController.FindByPart("Menu");
+            if (menu != null)
+                menu.GetComponent<IFullMenu>().Parts.SetPartsInfo();
         }
     }
 }

@@ -19,5 +19,8 @@ namespace Assets.Scripts.Scriptable
 
         [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
+
+        [SerializeField] private GameObject _model;
+        public GameObject Model => _model;
     }
 }

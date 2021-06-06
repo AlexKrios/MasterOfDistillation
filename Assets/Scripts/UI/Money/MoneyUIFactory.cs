@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using Zenject;
+// ReSharper disable UnassignedField.Global
 
-namespace Assets.Scripts.UI.Money
+namespace Assets.Scripts.Ui.Money
 {
     public class MoneyUiFactory : IFactory<MoneyUi> 
     {
@@ -20,8 +21,8 @@ namespace Assets.Scripts.UI.Money
 
         public MoneyUi Create()
         {
-            var moneyUi = _container.InstantiatePrefabForComponent<MoneyUi>(_settings.MoneyUiPrefab, _mainCanvas);
-            moneyUi.name = "Money";
+            var moneyUi = _container.InstantiatePrefabForComponent<MoneyUi>(_settings.Prefab, _mainCanvas);
+            moneyUi.name = _settings.Name;
 
             _uiController.Add(moneyUi.name, moneyUi.gameObject);
 
@@ -31,7 +32,8 @@ namespace Assets.Scripts.UI.Money
         [Serializable]
         public class Settings
         {
-            public GameObject MoneyUiPrefab;
+            public string Name;
+            public GameObject Prefab;
         }
     }
 }

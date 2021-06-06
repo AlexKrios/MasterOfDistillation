@@ -6,7 +6,12 @@
 		"Level": 3,
 		"Experience": 10
 	},
-	"RawInfo": [
+	"CraftInfo":
+  {
+		"Count": 1,
+		"CurrentCraft": "" 
+  },
+  "RawInfo": [
 		{
 			"Name": "Weapon",
 			"Count": 15,
@@ -22,12 +27,16 @@
 		{
       "Items": [
 				{
-					"Name": "Pistol",
-					"Count": [ 0, 0, 0, 0 ]
+					"Name": "Rifle Component 1",
+					"Count": [ 1, 0, 0, 0 ],
+					"Level": [ 1, 1, 1, 1 ],
+					"Experience": [ 3, 0, 0, 0 ]
 				},
 				{
-					"Name": "Pistol Component 1",
-					"Count": [ 0, 1, 0, 0 ]
+					"Name": "Rifle Component 2",
+					"Count": [ 1, 0, 0, 0 ],
+					"Level": [ 1, 1, 1, 1 ],
+					"Experience": [ 3, 0, 0, 0 ]
 				}
 			]
 		}

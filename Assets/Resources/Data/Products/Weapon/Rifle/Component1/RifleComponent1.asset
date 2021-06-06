@@ -15,3 +15,4 @@ MonoBehaviour:
   _name: Rifle Component 1
   _itemType: 1
   _icon: {fileID: 21300000, guid: f30b948b68496d14ab0f33f5b7f137b9, type: 3}
+  _model: {fileID: 481938183999175915, guid: f7251a9edafdc9143955af87e4a5547a, type: 3}

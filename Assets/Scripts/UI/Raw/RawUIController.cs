@@ -1,14 +1,13 @@
-﻿using System;
-using Assets.Scripts.Stores.Raw;
+﻿using Assets.Scripts.Stores.Raw;
+using JetBrains.Annotations;
+using System;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.Scripts.UI.Raw
+namespace Assets.Scripts.Ui.Raw
 {
-    [Serializable]
-    public class RawTextEvent : UnityEvent<string> { }
-
+    [UsedImplicitly]
     public class RawUiController : IRawUiController
     {
         [Inject] private IUiController _uiController;
@@ -50,4 +49,7 @@ namespace Assets.Scripts.UI.Raw
         }
         #endregion
     }
+
+    [Serializable]
+    public class RawTextEvent : UnityEvent<string> { }
 }

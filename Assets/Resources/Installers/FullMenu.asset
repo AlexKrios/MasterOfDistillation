@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288ecb50b530af14aa9818157c09cfda, type: 3}
+  m_Name: FullMenu
+  m_EditorClassIdentifier: 
+  TitleSection:
+    Name: Title
+    Prefab: {fileID: 5024953302384026895, guid: e778e8c19ba9374419b17cc8b030803c,
+      type: 3}
+  TabsGroup:
+    Name: Tabs
+    Prefab: {fileID: 2881336544839766366, guid: 40e4fa7e706f6d642ad20b874bfde2ec,
+      type: 3}
+  ProductCellSettings:
+    Name: Product
+    Prefab: {fileID: 3727523442164382368, guid: aebe0fd1728ca7548a08d1413edef128,
+      type: 3}
+  PartsGroupSettings:
+    Name: Parts
+    Prefab: {fileID: 4413835914395137429, guid: ee5c36ef4e1ebc541b074b98b09f287c,
+      type: 3}
+  PartCellSettings:
+    Prefab: {fileID: 1071680535684009406, guid: 420b790c2f317874696bc67ffb8eae37,
+      type: 3}
+  QualityButtonSettings:
+    Name: Quality
+    Prefab: {fileID: 3770212645789112496, guid: 79998b4910efcf44babb23cad17bab13,
+      type: 3}
+  ModelGroupSettings:
+    Name: ModelGroup
+    Prefab: {fileID: 4476351935305455848, guid: 92a98d3a3362083458a05f24b8aa5e42,
+      type: 3}
+  CraftMenu:
+    Name: CraftMenu
+    Prefab: {fileID: 7196737555349474873, guid: 9754840056129854cbc5a592d2bc5d89,
+      type: 3}
+    ItemsGroupSettings:
+      Name: Items
+      Prefab: {fileID: 4785780335862507188, guid: 78873f8340f403048a815722b81fae83,
+        type: 3}
+      Padding: 25
+      Height: 250
+    ItemButtonSettings:
+      Prefab: {fileID: 500747981298187993, guid: 6185952fe7b48c34492d1ca858f75acc,
+        type: 3}
+    CreateButtonSettings:
+      Name: Create
+      Prefab: {fileID: 8487604377595464340, guid: cbe2424901d025d4fa5b6593a0b2c761,
+        type: 3}
+  StorageMenu:
+    Name: StorageMenu
+    Prefab: {fileID: 522285592955554028, guid: bb1ec47c818b545428c8001cdac6417d, type: 3}
+    ItemsGroupSettings:
+      Name: Items
+      Prefab: {fileID: 2316782177733229763, guid: ab4e02e0469015349bfc85a870177de4,
+        type: 3}
+    ItemButtonSettings:
+      Prefab: {fileID: 3860291523611424635, guid: de36a7b6eef725e47b19654311fd5b71,
+        type: 3}

@@ -6,7 +6,7 @@ namespace Assets.Scripts.Stores.Product
 {
     public interface IProductStore
     {
-        Dictionary<string, ICraftable> Store { get; }
+        Dictionary<string, ICraftable> ItemsDictionary { get; }
 
         void LoadItemsCount(List<ProductLoadObject> storesInfo);
     }

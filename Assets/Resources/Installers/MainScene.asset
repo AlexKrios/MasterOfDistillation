@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89b4c7eac6237547b39575cb7fb451d, type: 3}
+  m_Name: MainScene
+  m_EditorClassIdentifier: 
+  MoneyUi:
+    Name: Money
+    Prefab: {fileID: 6843603260279845459, guid: a20c7e67eaaca1c42a3cd55efe6ce9c6,
+      type: 3}
+  LevelUi:
+    Name: Level
+    Prefab: {fileID: 9209229893864620261, guid: 49068a9f172410e4283921db703c7d2c,
+      type: 3}
+  RawUi:
+    Name: Raw
+    Prefab: {fileID: 1345606372920616409, guid: 64cdbf4a9bf31b84c835bec848e2f14a,
+      type: 3}
+  CraftGroup:
+    Name: CraftOrder
+    Spacing: 25
+    CraftCellSettings:
+      Name: CraftCell
+      Prefab: {fileID: 6169120114520657450, guid: 9249e22c477ae094688793b40f918dc1,
+        type: 3}
+    CraftPlusCellSettings:
+      Name: CraftPlusCell
+      Prefab: {fileID: 5875465251809574497, guid: dd21c4ab651ab7b48b181ff4c780d892,
+        type: 3}
+  ResultCanvas:
+    Name: CraftResult
+    Prefab: {fileID: 6538226576259759359, guid: 8c6266c662d6a7e4ba239d59db70b75a,
+      type: 3}
+    FadeTime: 1

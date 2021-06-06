@@ -1,17 +1,17 @@
-using Assets.Scripts.Common.Craft.Action;
-using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Scenes.Main.MainCamera.Disable;
-using Assets.Scripts.Scenes.Main.MainCamera.Target;
-using Assets.Scripts.Ui.Craft.Tab;
-using Assets.Scripts.UI.Craft;
-using Assets.Scripts.UI.Craft.Item;
-using Assets.Scripts.Ui.Craft.Title;
-using Assets.Scripts.UI.Level;
-using Assets.Scripts.UI.Money;
-using Assets.Scripts.UI.Raw;
+using Assets.Scripts.MainCamera.Disable;
+using Assets.Scripts.MainCamera.Target;
+using Assets.Scripts.Objects.Item.Craft;
+using Assets.Scripts.Ui.FullMenu.Craft;
+using Assets.Scripts.Ui.Level;
+using Assets.Scripts.Ui.Money;
+using Assets.Scripts.Ui.Order;
+using Assets.Scripts.Ui.Order.Result;
+using Assets.Scripts.Ui.Order.State;
+using Assets.Scripts.Ui.Raw;
+using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.DI.Scene.Main
+namespace Assets.Scripts.Di.Scene.Main
 {
     public class SceneInstaller : MonoInstaller
     {
@@ -19,8 +19,6 @@ namespace Assets.Scripts.DI.Scene.Main
         {
             InstallCameraComponents();
             InstallUiFactory();
-
-            InstallCraftMenu();
         }
 
         private void InstallCameraComponents()
@@ -35,17 +33,17 @@ namespace Assets.Scripts.DI.Scene.Main
             Container.BindFactory<LevelUi, LevelUi.Factory>().FromFactory<LevelUiFactory>();
             Container.BindFactory<RawUi, RawUi.Factory>().FromFactory<RawUiFactory>();
 
-            Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuUiFactory>();
-            Container.BindFactory<TitleSection, TitleSection.Factory>().FromFactory<TitleFactory>();
-            Container.BindFactory<TabsGroup, TabsGroup.Factory>().FromFactory<TabFactory>();
-            Container.BindFactory<ItemsGroup, ItemsGroup.Factory>().FromFactory<ItemsGroupFactory>();
-            Container.BindFactory<ICraftable, ItemButton, ItemButton.Factory>().FromFactory<ItemButtonFactory>();
-        }
+            Container.BindFactory<CraftMenu, CraftMenu.Factory>().FromFactory<CraftMenuFactory>();
+            Container.BindFactory<CraftCell, CraftCellEmpty, CraftCellEmpty.Factory>();
+            Container.BindFactory<CraftCell, CraftCellBusy, CraftCellBusy.Factory>();
+            Container.BindFactory<CraftCell, CraftCellFinish, CraftCellFinish.Factory>();
 
-        private void InstallCraftMenu()
-        {
-            Container.Bind<ICraftPartAction>().To<RawAction>().AsSingle().NonLazy();
-            Container.Bind<ICraftPartAction>().To<ComponentAction>().AsSingle().NonLazy();
+            Container.BindFactory<CraftObject, ResultCanvas, ResultCanvas.Factory>().FromFactory<ResultCanvasFactory>();
+            Container.BindFactory<GameObject, ResultModel, ResultModel.Factory>().FromFactory<ResultModelFactory>();
+
+            Container.BindFactory<CraftGroup, CraftGroup.Factory>().FromFactory<CraftGroupFactory>();
+            Container.BindFactory<CraftCell, CraftCell.Factory>().FromFactory<CraftCellFactory>();
+            Container.BindFactory<CraftPlusCell, CraftPlusCell.Factory>().FromFactory<CraftPlusCellFactory>();
         }
     }
 }

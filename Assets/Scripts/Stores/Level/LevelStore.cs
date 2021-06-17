@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Objects.Level;
-using Assets.Scripts.Scriptable;
-using Assets.Scripts.Ui;
+﻿using Assets.Scripts.Ui;
 using Assets.Scripts.Ui.Level;
 using JetBrains.Annotations;
 using System.Collections.Generic;
@@ -23,16 +21,14 @@ namespace Assets.Scripts.Stores.Level
         private Text _percentText;
 
         private readonly List<int> _levelCaps;
-        private int _level;
+        public int Level { get; private set; }
         private float _experience;
         private float _levelCap;
 
         public LevelStore()
         {
             if (Resources.Load("Data/Level/Caps") is LevelCapsScriptable levelSettings)
-            {
                 _levelCaps = levelSettings.Caps;
-            }
 
             OnInitLevel = new InitLevelEvent();
             OnInitLevel.AddListener(SetInitData);
@@ -49,16 +45,14 @@ namespace Assets.Scripts.Stores.Level
 
         private void SetLevel(int level)
         {
-            _level = level;
+            Level = level;
 
             if (!_levelText)
-            {
                 _levelText = _uiController.Find("Level").GetComponent<LevelUi>().LevelText;
-            }
 
             SetLevelCap();
 
-            _levelText.text = _level.ToString();
+            _levelText.text = Level.ToString();
         }
 
         private void SetExperience(int experience)
@@ -68,7 +62,7 @@ namespace Assets.Scripts.Stores.Level
             if (_experience >= _levelCap)
             {
                 _experience -= _levelCap;
-                SetLevel(_level + 1);
+                SetLevel(Level + 1);
             }
 
             SetPercent();
@@ -76,7 +70,7 @@ namespace Assets.Scripts.Stores.Level
 
         private void SetLevelCap()
         {
-            _levelCap = _levelCaps[_level - 1];
+            _levelCap = _levelCaps[Level - 1];
         }
 
         private void SetPercent()
@@ -84,9 +78,7 @@ namespace Assets.Scripts.Stores.Level
             var levelPercent = _experience / (_levelCap / 100);
 
             if (!_percentText)
-            {
                 _percentText = _uiController.Find("Level").GetComponent<LevelUi>().LevelPercentText;
-            }
 
             _percentText.text = $"{levelPercent:f0}%";
         }

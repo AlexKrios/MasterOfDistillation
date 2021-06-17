@@ -1,5 +1,5 @@
-using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Ui.FullMenu.Craft.Controller.Action;
+using Assets.Scripts.Controllers.Craft.Action;
+using Assets.Scripts.Stores.Craft;
 using Assets.Scripts.Ui.FullMenu.Craft.Create;
 using Assets.Scripts.Ui.FullMenu.Craft.Item;
 using Zenject;

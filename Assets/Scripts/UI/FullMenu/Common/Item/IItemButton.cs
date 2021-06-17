@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Item;
+﻿using Assets.Scripts.Stores.Craft;
 
 namespace Assets.Scripts.Ui.FullMenu.Common.Item
 {

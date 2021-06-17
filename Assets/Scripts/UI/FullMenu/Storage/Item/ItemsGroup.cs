@@ -1,3 +1,4 @@
+using Assets.Scripts.Controllers.Product;
 using Assets.Scripts.Stores.Product;
 using Assets.Scripts.Ui.FullMenu.Common;
 using Assets.Scripts.Ui.FullMenu.Common.Item;
@@ -66,7 +67,7 @@ namespace Assets.Scripts.Ui.FullMenu.Storage.Item
                 var items = _productStore.ItemsDictionary.Where(x => x.Value.ProductType == key);
                 foreach (var item in items)
                 {
-                    if (!ProductStore.CheckIfHaveCount(item.Value))
+                    if (!ProductCountController.CheckIfHaveCount(item.Value))
                         continue;
 
                     var newItem = _itemFactory.Create(item.Value);

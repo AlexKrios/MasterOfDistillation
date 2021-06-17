@@ -8,8 +8,8 @@ namespace Assets.Scripts.Ui.Raw
     [UsedImplicitly]
     public class RawUi : MonoBehaviour
     {
-        public Image IronIcon;
-        public Text IronText;
+        public Image WeaponIcon;
+        public Text WeaponText;
 
         public class Factory : PlaceholderFactory<RawUi> { }
     }

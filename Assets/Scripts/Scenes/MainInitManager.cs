@@ -1,9 +1,9 @@
-using Assets.Scripts.Objects;
+using Assets.Scripts.Controllers.Timer;
+using Assets.Scripts.Scenes.Main;
 using Assets.Scripts.Stores.Level;
 using Assets.Scripts.Stores.Money;
 using Assets.Scripts.Stores.Product;
 using Assets.Scripts.Stores.Raw;
-using Assets.Scripts.Timer;
 using Assets.Scripts.Ui.Level;
 using Assets.Scripts.Ui.Money;
 using Assets.Scripts.Ui.Order;
@@ -18,8 +18,6 @@ namespace Assets.Scripts.Scenes
     [UsedImplicitly]
     public class MainInitManager : MonoBehaviour
     {
-        private Transform _sceneContext;
-
         [Inject] private readonly MoneyUi.Factory _moneyUi;
         [Inject] private readonly LevelUi.Factory _levelUi;
         [Inject] private readonly RawUi.Factory _rawUi;
@@ -32,14 +30,10 @@ namespace Assets.Scripts.Scenes
         [Inject] private readonly IRawStore _rawStore;
         [Inject] private readonly IProductStore _productStore;
 
+        [Inject(Id = "SceneContext")] private readonly ITimerController _timerController;
+
         public TextAsset JsonFile;
         [NonSerialized] public LoadObject StartData;
-
-        [Inject]
-        private void Construct([Inject(Id = "SceneContext")] Transform sceneContext)
-        {
-            _sceneContext = sceneContext;
-        }
 
         // ReSharper disable once UnusedMember.Local
         private void Start()
@@ -69,7 +63,7 @@ namespace Assets.Scripts.Scenes
 
             _productStore.LoadItemsCount(StartData.StoresInfo);
 
-            _sceneContext.GetComponent<ITimerController>().SetRawTimers();
+            _timerController.SetRawTimers();
         }
 
         // ReSharper disable once UnusedMember.Local
@@ -78,6 +72,11 @@ namespace Assets.Scripts.Scenes
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _levelStore.OnSetExperience.Invoke(50);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log(_productStore.ItemsDictionary["Rifle Component 1"].Experience);
             }
         }
     }

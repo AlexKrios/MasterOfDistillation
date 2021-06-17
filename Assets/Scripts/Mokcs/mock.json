@@ -9,7 +9,7 @@
 	"CraftInfo":
   {
 		"Count": 1,
-		"CurrentCraft": "" 
+		"CurrentCraft": [] 
   },
   "RawInfo": [
 		{
@@ -28,14 +28,14 @@
       "Items": [
 				{
 					"Name": "Rifle Component 1",
-					"Count": [ 1, 0, 0, 0 ],
-					"Level": [ 1, 1, 1, 1 ],
+					"Slug": "rifle_component_1",
+					"Count": [ 3, 0, 0, 0 ],
 					"Experience": [ 3, 0, 0, 0 ]
 				},
 				{
 					"Name": "Rifle Component 2",
+					"Slug": "rifle_component_2",
 					"Count": [ 1, 0, 0, 0 ],
-					"Level": [ 1, 1, 1, 1 ],
 					"Experience": [ 3, 0, 0, 0 ]
 				}
 			]

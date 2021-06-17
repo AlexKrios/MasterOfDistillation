@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.MainCamera.Disable;
-using Assets.Scripts.Objects.Item.Craft;
+using Assets.Scripts.MainCamera.Disable;
+using Assets.Scripts.Stores.Craft;
 using JetBrains.Annotations;
 using System;
 using UnityEngine;
@@ -20,8 +20,12 @@ namespace Assets.Scripts.Ui.Order.Result
         [Inject] private readonly IUiController _uiController;
         [Inject] private readonly IDisable _disable;
 
+        [Inject(Id = "MainCanvas")] private readonly RectTransform _mainCanvas;
+
         public ResultCanvas Create(CraftObject obj)
         {
+            _mainCanvas.gameObject.SetActive(false);
+
             var result = _container.InstantiatePrefabForComponent<ResultCanvas>(_settings.Prefab);
             result.name = _settings.Name;
 

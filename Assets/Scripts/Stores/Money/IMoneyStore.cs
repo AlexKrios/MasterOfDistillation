@@ -2,6 +2,8 @@
 {
     public interface IMoneyStore
     {
+        int Money { get; }
+
         SetMoneyEvent OnSetMoney { get; }
     }
 }

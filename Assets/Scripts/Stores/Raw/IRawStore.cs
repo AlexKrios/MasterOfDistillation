@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Objects.Item.Raw;
-using Assets.Scripts.Objects.Item.Raw.Load;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Assets.Scripts.Stores.Raw
 {

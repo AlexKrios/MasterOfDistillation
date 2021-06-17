@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Ui.FullMenu.Craft.Controller;
+﻿using Assets.Scripts.Controllers.Craft;
+using Assets.Scripts.Stores.Craft;
+using Assets.Scripts.Ui.Order.Cell;
+using Assets.Scripts.Ui.Order.Plus;
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +18,9 @@ namespace Assets.Scripts.Ui.Order
         [Inject] private readonly CraftPlusCell.Factory _craftPlusCellFactory;
         [Inject] private readonly CraftGroupFactory.Settings _craftGroupSettings;
 
-        [Inject(Id = "SceneContext")] private Transform _sceneContext;
+        [Inject] private readonly ICraftStore _craftStore;
+
+        [Inject(Id = "SceneContext")] private readonly ICraftController _craftController;
 
         public List<CraftCell> Cells { get; private set; }
 
@@ -35,8 +40,7 @@ namespace Assets.Scripts.Ui.Order
             if (Cells != null)
                 RemoveCells();
 
-            var craftCellCount = _sceneContext.GetComponent<ICraftController>().CraftCellCount;
-            for (var i = 0; i < craftCellCount; i++)
+            for (var i = 0; i < _craftStore.CellCount; i++)
             {
                 CreateCell(i);
             }

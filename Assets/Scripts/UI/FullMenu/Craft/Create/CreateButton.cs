@@ -1,7 +1,9 @@
-﻿using Assets.Scripts.Objects.Item.Craft;
-using Assets.Scripts.Timer;
+﻿using Assets.Scripts.Controllers.Craft;
+using Assets.Scripts.Controllers.Timer;
+using Assets.Scripts.Stores.Craft;
 using Assets.Scripts.Ui.FullMenu.Common;
-using Assets.Scripts.Ui.FullMenu.Craft.Controller;
+using Assets.Scripts.Ui.Popup;
+using Assets.Scripts.Ui.Popup.Notification;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -17,9 +19,12 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Create
         [Inject] private readonly CraftMenuFactory.Settings _craftMenuSettings;
 
         [Inject] private readonly IUiController _uiController;
-        [Inject(Id = "SceneContext")] private Transform _sceneContext;
+        [Inject] private readonly IPopupFactory _popupFactory;
+        [Inject] private readonly PopupConfig _popupConfig;
 
-        private ICraftController _craftController;
+        [Inject(Id = "SceneContext")] private ICraftController _craftController;
+        [Inject(Id = "SceneContext")] private ITimerController _timerController;
+
         private IFullMenu _fullMenu;
 
         private void Awake()
@@ -27,22 +32,23 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Create
             _fullMenu = _uiController.Find(_craftMenuSettings.Name).GetComponent<IFullMenu>();
         }
 
-        private void Start()
-        {
-            _craftController = _sceneContext.GetComponent<ICraftController>();
-        }
-
         public void CraftItem()
         {            
             if (!_craftController.IsEnoughParts())
             {
-                Debug.LogWarning("Нехватает ингридиентов");
+                var config = _popupConfig.InitPopupHaveNotParts();
+                _popupFactory.CreatePopup<PopupNotificationBase>(config);
+
+                Debug.LogWarning(config.Text);
                 return;
             }
             
             if (!_craftController.IsHaveFreeCell())
             {
-                Debug.LogWarning("Нехватает ячеек для крафта");
+                var config = _popupConfig.InitPopupHaveNotCells();
+                _popupFactory.CreatePopup<PopupNotificationBase>(config);
+
+                Debug.LogWarning(config.Text);
                 return;
             }
 
@@ -54,7 +60,7 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Create
 
         public void StartRawTimer()
         {
-            _sceneContext.GetComponent<ITimerController>().SetRawTimers();
+            _timerController.SetRawTimers();
         }
 
         //TODO Переделать в отдельынй класс и добавть в DI

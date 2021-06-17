@@ -15,14 +15,11 @@ namespace Assets.Scripts.Ui.Raw
 
         public RawTextEvent RawTextEvent { get; set; }
 
-        private Text _ironText;
+        private Text _weaponText;
 
         public RawUiController()
         {
-            if (RawTextEvent == null)
-            {
-                RawTextEvent = new RawTextEvent();
-            }
+            RawTextEvent = new RawTextEvent();
 
             RawTextEvent.AddListener(SetRawText);
         }
@@ -31,21 +28,19 @@ namespace Assets.Scripts.Ui.Raw
         {
             switch (raw)
             {
-                case "Iron":
-                    SetIronText();
+                case "Weapon":
+                    SetWeaponText();
                     break;
             }
         }
 
-        #region Iron
-        private void SetIronText()
+        #region Weapon
+        private void SetWeaponText()
         {
-            if (!_ironText)
-            {
-                _ironText = _uiController.Find("Raw").GetComponent<RawUi>().IronText;
-            }
+            if (!_weaponText)
+                _weaponText = _uiController.Find("Raw").GetComponent<RawUi>().WeaponText;
 
-            _ironText.text = _rawStore.RawData["Iron"].Count.ToString();
+            _weaponText.text = _rawStore.RawData["Weapon"].Count.ToString();
         }
         #endregion
     }

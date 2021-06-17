@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Objects.Item.Raw;
-using Assets.Scripts.Objects.Item.Raw.Load;
-using Assets.Scripts.Scriptable;
-using Assets.Scripts.Ui;
+﻿using Assets.Scripts.Ui;
 using Assets.Scripts.Ui.FullMenu.Common;
 using Assets.Scripts.Ui.Raw;
 using JetBrains.Annotations;
@@ -43,7 +40,8 @@ namespace Assets.Scripts.Stores.Raw
                 };
 
                 RawData.Add(raw.Name, rawObj);
-            }         
+                _rawUiController.RawTextEvent.Invoke(raw.Name);
+            }
         }
 
         public void SetRawListData(string type, int count)

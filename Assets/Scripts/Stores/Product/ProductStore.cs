@@ -1,8 +1,7 @@
-﻿using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Objects.Item.Product;
-using Assets.Scripts.Objects.Item.Product.Load;
-using Assets.Scripts.Objects.Item.Product.Types;
-using Assets.Scripts.Scriptable;
+﻿using Assets.Scripts.Stores.Craft;
+using Assets.Scripts.Stores.Product.Load;
+using Assets.Scripts.Stores.Product.Recipe;
+using Assets.Scripts.Stores.Product.Types;
 using Assets.Scripts.Utils;
 using JetBrains.Annotations;
 using System.Collections.Generic;
@@ -19,9 +18,7 @@ namespace Assets.Scripts.Stores.Product
         public ProductStore()
         {
             if (ItemsDictionary == null)
-            {
                 ItemsDictionary = new Dictionary<string, ICraftable>();
-            }
 
             var storeData = Resources.Load("Data/Products/ProductStoreData") as ProductStoreSettings;
             SetProductToStoreDictionary(storeData);
@@ -49,8 +46,6 @@ namespace Assets.Scripts.Stores.Product
             var filesRecipes = Resources.LoadAll<RecipeScriptable>(path);
             var recipesList = new List<RecipeScriptable>(filesRecipes);
 
-            var levelCapsFile = Resources.Load<LevelCapsScriptable>("Data/Products/LevelCaps");
-
             return new ProductObject
             {
                 Name = fileData.Name,
@@ -59,19 +54,12 @@ namespace Assets.Scripts.Stores.Product
                 Icon = fileData.Icon,
                 Model = fileData.Model,
 
-                Level = 1,
                 Experience = 0,
-                LevelCaps = levelCapsFile.Caps,
 
                 Count = new List<int> { 0, 0, 0, 0 },
 
                 Recipes = recipesList
             };
-        }
-
-        public static bool CheckIfHaveCount(ICraftable item)
-        {
-            return item.Count.Any(count => count != 0);
         }
 
         public void LoadItemsCount(List<ProductLoadObject> storesInfo)

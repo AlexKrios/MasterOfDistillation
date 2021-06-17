@@ -11,12 +11,7 @@ namespace Assets.Scripts.Ui.Level
         
         [Inject] private readonly IUiController _uiController;
 
-        private readonly Transform _mainCanvas;
-
-        public LevelUiFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
-        {
-            _mainCanvas = mainCanvas.gameObject.transform;
-        }
+        [Inject(Id = "MainCanvas")] private readonly RectTransform _mainCanvas;
 
         public LevelUi Create()
         {

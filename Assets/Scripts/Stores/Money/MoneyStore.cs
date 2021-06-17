@@ -16,7 +16,7 @@ namespace Assets.Scripts.Stores.Money
 
         private Text _moneyText;
 
-        private int _money;
+        public int Money { get; private set; }
 
         public MoneyStore()
         {
@@ -27,14 +27,12 @@ namespace Assets.Scripts.Stores.Money
 
         private void SetMoney(int money)
         {
-            _money = money;
+            Money = money;
 
             if (!_moneyText)
-            {
                 _moneyText = _uiController.Find("Money").GetComponent<MoneyUi>().MoneyText;
-            }
 
-            _moneyText.text = _money.ToString();
+            _moneyText.text = Money.ToString();
         }
     }
 

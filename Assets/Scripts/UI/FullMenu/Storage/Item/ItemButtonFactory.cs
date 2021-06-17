@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Item;
+﻿using Assets.Scripts.Stores.Craft;
 using Assets.Scripts.Ui.FullMenu.Common;
 using JetBrains.Annotations;
 using System;

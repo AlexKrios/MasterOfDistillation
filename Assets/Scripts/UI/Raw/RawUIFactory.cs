@@ -7,16 +7,11 @@ namespace Assets.Scripts.Ui.Raw
     public class RawUiFactory : IFactory<RawUi> 
     {
         [Inject] private readonly DiContainer _container;
-        [Inject] private readonly IUiController _uiController;
-
         [Inject] private readonly Settings _settings;
 
-        private readonly Transform _mainCanvas;
+        [Inject] private readonly IUiController _uiController;
 
-        public RawUiFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
-        {
-            _mainCanvas = mainCanvas.gameObject.transform;
-        }
+        [Inject(Id = "MainCanvas")] private readonly RectTransform _mainCanvas;
 
         public RawUi Create()
         {

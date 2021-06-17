@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Item;
+﻿using Assets.Scripts.Stores.Craft;
 using Assets.Scripts.Ui.FullMenu.Common;
 using Assets.Scripts.Ui.FullMenu.Common.Item;
 using JetBrains.Annotations;
@@ -37,7 +37,6 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Item
         private Image _background;
         [SerializeField] private Image _icon;
         [SerializeField] private Text _name;
-        [SerializeField] private Text _level;
 
         [Header("Background assets")]
         [SerializeField] private Sprite _bgInactive;
@@ -76,7 +75,6 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Item
 
             SetCellIcon(product.Icon);
             SetCellName(product.Name);
-            SetCellLevel(product.Level);
         }
 
         public void SetItemInactive()
@@ -102,11 +100,6 @@ namespace Assets.Scripts.Ui.FullMenu.Craft.Item
         private void SetCellName(string cellName)
         {
             _name.text = cellName;
-        }
-
-        private void SetCellLevel(int level)
-        {
-            _level.text = level.ToString();
         }
 
         [UsedImplicitly]

@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Objects.Item;
-using Assets.Scripts.Objects.Item.Product.Types;
+﻿using Assets.Scripts.Stores;
+using Assets.Scripts.Stores.Product.Types;
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;

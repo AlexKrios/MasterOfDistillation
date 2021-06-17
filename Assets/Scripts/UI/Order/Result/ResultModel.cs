@@ -1,7 +1,8 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using Zenject;
+// ReSharper disable UnusedMember.Local
 
 #pragma warning disable 649
 
@@ -15,12 +16,14 @@ namespace Assets.Scripts.Ui.Order.Result
         private Transform _transform;
         private Rigidbody _rigidbody;
 
-        // ReSharper disable once UnusedMember.Local
         private void Awake()
         {
             _transform = GetComponent<RectTransform>();
             _rigidbody = GetComponent<Rigidbody>();
+        }
 
+        private void Start()
+        {
             StartCoroutine(StartTransformation());
         }
 
@@ -28,7 +31,7 @@ namespace Assets.Scripts.Ui.Order.Result
         {
             _transform.SetParent(parent);
             _transform.localPosition = new Vector3(0, 0, -500);
-            _transform.localRotation = Quaternion.Euler(-45, 0, 0);
+            _transform.localRotation = Quaternion.Euler(45, 0, 45);
         }
 
         private IEnumerator StartTransformation()
@@ -50,11 +53,10 @@ namespace Assets.Scripts.Ui.Order.Result
             }
         }
 
-        // ReSharper disable once UnusedMember.Local
         private void FixedUpdate()
         {
-            var turn = -Input.GetAxis("Horizontal");
-            _rigidbody.AddTorque(_transform.up * 100 * turn);
+            var turn = Input.GetAxis("Horizontal");
+            _rigidbody.AddTorque(Vector3.up * 100 * turn);
 
             if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {

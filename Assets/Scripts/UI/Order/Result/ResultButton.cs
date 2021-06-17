@@ -15,8 +15,12 @@ namespace Assets.Scripts.Ui.Order.Result
         [Inject] private readonly IUiController _uiController;
         [Inject] private readonly IDisable _disable;
 
+        [Inject(Id = "MainCanvas")] private readonly RectTransform _mainCanvas;
+
         public void Click()
         {
+            _mainCanvas.gameObject.SetActive(true);
+
             var result = _uiController.Find(_resultCanvasSettings.Name);
             _uiController.Remove(result);
 

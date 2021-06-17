@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Objects.Item.Craft;
+﻿using Assets.Scripts.Stores.Craft;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;

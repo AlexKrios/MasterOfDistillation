@@ -1,6 +1,7 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
+// ReSharper disable UnusedMember.Local
 
 #pragma warning disable 649
 
@@ -12,7 +13,6 @@ namespace Assets.Scripts.Ui.FullMenu.Common.Model
         private Transform _transform;
         private Rigidbody _rigidbody;
 
-        // ReSharper disable once UnusedMember.Local
         private void Awake()
         {
             _transform = GetComponent<RectTransform>();
@@ -28,7 +28,6 @@ namespace Assets.Scripts.Ui.FullMenu.Common.Model
             _transform.localScale = new Vector3(250, 250, 250);
         }
 
-        // ReSharper disable once UnusedMember.Local
         private void FixedUpdate()
         {
             var turn = Input.GetAxis("Horizontal");

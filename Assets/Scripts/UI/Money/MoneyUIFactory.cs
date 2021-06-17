@@ -8,16 +8,11 @@ namespace Assets.Scripts.Ui.Money
     public class MoneyUiFactory : IFactory<MoneyUi> 
     {
         [Inject] private readonly DiContainer _container;
-        [Inject] private readonly IUiController _uiController;
-
         [Inject] private readonly Settings _settings;
 
-        private readonly Transform _mainCanvas;
+        [Inject] private readonly IUiController _uiController;
 
-        public MoneyUiFactory([Inject(Id = "MainCanvas")] RectTransform mainCanvas)
-        {
-            _mainCanvas = mainCanvas.gameObject.transform;
-        }
+        [Inject(Id = "MainCanvas")] private readonly RectTransform _mainCanvas;
 
         public MoneyUi Create()
         {

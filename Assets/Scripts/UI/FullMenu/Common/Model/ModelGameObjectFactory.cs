@@ -15,10 +15,12 @@ namespace Assets.Scripts.Ui.FullMenu.Common.Model
         {
             var parent = _uiController.FindByPart("Menu").GetComponent<IFullMenu>().Model.Transform;
 
-            var result = _container.InstantiatePrefabForComponent<ModelGameObject>(obj, parent);
-            result.name = "Model";
+            var result = _container.InstantiatePrefab(obj, parent);
+            _container.InstantiateComponent<ModelGameObject>(result.gameObject);
 
-            return result;
+            result.gameObject.name = "Model";
+
+            return result.GetComponent<ModelGameObject>();
         }
     }
 }
